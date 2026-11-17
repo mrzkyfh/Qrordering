@@ -44,9 +44,9 @@ async function optimizedImage(file: File, scope: ImageScope): Promise<File> {
 
 const imageBucket = 'menu-images'
 const primaryOrigin = new URL(import.meta.env.VITE_SUPABASE_URL as string).origin
-const stagingPublicOrigin = 'https://time420s-r2-staging.official-b0d.workers.dev'
-const productionPublicOrigin = 'https://assets.time420s.my.id'
-const productionWorkerOrigin = 'https://time420s-r2-production.official-b0d.workers.dev'
+const stagingPublicOrigin = 'https://qrordering-r2-staging.official-b0d.workers.dev'
+const productionPublicOrigin = 'https://assets.qrordering.my.id'
+const productionWorkerOrigin = 'https://qrordering-r2-production.official-b0d.workers.dev'
 const storageBackend = import.meta.env.VITE_IMAGE_STORAGE_BACKEND as string | undefined
 const stagingApiUrl = import.meta.env.VITE_R2_STAGING_API_URL as string | undefined
 const productionApiUrl = import.meta.env.VITE_R2_API_URL as string | undefined

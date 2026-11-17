@@ -7,9 +7,9 @@ import { promisify } from 'node:util'
 const execFileAsync = promisify(execFile)
 const PROJECT_REF = 'yjmrabgpxjbunwtsiavs'
 const SOURCE_BUCKET = 'menu-images'
-const TARGET_BUCKET = 'time420s-assets'
+const TARGET_BUCKET = 'qrordering-assets'
 const ACCOUNT_ID = '4e5b204f44bdff9f75eda4c3e99ee098'
-const PUBLIC_BASE = 'https://assets.time420s.my.id'
+const PUBLIC_BASE = 'https://assets.qrordering.my.id'
 const CANARY_KEY = 'menu-images/d81e6a71-bb92-45b0-be88-cca026ed783e/menu/49ad52e7-4546-48eb-92fb-5213d6000691.webp'
 const CACHE_CONTROL = 'public, max-age=31536000, immutable'
 const ROOT = process.cwd()

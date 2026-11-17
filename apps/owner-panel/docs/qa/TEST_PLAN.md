@@ -42,7 +42,7 @@ Memastikan owner-panel siap dipakai di production dengan kualitas:
 
 ### Out-of-Scope (release berikutnya)
 
-- Mobile app (apps/mobile/time420s) — testing terpisah
+- Mobile app (apps/mobile/qrordering) — testing terpisah
 - Webhook integrations (belum ada)
 - Multi-language (UI saat ini hanya Bahasa Indonesia)
 
@@ -62,7 +62,7 @@ Memastikan owner-panel siap dipakai di production dengan kualitas:
 | Env | URL | Database | Untuk |
 |---|---|---|---|
 | **Local dev** | `http://localhost:5173` | Supabase project shared | Smoke selama development |
-| **Production** | `https://time420s.pages.dev` | Supabase production | Final regression + monitoring |
+| **Production** | `https://qrordering.pages.dev` | Supabase production | Final regression + monitoring |
 
 ### 3.3 Test data
 

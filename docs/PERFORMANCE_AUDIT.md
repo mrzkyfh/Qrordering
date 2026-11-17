@@ -1,4 +1,4 @@
-# Performance Audit — Time 420s POS (Mobile)
+# Performance Audit — QR Ordering POS (Mobile)
 **Tanggal:** 2026-07-05
 **Metode:** Terukur (APK breakdown, build split) + static analysis hot-path
 **Stack:** Flutter + BLoC + Supabase

@@ -5,8 +5,8 @@ interface Env {
 }
 
 const DEFAULT_ALLOWED_ORIGINS = [
-  'https://time420s-47o.pages.dev',
-  'https://times420s-menu-c56.pages.dev',
+  'https://qrordering-47o.pages.dev',
+  'https://qrordering-menu-c56.pages.dev',
 ]
 const DEFAULT_MAX_BODY_BYTES = 10 * 1024 * 1024
 const ALLOWED_REQUEST_HEADERS = new Set([
@@ -31,7 +31,7 @@ const ALLOWED_REQUEST_HEADERS = new Set([
   'x-upsert',
 ])
 const EXPOSED_HEADERS =
-  'content-range, range, x-supabase-api-version, x-time420s-route'
+  'content-range, range, x-supabase-api-version, x-qrordering-route'
 const ALLOWED_FUNCTIONS = new Set([
   'change-device-password',
   'change-staff-password',
@@ -92,7 +92,7 @@ function allowedMethods(pathname: string): Set<string> | null {
   const path = decodedPath(pathname)
   if (!path) return null
 
-  if (path === '/__time420s_health') return new Set(['GET', 'HEAD'])
+  if (path === '/__qrordering_health') return new Set(['GET', 'HEAD'])
 
   if (path.startsWith('/auth/v1/')) {
     // Service-role Auth Admin API must never become reachable through a public
@@ -179,9 +179,9 @@ export default {
       return json({ error: 'Method not allowed' }, 405, origin)
     }
 
-    if (decodedPath(incomingUrl.pathname) === '/__time420s_health') {
+    if (decodedPath(incomingUrl.pathname) === '/__qrordering_health') {
       return json(
-        { ok: true, service: 'time420s-network-gateway' },
+        { ok: true, service: 'qrordering-network-gateway' },
         200,
         origin,
       )
@@ -213,7 +213,7 @@ export default {
     const headers = new Headers(request.headers)
     stripForwardingHeaders(headers)
     headers.delete('content-length')
-    headers.set('X-Time420s-Route', 'fallback')
+    headers.set('X-QrOrdering-Route', 'fallback')
 
     try {
       const upstreamResponse = await fetch(
@@ -233,7 +233,7 @@ export default {
         }
       }
       responseHeaders.set('Cache-Control', 'no-store')
-      responseHeaders.set('X-Time420s-Route', 'fallback')
+      responseHeaders.set('X-QrOrdering-Route', 'fallback')
       for (const [key, value] of Object.entries(corsHeaders(origin))) {
         responseHeaders.set(key, value)
       }

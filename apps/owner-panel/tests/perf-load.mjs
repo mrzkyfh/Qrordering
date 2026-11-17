@@ -1,5 +1,5 @@
 // ────────────────────────────────────────────────────────────────────────────
-// Performance Load Test — Time420s POS Backend (Supabase)
+// Performance Load Test — QrOrdering POS Backend (Supabase)
 // Simulasi customer journey saat jam ramai (lunch rush)
 //
 // Customer journey (per "user"):

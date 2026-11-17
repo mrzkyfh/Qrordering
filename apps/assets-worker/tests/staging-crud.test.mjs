@@ -15,15 +15,15 @@ const outletA = '849aada5-8e64-4e1e-b5f4-5d626b44739e'
 const outletB = '19c1ef33-ccea-4aa7-b6a6-12ce0e134ed8'
 const staging = {
   ENVIRONMENT: 'staging',
-  R2_BUCKET_NAME: 'time420s-assets-staging',
-  PUBLIC_ASSET_BASE_URL: 'https://time420s-r2-staging.official-b0d.workers.dev',
+  R2_BUCKET_NAME: 'qrordering-assets-staging',
+  PUBLIC_ASSET_BASE_URL: 'https://qrordering-r2-staging.official-b0d.workers.dev',
   SUPABASE_URL: 'https://supabase.example',
   SUPABASE_ANON_KEY: 'anon-key',
 }
 const production = {
   ENVIRONMENT: 'production',
-  R2_BUCKET_NAME: 'time420s-assets',
-  PUBLIC_ASSET_BASE_URL: 'https://assets.time420s.my.id',
+  R2_BUCKET_NAME: 'qrordering-assets',
+  PUBLIC_ASSET_BASE_URL: 'https://assets.qrordering.my.id',
   SUPABASE_URL: 'https://supabase.example',
   SUPABASE_ANON_KEY: 'anon-key',
 }
@@ -97,12 +97,12 @@ test('wrong bucket/config guard fails closed before authentication or write', as
   const bucket = memoryBucket()
   const response = await worker.fetch(new Request('https://worker.test/v1/images', {
     method: 'POST', headers: { ...auth, 'Content-Type': 'image/webp', 'X-Outlet-Id': outletA }, body: new Uint8Array([1]),
-  }), { ...staging, R2_BUCKET_NAME: 'time420s-assets', IMAGES: bucket }, context)
+  }), { ...staging, R2_BUCKET_NAME: 'qrordering-assets', IMAGES: bucket }, context)
   assert.equal(response.status, 503)
   assert.equal(bucket.objects.size, 0)
 })
 
-test('production guard emits assets.time420s.my.id URL and rejects staging bucket', async () => {
+test('production guard emits assets.qrordering.my.id URL and rejects staging bucket', async () => {
   const worker = loadWorker()
   const bucket = memoryBucket()
   const request = () => new Request('https://worker.test/v1/images', {
@@ -110,9 +110,9 @@ test('production guard emits assets.time420s.my.id URL and rejects staging bucke
   })
   const response = await worker.fetch(request(), { ...production, IMAGES: bucket }, context)
   assert.equal(response.status, 201)
-  assert.match((await response.json()).url, /^https:\/\/assets\.time420s\.my\.id\/assets\/menu-images\//)
+  assert.match((await response.json()).url, /^https:\/\/assets\.qrordering\.my\.id\/assets\/menu-images\//)
 
-  const rejected = await worker.fetch(request(), { ...production, R2_BUCKET_NAME: 'time420s-assets-staging', IMAGES: bucket }, context)
+  const rejected = await worker.fetch(request(), { ...production, R2_BUCKET_NAME: 'qrordering-assets-staging', IMAGES: bucket }, context)
   assert.equal(rejected.status, 503)
 })
 

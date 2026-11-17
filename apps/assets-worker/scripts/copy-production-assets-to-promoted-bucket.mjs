@@ -6,9 +6,9 @@ import { spawnSync } from 'node:child_process'
 
 const supabaseUrl = process.env.SUPABASE_URL?.replace(/\/$/, '')
 const anonKey = process.env.SUPABASE_ANON_KEY
-const sourceOrigin = (process.env.SOURCE_ASSET_ORIGIN || 'https://assets.time420s.my.id').replace(/\/$/, '')
-const targetOrigin = (process.env.TARGET_ASSET_ORIGIN || 'https://time420s-r2-staging.official-b0d.workers.dev').replace(/\/$/, '')
-const bucket = process.env.R2_BUCKET || 'time420s-assets-staging'
+const sourceOrigin = (process.env.SOURCE_ASSET_ORIGIN || 'https://assets.qrordering.my.id').replace(/\/$/, '')
+const targetOrigin = (process.env.TARGET_ASSET_ORIGIN || 'https://qrordering-r2-staging.official-b0d.workers.dev').replace(/\/$/, '')
+const bucket = process.env.R2_BUCKET || 'qrordering-assets-staging'
 const apply = process.env.APPLY === '1'
 const partTotal = Math.max(1, Number.parseInt(process.env.PART_TOTAL || '1', 10))
 const partIndex = Math.max(0, Number.parseInt(process.env.PART_INDEX || '0', 10))
@@ -47,7 +47,7 @@ if (!apply) {
   process.exit(0)
 }
 
-const temp = await mkdtemp(join(tmpdir(), 'time420s-production-r2-copy-'))
+const temp = await mkdtemp(join(tmpdir(), 'qrordering-production-r2-copy-'))
 const manifest = []
 try {
   let index = 0

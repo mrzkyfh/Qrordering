@@ -146,7 +146,7 @@ test('orders + order_items + menu_items embed', async () => {
 
 test('realtime endpoint reachable', async () => {
   // PostgREST tidak handle WebSocket — kita test apakah /realtime ada
-  const res = await fetch(`${URL}/realtime/v1/api/tenants/realtime-time420s/health`).catch(() => null)
+  const res = await fetch(`${URL}/realtime/v1/api/tenants/realtime-qrordering/health`).catch(() => null)
   // Just verify connection possible (200 or 401/404 OK — bukan network error)
   if (res) assert.ok([200, 401, 404].includes(res.status), `unexpected status ${res.status}`)
 })

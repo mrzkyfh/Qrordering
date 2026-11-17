@@ -7,8 +7,8 @@ import { spawnSync } from 'node:child_process'
 const supabaseUrl = process.env.SUPABASE_URL?.replace(/\/$/, '')
 const anonKey = process.env.SUPABASE_ANON_KEY
 const workerUrl = (process.env.ASSET_WORKER_URL ||
-  'https://time420s-assets.timess402coffee.workers.dev').replace(/\/$/, '')
-const bucket = process.env.R2_BUCKET || 'time420s-images'
+  'https://qrordering-assets.timess402coffee.workers.dev').replace(/\/$/, '')
+const bucket = process.env.R2_BUCKET || 'qrordering-images'
 
 if (!supabaseUrl || !anonKey) {
   throw new Error('SUPABASE_URL dan SUPABASE_ANON_KEY wajib tersedia')
@@ -34,7 +34,7 @@ for (const row of rows) {
   byUrl.set(row.image_url, { ...row, oldPath, key: `menu/${oldPath}` })
 }
 
-const temp = await mkdtemp(join(tmpdir(), 'time420s-r2-migration-'))
+const temp = await mkdtemp(join(tmpdir(), 'qrordering-r2-migration-'))
 const manifest = []
 try {
   let index = 0

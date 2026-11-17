@@ -80,8 +80,8 @@ for (const row of rows) {
   distribution.nonNull++
   const value = String(row.image_url)
   if (value.includes('.supabase.co/storage/v1/')) distribution.supabase++
-  else if (value.startsWith('https://assets.time420s.my.id/')) distribution.productionR2++
-  else if (value.includes('.r2.dev/') || value.includes('time420s-r2-staging')) distribution.stagingR2++
+  else if (value.startsWith('https://assets.qrordering.my.id/')) distribution.productionR2++
+  else if (value.includes('.r2.dev/') || value.includes('qrordering-r2-staging')) distribution.stagingR2++
   else distribution.other++
 }
 if (distribution.nonNull !== 114 || distribution.supabase !== 112 || distribution.productionR2 !== 2 || distribution.stagingR2 !== 0 || distribution.other !== 0) {

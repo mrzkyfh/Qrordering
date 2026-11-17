@@ -6,7 +6,7 @@ import { normalizeShiftCloseReport } from '../../src/lib/shiftCloseReport.ts'
 test('laporan tutup kasir menormalkan NUMERIC JSONB dan seluruh rinciannya', () => {
   const report = normalizeShiftCloseReport({
     shift_id: 'shift-1',
-    outlet: { name: 'TIME420S' },
+    outlet: { name: 'QRORDERING' },
     cashier_name: 'Kasir Satu',
     opening_cash: '100000',
     total_receipts: '441100',

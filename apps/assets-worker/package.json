@@ -1,5 +1,5 @@
 {
-  "name": "time420s-assets-worker",
+  "name": "qrordering-assets-worker",
   "private": true,
   "scripts": {
     "test": "node --test tests/*.test.mjs",

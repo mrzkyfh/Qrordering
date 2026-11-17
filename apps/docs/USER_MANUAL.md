@@ -1,7 +1,7 @@
 <section class="cover">
-  <img class="cover-logo" src="../owner-panel/src/assets/logo.png" alt="Logo Time420s">
+  <img class="cover-logo" src="../owner-panel/src/assets/logo.png" alt="Logo QrOrdering">
   <p class="eyebrow">MODUL PENGGUNAAN RESMI</p>
-  <h1>Time420s</h1>
+  <h1>QrOrdering</h1>
   <p class="cover-subtitle">Web Owner Panel, Aplikasi Kasir, Menu Digital Pelanggan, Persediaan, Laporan, dan Perangkat Cetak</p>
   <div class="cover-meta">
     <p><strong>Versi dokumen</strong> 2.0</p>
@@ -15,9 +15,9 @@
 
 # Tentang modul ini
 
-Modul ini menjelaskan cara menggunakan Time420s dari tahap persiapan outlet sampai operasional harian. Nama menu, tombol, dan alur mengikuti versi aplikasi yang berlaku saat dokumen ini diterbitkan.
+Modul ini menjelaskan cara menggunakan QrOrdering dari tahap persiapan outlet sampai operasional harian. Nama menu, tombol, dan alur mengikuti versi aplikasi yang berlaku saat dokumen ini diterbitkan.
 
-Time420s terdiri dari tiga bagian utama:
+QrOrdering terdiri dari tiga bagian utama:
 
 1. **Web Owner Panel** adalah halaman pengelolaan untuk mengatur data utama, cabang, sumber daya manusia, persediaan, dan laporan.
 2. **Aplikasi POS (Point of Sale)** adalah aplikasi kasir untuk mencatat waktu masuk, membuat transaksi, mengelola pesanan, menerima pembayaran, mengatur giliran kerja, mencatat kehadiran, dan menggunakan printer.
@@ -1411,7 +1411,7 @@ Saat meminta bantuan, siapkan:
 - Status internet.
 - Nama printer dan tipe koneksi.
 
-**Kontak dukungan:** isi sesuai kontak resmi penyedia Time420s.
+**Kontak dukungan:** isi sesuai kontak resmi penyedia QrOrdering.
 **Jam dukungan:** isi sesuai perjanjian layanan.
 
 ---

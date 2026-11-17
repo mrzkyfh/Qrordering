@@ -7,8 +7,8 @@ import { promisify } from 'node:util'
 const execFileAsync = promisify(execFile)
 const root = process.cwd()
 const accountId = '4e5b204f44bdff9f75eda4c3e99ee098'
-const bucket = 'time420s-assets'
-const productionBase = 'https://assets.time420s.my.id'
+const bucket = 'qrordering-assets'
+const productionBase = 'https://assets.qrordering.my.id'
 const stagingHost = 'pub-03e9996cd3b549a4b55663ff7ec18251.r2.dev'
 const runId = new Date().toISOString().replaceAll(':', '').replaceAll('-', '').replace(/\.\d{3}Z$/, 'Z')
 const outputDir = path.join(root, 'backups', `resolve-staging-images-${runId}`)

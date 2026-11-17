@@ -1,4 +1,4 @@
-# Panduan Setup Akun, PIN & Login — Time420s
+# Panduan Setup Akun, PIN & Login — QrOrdering
 
 Panduan **praktis langkah-demi-langkah** untuk menyiapkan akun, PIN, dan login.
 Untuk detail hak akses per role, lihat [ROLE_DAN_HAK_AKSES.md](ROLE_DAN_HAK_AKSES.md).

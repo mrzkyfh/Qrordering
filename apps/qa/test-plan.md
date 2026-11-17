@@ -1,4 +1,4 @@
-# Test Plan — Times420s Restaurant Management System
+# Test Plan — QrOrdering Restaurant Management System
 
 **Versi:** 1.0  
 **Dibuat:** 2026-06-14  

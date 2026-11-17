@@ -92,7 +92,7 @@ Di Supabase Dashboard → **Settings → Edge Functions → Environment Variable
 
 | Key | Value |
 |-----|-------|
-| `APP_URL` | `https://times420s.pages.dev` |
+| `APP_URL` | `https://qrordering.pages.dev` |
 
 (`SUPABASE_URL` dan `SUPABASE_SERVICE_ROLE_KEY` sudah tersedia otomatis di Edge Function)
 
@@ -114,8 +114,8 @@ supabase functions deploy transaction-archive --workdir apps
 
 Di Supabase Dashboard → **Authentication → URL Configuration**:
 
-- **Site URL**: `https://times420s.pages.dev`
-- **Redirect URLs**: `https://times420s.pages.dev/**`
+- **Site URL**: `https://qrordering.pages.dev`
+- **Redirect URLs**: `https://qrordering.pages.dev/**`
 
 Di **Authentication → Providers → Email**:
 - Enable Email provider

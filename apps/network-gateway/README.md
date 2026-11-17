@@ -1,6 +1,6 @@
-# Time420s Network Gateway
+# QrOrdering Network Gateway
 
-Jalur cadangan terbatas untuk aplikasi Time420s ketika jaringan pelanggan
+Jalur cadangan terbatas untuk aplikasi QrOrdering ketika jaringan pelanggan
 tidak dapat menjangkau domain Supabase secara langsung.
 
 - Gateway hanya meneruskan path Supabase yang telah diizinkan.

@@ -24,10 +24,10 @@ const IMAGE_TYPES: Record<string, string> = {
 
 const ASSET_SCOPES = new Set(['menu', 'logos', 'covers'])
 const DEFAULT_MAX_IMAGE_BYTES = 5 * 1024 * 1024
-const STAGING_BUCKET = 'time420s-assets-staging'
-const STAGING_PUBLIC_ORIGIN = 'https://time420s-r2-staging.official-b0d.workers.dev'
-const PRODUCTION_BUCKET = 'time420s-assets'
-const PRODUCTION_PUBLIC_ORIGIN = 'https://assets.time420s.my.id'
+const STAGING_BUCKET = 'qrordering-assets-staging'
+const STAGING_PUBLIC_ORIGIN = 'https://qrordering-r2-staging.official-b0d.workers.dev'
+const PRODUCTION_BUCKET = 'qrordering-assets'
+const PRODUCTION_PUBLIC_ORIGIN = 'https://assets.qrordering.my.id'
 const IMAGE_NAMESPACE = 'menu-images'
 const UUID = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
 const MANAGED_IMAGE_KEY = new RegExp(`^${IMAGE_NAMESPACE}/(${UUID})/(menu|logos|covers)/${UUID}\\.(?:jpg|png|webp|gif)$`, 'i')
@@ -345,7 +345,7 @@ export default {
     }
 
     if (url.pathname === '/health' && (request.method === 'GET' || request.method === 'HEAD')) {
-      return json({ ok: true, service: 'time420s-assets' }, 200, origin)
+      return json({ ok: true, service: 'qrordering-assets' }, 200, origin)
     }
 
     if (url.pathname === '/v1/images' && request.method === 'POST') {

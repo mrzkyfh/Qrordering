@@ -1,4 +1,4 @@
-# Roadmap Fitur Lanjutan (menuju paritas Majoo) — Time420s
+# Roadmap Fitur Lanjutan (menuju paritas Majoo) — QrOrdering
 
 **Tanggal:** 2026-07-07
 **Status:** SPEC — dokumentasi sebelum eksekusi.

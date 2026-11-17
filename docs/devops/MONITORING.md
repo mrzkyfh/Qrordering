@@ -1,4 +1,4 @@
-# Monitoring & Alerting — Time 420s
+# Monitoring & Alerting — QR Ordering
 
 Observability untuk stack serverless (Cloudflare Pages + Supabase + Flutter). Fokus: ketersediaan, error, performa DB, dan jejak audit bisnis.
 

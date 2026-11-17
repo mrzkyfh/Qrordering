@@ -7,8 +7,8 @@ import { spawnSync } from 'node:child_process'
 const sourceManifestUrl = new URL('../migration-manifest.json', import.meta.url)
 const outputManifestUrl = new URL('../optimized-manifest.json', import.meta.url)
 const workerUrl = (process.env.ASSET_WORKER_URL ||
-  'https://time420s-assets.timess402coffee.workers.dev').replace(/\/$/, '')
-const bucket = process.env.R2_BUCKET || 'time420s-images'
+  'https://qrordering-assets.timess402coffee.workers.dev').replace(/\/$/, '')
+const bucket = process.env.R2_BUCKET || 'qrordering-images'
 const maxDimension = Number(process.env.IMAGE_MAX_DIMENSION || 720)
 const quality = Number(process.env.IMAGE_WEBP_QUALITY || 78)
 
@@ -39,7 +39,7 @@ function dimensions(file) {
 }
 
 const manifest = JSON.parse(await readFile(sourceManifestUrl, 'utf8'))
-const temp = await mkdtemp(join(tmpdir(), 'time420s-r2-optimize-'))
+const temp = await mkdtemp(join(tmpdir(), 'qrordering-r2-optimize-'))
 const optimized = []
 
 try {

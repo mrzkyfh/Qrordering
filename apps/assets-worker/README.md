@@ -1,15 +1,15 @@
-# Time420s Assets Worker
+# QrOrdering Assets Worker
 
-Penyimpanan khusus gambar Time420s di Cloudflare R2. Database, autentikasi,
+Penyimpanan khusus gambar QrOrdering di Cloudflare R2. Database, autentikasi,
 transaksi, dan konfigurasi tetap berada di Supabase.
 
 ## Production
 
 Konfigurasi produksi berada di `wrangler.toml`:
 
-- Worker: `time420s-r2-production`
-- Bucket: `time420s-assets`
-- URL publik: `https://assets.time420s.my.id`
+- Worker: `qrordering-r2-production`
+- Bucket: `qrordering-assets`
+- URL publik: `https://assets.qrordering.my.id`
 
 Simpan anon key Supabase sebagai secret Worker:
    `npx wrangler secret put SUPABASE_ANON_KEY`.
@@ -23,7 +23,7 @@ web pemesanan tanpa login.
 
 Konfigurasi staging terpisah berada di `wrangler.staging.toml`. Jangan memakai
 file staging untuk deploy produksi dan jangan mengikat Worker produksi ke bucket
-`time420s-assets-staging`.
+`qrordering-assets-staging`.
 
 ## Penghapusan data
 
@@ -38,6 +38,6 @@ Bucket R2 berada di luar database Supabase. Sebelum menjalankan
 5. Isi konfirmasi R2 pada SQL factory reset, lalu jalankan SQL melalui Supabase
    SQL Editor.
 
-Jangan menghapus bucket produksi `time420s-assets` karena deployment Worker
+Jangan menghapus bucket produksi `qrordering-assets` karena deployment Worker
 bergantung pada binding tersebut. SQL Supabase tidak dapat memeriksa atau
 menghapus object Cloudflare R2 secara otomatis.

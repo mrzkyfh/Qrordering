@@ -27,7 +27,7 @@ import { humanizeError } from '@/lib/errorMessage'
 import type { RestaurantTable } from '@/types/database'
 import logo from '@/assets/logo.png'
 
-const MENU_BASE_URL = import.meta.env.VITE_MENU_BASE_URL ?? 'https://menu.time420s.my.id'
+const MENU_BASE_URL = import.meta.env.VITE_MENU_BASE_URL ?? 'https://menu.qrordering.my.id'
 
 // Escape nilai dinamis agar tidak jadi DOM XSS saat ditulis ke window cetak.
 function escapeHtml(s: string): string {

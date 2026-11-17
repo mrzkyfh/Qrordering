@@ -2,13 +2,13 @@ import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
 const defaultAllowedOrigins = new Set([
-  'https://time420s.my.id',
-  'https://menu.time420s.my.id',
-  'https://time420s-47o.pages.dev',
-  'https://time420s.time420s-network-gateway.workers.dev',
-  'https://times420s-menu.time420s-network-gateway.workers.dev',
-  'https://times420s-menu-c56.pages.dev',
-  'https://time420s-staging.official-b0d.workers.dev',
+  'https://qrordering.my.id',
+  'https://menu.qrordering.my.id',
+  'https://qrordering-47o.pages.dev',
+  'https://qrordering.qrordering-network-gateway.workers.dev',
+  'https://qrordering-menu.qrordering-network-gateway.workers.dev',
+  'https://qrordering-menu-c56.pages.dev',
+  'https://qrordering-staging.official-b0d.workers.dev',
   'http://localhost:5173',
   'http://127.0.0.1:5173',
 ])

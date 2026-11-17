@@ -1,19 +1,19 @@
 account_id = "b0d09d15b16ea37156b38470fd58350d"
-name = "time420s-r2-production"
+name = "qrordering-r2-production"
 main = "src/index.ts"
 compatibility_date = "2026-08-26"
 workers_dev = true
 
 [[r2_buckets]]
 binding = "IMAGES"
-bucket_name = "time420s-assets"
+bucket_name = "qrordering-assets"
 
 [vars]
 ENVIRONMENT = "production"
-R2_BUCKET_NAME = "time420s-assets"
-PUBLIC_ASSET_BASE_URL = "https://assets.time420s.my.id"
+R2_BUCKET_NAME = "qrordering-assets"
+PUBLIC_ASSET_BASE_URL = "https://assets.qrordering.my.id"
 SUPABASE_URL = "https://yjmrabgpxjbunwtsiavs.supabase.co"
-ALLOWED_ORIGINS = "https://time420s.my.id,https://time420s-47o.pages.dev,https://time420s.official-b0d.workers.dev,http://localhost:5173,http://127.0.0.1:5173"
+ALLOWED_ORIGINS = "https://qrordering.my.id,https://qrordering-47o.pages.dev,https://qrordering.official-b0d.workers.dev,http://localhost:5173,http://127.0.0.1:5173"
 MAX_IMAGE_BYTES = "5242880"
 
 # SUPABASE_ANON_KEY must be configured as a Worker secret before deployment.

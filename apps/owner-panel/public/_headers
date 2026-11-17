@@ -11,7 +11,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.supabase.co https://assets.time420s.my.id https://time420s-r2-staging.official-b0d.workers.dev; font-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.time420s.my.id wss://api.time420s.my.id https://time420s-r2-staging.official-b0d.workers.dev https://time420s-r2-production.official-b0d.workers.dev; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.supabase.co https://assets.qrordering.my.id https://qrordering-r2-staging.official-b0d.workers.dev; font-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.qrordering.my.id wss://api.qrordering.my.id https://qrordering-r2-staging.official-b0d.workers.dev https://qrordering-r2-production.official-b0d.workers.dev; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
 
 # index.html TIDAK boleh di-cache. Kalau basi, ia menunjuk nama chunk lama yang
 # sudah hilang setelah deploy; permintaan chunk itu jatuh ke SPA fallback dan

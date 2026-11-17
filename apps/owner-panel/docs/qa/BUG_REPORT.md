@@ -92,7 +92,7 @@ Migration `031_sales_breakdown_views.sql` perlu dijalankan manual di Supabase SQ
 
 **Severity:** MEDIUM
 **Status:** ✅ RESOLVED (migration 033 sudah dijalankan 2026-05-28, verifikasi pass: anon SELECT * → 401, view publik 200)
-**File:** `apps/supabase/migrations/033_outlets_anon_field_security.sql`, `apps/mobile/time420s/lib/features/customer_menu/presentation/pages/customer_menu_page.dart`
+**File:** `apps/supabase/migrations/033_outlets_anon_field_security.sql`, `apps/mobile/qrordering/lib/features/customer_menu/presentation/pages/customer_menu_page.dart`
 
 **Deskripsi:**
 Policy `outlets_select_anon` di migration `008_customer_menu_anon.sql` memberi anon SELECT * pada tabel `outlets` (filter `is_active = true`). Akibatnya field sensitif bocor ke siapapun yang punya anon key:

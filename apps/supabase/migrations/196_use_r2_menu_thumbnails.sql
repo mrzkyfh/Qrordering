@@ -49,6 +49,6 @@ WHERE id IN (
     '5b262d9f-e71f-4f19-94f1-36c9480fe377'
   )
   AND image_url LIKE
-    'https://time420s-assets.timess402coffee.workers.dev/assets/menu/%';
+    'https://qrordering-assets.timess402coffee.workers.dev/assets/menu/%';
 
 COMMIT;

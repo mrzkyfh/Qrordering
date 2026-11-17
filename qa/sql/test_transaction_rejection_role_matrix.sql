@@ -66,7 +66,7 @@ BEGIN
     ) VALUES (
       '00000000-0000-0000-0000-000000000000',
       v_users[v_i], 'authenticated', 'authenticated',
-      format('qa-role-%s-%s@time420s.invalid', v_roles[v_i], v_users[v_i]),
+      format('qa-role-%s-%s@qrordering.invalid', v_roles[v_i], v_users[v_i]),
       '', now(),
       '{"provider":"email","providers":["email"]}'::jsonb,
       jsonb_build_object('full_name', '[QA] ' || v_roles[v_i]),

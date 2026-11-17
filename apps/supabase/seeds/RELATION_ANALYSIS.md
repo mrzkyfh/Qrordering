@@ -1,4 +1,4 @@
-# Analisis Relasi Sistem — Time420s POS
+# Analisis Relasi Sistem — QrOrdering POS
 **Status:** Post-Fix #1, #2, #3, #4 (kode sudah selesai, migrasi 039–042 sudah di-apply)
 **Tanggal review:** 2026-05-30
 

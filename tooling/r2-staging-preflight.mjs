@@ -1,7 +1,7 @@
 import { createHash, createHmac, randomUUID } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
 
-const EXPECTED_BUCKET = 'time420s-assets-staging'
+const EXPECTED_BUCKET = 'qrordering-assets-staging'
 
 function loadEnv(text) {
   return Object.fromEntries(
@@ -104,7 +104,7 @@ if (env.R2_BUCKET !== EXPECTED_BUCKET) {
 
 const request = signer(env)
 const key = `_preflight/${randomUUID()}.txt`
-const payload = Buffer.from('TIME420S R2 STAGING PREFLIGHT v1\n', 'utf8')
+const payload = Buffer.from('QRORDERING R2 STAGING PREFLIGHT v1\n', 'utf8')
 const expectedHash = sha256(payload)
 let uploaded = false
 

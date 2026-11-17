@@ -43,7 +43,7 @@ if (publicBase.href !== EXPECTED_BASE) throw new Error(`Public endpoint guard re
 
 const reportPath = path.join(backupRoot, 'r2-staging-copy-report.json')
 const report = JSON.parse(await readFile(reportPath, 'utf8'))
-if (report.targetBucket !== 'time420s-assets-staging') throw new Error('Report target bucket guard rejected')
+if (report.targetBucket !== 'qrordering-assets-staging') throw new Error('Report target bucket guard rejected')
 if (report.objects.length !== EXPECTED_COUNT || report.target.count !== EXPECTED_COUNT || report.target.bytes !== EXPECTED_BYTES) {
   throw new Error('Existing authenticated-copy reconciliation is not the expected 127 objects / 5,195,078 bytes')
 }

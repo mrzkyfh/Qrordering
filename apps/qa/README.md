@@ -1,6 +1,6 @@
-# QA Documentation — Times420s
+# QA Documentation — QrOrdering
 
-Folder ini berisi semua dokumentasi testing untuk project Times420s.
+Folder ini berisi semua dokumentasi testing untuk project QrOrdering.
 
 ## Struktur
 

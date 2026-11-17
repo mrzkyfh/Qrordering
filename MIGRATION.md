@@ -1,18 +1,18 @@
-# Time420S — promosi staging ke production
+# QrOrdering — promosi staging ke production
 
-- GitHub: https://github.com/official655/Time420s
+- GitHub: https://github.com/official655/QrOrdering
 - Cloudflare account ID: `b0d09d15b16ea37156b38470fd58350d`
-- Panel sementara: https://time420s-staging.official-b0d.workers.dev
-- Menu pelanggan sementara: https://time420s-menu-staging.official-b0d.workers.dev
-- Gateway sementara: https://time420s-network-gateway-staging.official-b0d.workers.dev
-- Assets sementara: https://time420s-r2-staging.official-b0d.workers.dev
+- Panel sementara: https://qrordering-staging.official-b0d.workers.dev
+- Menu pelanggan sementara: https://qrordering-menu-staging.official-b0d.workers.dev
+- Gateway sementara: https://qrordering-network-gateway-staging.official-b0d.workers.dev
+- Assets sementara: https://qrordering-r2-staging.official-b0d.workers.dev
 - Supabase: https://jstdtalbihxlbpfsisab.supabase.co
 
 ## Data dan penyimpanan
 
 Project Supabase yang sama tetap digunakan sehingga akun, outlet, dan transaksi
-tidak dipindahkan. Gambar baru memakai R2 bucket `time420s-assets-staging` melalui
-Worker `time420s-r2-staging`. Resource tersebut sudah diuji di staging dan
+tidak dipindahkan. Gambar baru memakai R2 bucket `qrordering-assets-staging` melalui
+Worker `qrordering-r2-staging`. Resource tersebut sudah diuji di staging dan
 dipromosikan in-place menjadi production; nama dipertahankan untuk menghindari
 perubahan binding, URL, dan object.
 

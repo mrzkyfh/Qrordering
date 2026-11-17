@@ -1,4 +1,4 @@
-# Supabase CLI project config (Time 420s)
+# Supabase CLI project config (QR Ordering)
 # Project ini memakai layout non-standar: migrations & functions ada di
 # apps/supabase/. Karena itu perintah CLI dijalankan dengan: --workdir apps
 #   supabase db push --workdir apps

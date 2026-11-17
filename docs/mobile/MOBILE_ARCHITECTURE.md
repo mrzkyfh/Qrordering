@@ -1,4 +1,4 @@
-# Mobile Architecture — Time420s
+# Mobile Architecture — QrOrdering
 
 Aplikasi Flutter adalah POS bersama untuk Owner, Admin, Manajer, dan Kasir.
 Tidak ada akun atau route khusus operator produksi.

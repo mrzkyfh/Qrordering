@@ -8,7 +8,7 @@ export default defineConfig({
   workers: 1,
   reporter: [['html', { open: 'never' }], ['list']],
   use: {
-    baseURL: 'https://time420s-47o.pages.dev',
+    baseURL: 'https://qrordering-47o.pages.dev',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'off',

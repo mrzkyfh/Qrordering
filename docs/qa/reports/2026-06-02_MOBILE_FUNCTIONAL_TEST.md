@@ -2,7 +2,7 @@
 
 - **Tanggal:** 2026-06-02
 - **Tester:** QA Engineer
-- **Build:** `apps/mobile/time420s` (branch `main`)
+- **Build:** `apps/mobile/qrordering` (branch `main`)
 - **Platform diuji:** Web (Chrome, `flutter run -d chrome`) + automated (`flutter test`)
 - **Acuan:** [USER_STORIES.md](../../../claude/docs/product/USER_STORIES.md), [TEST_CASES.md](../TEST_CASES.md)
 
@@ -128,7 +128,7 @@ Format detail: [BUG_REPORT_TEMPLATE.md](../BUG_REPORT_TEMPLATE.md).
 
 ## 5. Cara Reproduksi Test Otomatis
 ```bash
-cd apps/mobile/time420s
+cd apps/mobile/qrordering
 flutter pub get
 flutter analyze lib
 flutter test            # 84 test

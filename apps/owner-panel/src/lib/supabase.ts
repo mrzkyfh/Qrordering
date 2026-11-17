@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 
 const primarySupabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
 const supabaseUrl =
-  window.__TIME420S_BACKEND_URL__?.trim() || primarySupabaseUrl
+  window.__QRORDERING_BACKEND_URL__?.trim() || primarySupabaseUrl
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string
 
 if (!primarySupabaseUrl || !supabaseUrl || !supabaseAnonKey) {

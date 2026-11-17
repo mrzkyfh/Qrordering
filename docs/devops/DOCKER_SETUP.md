@@ -1,4 +1,4 @@
-# Docker Setup — Time 420s
+# Docker Setup — QR Ordering
 
 ## Ringkasan: produksi TIDAK memakai Docker
 

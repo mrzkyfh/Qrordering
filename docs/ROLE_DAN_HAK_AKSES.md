@@ -1,4 +1,4 @@
-# Role & Hak Akses — POS Time420s
+# Role & Hak Akses — POS QrOrdering
 
 Dokumen ini adalah acuan role aktif untuk owner-panel, aplikasi mobile, dan
 aturan database. Sistem hanya memiliki role manusia **Owner, Admin, Manajer,

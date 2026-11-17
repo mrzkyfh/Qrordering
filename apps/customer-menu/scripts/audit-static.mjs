@@ -24,7 +24,7 @@ if (/cdn\.jsdelivr\.net|fonts\.googleapis\.com|fonts\.gstatic\.com/i.test(html))
 if (!/Content-Security-Policy:/i.test(headers)) {
   violations.push('Header Content-Security-Policy tidak ditemukan.')
 }
-if (!/img-src[^;]*https:\/\/\*\.supabase\.co[^;]*https:\/\/assets\.time420s\.my\.id/i.test(headers)) {
+if (!/img-src[^;]*https:\/\/\*\.supabase\.co[^;]*https:\/\/assets\.qrordering\.my\.id/i.test(headers)) {
   violations.push('CSP gambar harus mengizinkan Supabase dan R2 production.')
 }
 if (!/data-image-fallback/.test(app) || !/installImageFallbacks/.test(app)) {

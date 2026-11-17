@@ -219,7 +219,7 @@ const html = `<!doctype html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modul Penggunaan Time420s</title>
+  <title>Modul Penggunaan QrOrdering</title>
   <style>${css}</style>
 </head>
 <body>${output.join('\n')}</body>
@@ -246,7 +246,7 @@ try {
     headerTemplate: '<div></div>',
     footerTemplate: `
       <div style="box-sizing:border-box;width:100%;margin:0 15mm;padding-top:2mm;border-top:1px solid #e5e7eb;font:8px Arial;color:#8a94a3;display:flex;justify-content:space-between;">
-        <span>Time420s · Modul Penggunaan</span>
+        <span>QrOrdering · Modul Penggunaan</span>
         <span>Halaman <span class="pageNumber"></span> dari <span class="totalPages"></span></span>
       </div>`,
   })

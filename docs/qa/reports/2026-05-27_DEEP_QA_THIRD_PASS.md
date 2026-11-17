@@ -221,14 +221,14 @@ function printQR(dataUrl: string, tableNumber: string) {
 
 **Deskripsi:**  
 ```ts
-const MENU_BASE_URL = 'https://times420s-menu.pages.dev'
+const MENU_BASE_URL = 'https://qrordering-menu.pages.dev'
 ```
 
 URL ini hardcoded. Tidak ada fallback ke env var. QR code yang di-generate di dev environment akan mengarah ke production URL. QR yang sudah di-generate tidak bisa di-switch ke environment lain.
 
 **Fix:**
 ```ts
-const MENU_BASE_URL = import.meta.env.VITE_MENU_BASE_URL ?? 'https://times420s-menu.pages.dev'
+const MENU_BASE_URL = import.meta.env.VITE_MENU_BASE_URL ?? 'https://qrordering-menu.pages.dev'
 ```
 
 ---

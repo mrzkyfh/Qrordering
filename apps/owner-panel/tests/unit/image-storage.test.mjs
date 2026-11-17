@@ -5,9 +5,9 @@ import vm from 'node:vm'
 import ts from 'typescript'
 
 const outlet = '11111111-1111-4111-8111-111111111111'
-const productionApi = 'https://time420s-r2-production.official-b0d.workers.dev'
-const productionPublic = 'https://assets.time420s.my.id'
-const stagingApi = 'https://time420s-r2-staging.official-b0d.workers.dev'
+const productionApi = 'https://qrordering-r2-production.official-b0d.workers.dev'
+const productionPublic = 'https://assets.qrordering.my.id'
+const stagingApi = 'https://qrordering-r2-staging.official-b0d.workers.dev'
 
 function storageModule({ backend = '', uploadError = null, fetchImpl, stagingApiUrl = '' } = {}) {
   const calls = []

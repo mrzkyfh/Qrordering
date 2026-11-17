@@ -56,8 +56,8 @@ const outletId = '849aada5-8e64-4e1e-b5f4-5d626b44739e'
 const key = `menu-images/${outletId}/menu/29ae5ef5-a833-4f97-a57a-00e547f57a35.png`
 const stagingEnv = {
   ENVIRONMENT: 'staging',
-  R2_BUCKET_NAME: 'time420s-assets-staging',
-  PUBLIC_ASSET_BASE_URL: 'https://time420s-r2-staging.official-b0d.workers.dev',
+  R2_BUCKET_NAME: 'qrordering-assets-staging',
+  PUBLIC_ASSET_BASE_URL: 'https://qrordering-r2-staging.official-b0d.workers.dev',
 }
 
 test('DELETE removes the R2 object and its canonical public cache entry', async () => {

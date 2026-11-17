@@ -10,7 +10,7 @@ test('Wi-Fi memblokir Supabase langsung → web memakai jalur cadangan', async (
     (route) => route.abort('internetdisconnected'),
   )
   await page.route(
-    'https://api.time420s.my.id/auth/v1/health',
+    'https://api.qrordering.my.id/auth/v1/health',
     (route) => route.fulfill({
       status: 200,
       contentType: 'application/json',
@@ -23,7 +23,7 @@ test('Wi-Fi memblokir Supabase langsung → web memakai jalur cadangan', async (
       request
         .url()
         .startsWith(
-          'https://api.time420s.my.id/auth/v1/health',
+          'https://api.qrordering.my.id/auth/v1/health',
         )
     ) {
       fallbackHealthCalled = true
@@ -37,6 +37,6 @@ test('Wi-Fi memblokir Supabase langsung → web memakai jalur cadangan', async (
   })
   expect(fallbackHealthCalled).toBe(true)
   expect(
-    await page.evaluate(() => window.__TIME420S_BACKEND_ROUTE__),
+    await page.evaluate(() => window.__QRORDERING_BACKEND_ROUTE__),
   ).toBe('fallback')
 })

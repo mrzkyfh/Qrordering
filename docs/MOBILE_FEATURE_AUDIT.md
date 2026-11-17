@@ -1,8 +1,8 @@
-# Mobile Feature Audit — Time 420s POS
+# Mobile Feature Audit — QR Ordering POS
 **Tanggal:** 2026-07-05
 **Auditor:** Mobile Developer
 **Stack:** Flutter + BLoC + go_router + Supabase (verified — bukan React Native)
-**Scope:** `apps/mobile/time420s` — audit fitur: apa yang sudah ada vs apa yang belum & sebaiknya dibuat
+**Scope:** `apps/mobile/qrordering` — audit fitur: apa yang sudah ada vs apa yang belum & sebaiknya dibuat
 
 ---
 

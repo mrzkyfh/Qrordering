@@ -8,8 +8,8 @@ const execFileAsync = promisify(execFile)
 const ROOT = process.cwd()
 const PROJECT_REF = 'yjmrabgpxjbunwtsiavs'
 const ACCOUNT_ID = '4e5b204f44bdff9f75eda4c3e99ee098'
-const TARGET_BUCKET = 'time420s-assets'
-const PUBLIC_BASE = 'https://assets.time420s.my.id'
+const TARGET_BUCKET = 'qrordering-assets'
+const PUBLIC_BASE = 'https://assets.qrordering.my.id'
 const CACHE_CONTROL = 'public, max-age=31536000, immutable'
 const BASELINE_PATH = path.join(ROOT, 'backups/r2-production-copy-20261010T172104Z/production-r2-copy-manifest.json')
 const runId = new Date().toISOString().replaceAll(':', '').replaceAll('-', '').replace(/\.\d{3}Z$/, 'Z')
@@ -133,7 +133,7 @@ for (const row of dbRows) {
     const match = value.match(/\/storage\/v1\/(?:object|render\/image)\/public\/([^/]+)/)
     if (match) referencedBuckets.add(decodeURIComponent(match[1]))
   } else if (value.startsWith(`${PUBLIC_BASE}/`)) distribution.productionR2++
-  else if (value.includes('.r2.dev/') || value.includes('time420s-r2-staging')) distribution.stagingR2++
+  else if (value.includes('.r2.dev/') || value.includes('qrordering-r2-staging')) distribution.stagingR2++
   else distribution.other++
 }
 

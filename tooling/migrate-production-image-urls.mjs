@@ -9,8 +9,8 @@ const execFileAsync = promisify(execFile)
 const root = process.cwd()
 const projectRef = 'yjmrabgpxjbunwtsiavs'
 const accountId = '4e5b204f44bdff9f75eda4c3e99ee098'
-const bucket = 'time420s-assets'
-const publicBase = 'https://assets.time420s.my.id'
+const bucket = 'qrordering-assets'
+const publicBase = 'https://assets.qrordering.my.id'
 const supabaseBucket = 'menu-images'
 
 function parseEnv(text) {
@@ -75,7 +75,7 @@ function classify(url) {
   if (!url) return 'null'
   if (url.includes('.supabase.co/storage/v1/')) return 'supabase'
   if (url.startsWith(`${publicBase}/`)) return 'productionR2'
-  if (url.includes('.r2.dev/') || url.includes('time420s-r2-staging')) return 'stagingR2'
+  if (url.includes('.r2.dev/') || url.includes('qrordering-r2-staging')) return 'stagingR2'
   return 'other'
 }
 
@@ -112,7 +112,7 @@ const mode = process.argv[2]
 if (mode === 'audit') {
   const runId = new Date().toISOString().replaceAll(':', '').replaceAll('-', '').replace(/\.\d{3}Z$/, 'Z')
   const outputDir = path.join(root, 'backups', `image-url-migration-${runId}`)
-  const tempDir = await mkdtemp(path.join(os.tmpdir(), 'time420s-image-url-audit-'))
+  const tempDir = await mkdtemp(path.join(os.tmpdir(), 'qrordering-image-url-audit-'))
   await mkdir(outputDir, { recursive: true })
   try {
     const rows = await getRows(owner, anonHeaders)

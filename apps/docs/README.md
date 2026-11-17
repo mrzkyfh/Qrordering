@@ -8,7 +8,7 @@
 
 ## Panduan pengguna
 
-- [Modul Penggunaan Time420s — PDF](./USER_MANUAL.pdf)
+- [Modul Penggunaan QrOrdering — PDF](./USER_MANUAL.pdf)
 - [Sumber modul — Markdown](./USER_MANUAL.md)
 
 Untuk membuat ulang PDF setelah isi modul diperbarui:

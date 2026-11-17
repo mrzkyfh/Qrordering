@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Bump versi lalu build Android App Bundle (AAB) dan APK release Time420s tanpa
+# Bump versi lalu build Android App Bundle (AAB) dan APK release QrOrdering tanpa
 # upload ke Google Play. Jalankan dari mana saja dengan: ./release.sh
 #
 # Opsi:
@@ -15,7 +15,7 @@
 set -Eeuo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-APP_DIR="$ROOT_DIR/apps/mobile/time420s"
+APP_DIR="$ROOT_DIR/apps/mobile/qrordering"
 ENV_FILE="${ENV_FILE:-$APP_DIR/.env}"
 AAB_RELATIVE_PATH="build/app/outputs/bundle/release/app-release.aab"
 AAB_PATH="$APP_DIR/$AAB_RELATIVE_PATH"

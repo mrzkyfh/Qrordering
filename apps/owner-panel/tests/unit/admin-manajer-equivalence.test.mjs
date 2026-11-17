@@ -13,7 +13,7 @@ const [roleTypes, protectedRoute, sidebar, migration, retiredRoleMigration, crea
     readFile(new URL('supabase/functions/create-staff/index.ts', root), 'utf8'),
     readFile(new URL('supabase/functions/change-staff-password/index.ts', root), 'utf8'),
     readFile(new URL('assets-worker/src/index.ts', root), 'utf8'),
-    readFile(new URL('mobile/time420s/lib/features/pos/presentation/pages/device_settings_page.dart', root), 'utf8'),
+    readFile(new URL('mobile/qrordering/lib/features/pos/presentation/pages/device_settings_page.dart', root), 'utf8'),
   ])
 
 test('manajer dinormalisasi sebagai admin pada guard web dan database', () => {

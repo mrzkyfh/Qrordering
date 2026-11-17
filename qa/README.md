@@ -1,4 +1,4 @@
-# QA Workspace — Times420s
+# QA Workspace — QrOrdering
 
 Folder ini adalah ruang kerja QA. Semua file testing dan bug report disimpan di sini.
 

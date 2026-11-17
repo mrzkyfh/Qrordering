@@ -244,7 +244,7 @@ Posture matang. 8 ronde audit sebelumnya sudah menutup privilege-escalation, aud
 **Status:** ℹ️ Monitor
 
 ### SEC-R6-005 — Registry Printer Device-Local (SharedPreferences) Tidak Terenkripsi
-**File:** `apps/mobile/time420s/lib/shared/services/printer_service.dart`
+**File:** `apps/mobile/qrordering/lib/shared/services/printer_service.dart`
 **Risiko:** Konfigurasi printer (MAC/host/port) disimpan plaintext di SharedPreferences. Bukan rahasia tinggi, tapi pada device rooted bisa dibaca/diubah. Dampak rendah (bukan kredensial).
 **Rekomendasi:** Terima sebagai risiko rendah, atau pindah ke `flutter_secure_storage` bila device sharing jadi concern.
 **Status:** ℹ️ Accept/Monitor

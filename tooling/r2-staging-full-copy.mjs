@@ -2,8 +2,8 @@ import { createHash, createHmac } from 'node:crypto'
 import { readFile, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
-const EXPECTED_BUCKET = 'time420s-assets-staging'
-const FORBIDDEN_BUCKET = 'time420s-assets'
+const EXPECTED_BUCKET = 'qrordering-assets-staging'
+const FORBIDDEN_BUCKET = 'qrordering-assets'
 const EXPECTED_COUNT = 127
 const EXPECTED_BYTES = 5195078
 

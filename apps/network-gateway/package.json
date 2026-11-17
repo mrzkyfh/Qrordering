@@ -1,5 +1,5 @@
 {
-  "name": "time420s-network-gateway",
+  "name": "qrordering-network-gateway",
   "private": true,
   "scripts": {
     "check": "npx wrangler deploy --dry-run",

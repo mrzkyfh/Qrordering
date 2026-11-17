@@ -3,7 +3,7 @@
 -- Paste ke Supabase SQL Editor dan jalankan
 --
 -- Credentials hasil:
---   Email   : test-qa@time420s.com
+--   Email   : test-qa@qrordering.com
 --   Password: QATest123!
 --   Role    : owner (bisa menjalankan smoke test owner + admin)
 -- ============================================================
@@ -24,7 +24,7 @@ BEGIN
   -- Cek apakah user sudah ada
   SELECT id INTO v_user_id
   FROM auth.users
-  WHERE email = 'test-qa@time420s.com';
+  WHERE email = 'test-qa@qrordering.com';
 
   IF v_user_id IS NOT NULL THEN
     -- User sudah ada — reset password & pastikan profile benar
@@ -53,7 +53,7 @@ BEGIN
     ) VALUES (
       '00000000-0000-0000-0000-000000000000',
       v_user_id, 'authenticated', 'authenticated',
-      'test-qa@time420s.com',
+      'test-qa@qrordering.com',
       crypt('QATest123!', gen_salt('bf')),
       now(),
       '{"provider":"email","providers":["email"]}'::jsonb,
@@ -66,8 +66,8 @@ BEGIN
       last_sign_in_at, created_at, updated_at
     ) VALUES (
       gen_random_uuid(), v_user_id,
-      'test-qa@time420s.com',
-      jsonb_build_object('sub', v_user_id::text, 'email', 'test-qa@time420s.com'),
+      'test-qa@qrordering.com',
+      jsonb_build_object('sub', v_user_id::text, 'email', 'test-qa@qrordering.com'),
       'email', now(), now(), now()
     );
 
@@ -96,7 +96,7 @@ SELECT
 FROM auth.users u
 JOIN profiles p ON p.id = u.id
 LEFT JOIN outlets o ON o.id = p.outlet_id
-WHERE u.email = 'test-qa@time420s.com';
+WHERE u.email = 'test-qa@qrordering.com';
 
 
 -- ============================================================
@@ -106,7 +106,7 @@ WHERE u.email = 'test-qa@time420s.com';
 DO $$
 DECLARE v_id uuid;
 BEGIN
-  SELECT id INTO v_id FROM auth.users WHERE email = 'test-qa@time420s.com';
+  SELECT id INTO v_id FROM auth.users WHERE email = 'test-qa@qrordering.com';
   IF v_id IS NULL THEN RAISE NOTICE 'User tidak ditemukan'; RETURN; END IF;
   DELETE FROM auth.identities WHERE user_id = v_id;
   DELETE FROM profiles         WHERE id = v_id;

@@ -1,4 +1,4 @@
-# Infrastructure — Time 420s
+# Infrastructure — QR Ordering
 
 Arsitektur **serverless / managed**. Tidak ada server/VM/K8s yang dikelola sendiri.
 Stack inti: **Cloudflare Pages** (frontend) + **Supabase** (backend) + **Flutter** (mobile).
@@ -16,7 +16,7 @@ Stack inti: **Cloudflare Pages** (frontend) + **Supabase** (backend) + **Flutter
                     └───────────────┬──────────────┘
                                     │ HTTPS (anon key + JWT)
    Pelanggan ──────▶ customer-menu (static)         │
-                    │ Cloudflare Pages: times420s-menu│
+                    │ Cloudflare Pages: qrordering-menu│
                     └───────────────┤
                                     ▼
    Kasir ──────────▶ mobile (Flutter)  ───────────▶ ┌───────────────────────────┐
@@ -39,8 +39,8 @@ Stack inti: **Cloudflare Pages** (frontend) + **Supabase** (backend) + **Flutter
 | Komponen | Teknologi | Hosting | Sumber |
 |----------|-----------|---------|--------|
 | **owner-panel** | React + Vite (SPA) | Cloudflare Pages (`panel-restoran`) | `apps/owner-panel` |
-| **customer-menu** | HTML/JS statis | Cloudflare Pages (mis. `times420s-menu`) | `apps/customer-menu` |
-| **mobile** | Flutter (Android/iOS/Web) | Play Store / App Store / Pages (web) | `apps/mobile/time420s` |
+| **customer-menu** | HTML/JS statis | Cloudflare Pages (mis. `qrordering-menu`) | `apps/customer-menu` |
+| **mobile** | Flutter (Android/iOS/Web) | Play Store / App Store / Pages (web) | `apps/mobile/qrordering` |
 | **database & auth** | Supabase Postgres + Auth + RLS | Supabase Cloud | `apps/supabase/migrations`, `seeds` |
 | **serverless logic** | Supabase Edge Functions (Deno) | Supabase | `apps/supabase/functions`, `supabase/functions` |
 
@@ -57,7 +57,7 @@ Stack inti: **Cloudflare Pages** (frontend) + **Supabase** (backend) + **Flutter
 | Layanan | URL/Host | TLS |
 |---------|----------|-----|
 | owner-panel | `*.pages.dev` (atau custom domain) | Otomatis (Cloudflare) |
-| customer-menu | `times420s-menu.pages.dev` | Otomatis |
+| customer-menu | `qrordering-menu.pages.dev` | Otomatis |
 | Supabase API | `https://<ref>.supabase.co` | Managed |
 | Supabase Realtime | `wss://<ref>.supabase.co` | Managed |
 

@@ -44,7 +44,7 @@ BEGIN
     v_user,
     'authenticated',
     'authenticated',
-    'qa-offline-shift-' || v_user || '@time420s.invalid',
+    'qa-offline-shift-' || v_user || '@qrordering.invalid',
     '',
     now(),
     '{"provider":"email","providers":["email"]}'::jsonb,

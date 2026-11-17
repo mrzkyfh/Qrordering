@@ -15,10 +15,10 @@ test('replacement persists new URL before attempting old image cleanup', () => {
 
 test('Owner Panel CSP permits dual Supabase and production R2 reads', () => {
   assert.match(headers, /img-src[^;]*https:\/\/\*\.supabase\.co/)
-  assert.match(headers, /img-src[^;]*https:\/\/assets\.time420s\.my\.id/)
-  assert.match(headers, /img-src[^;]*https:\/\/time420s-r2-staging\.official-b0d\.workers\.dev/)
-  assert.match(headers, /connect-src[^;]*https:\/\/time420s-r2-staging\.official-b0d\.workers\.dev/)
-  assert.match(headers, /connect-src[^;]*https:\/\/time420s-r2-production\.official-b0d\.workers\.dev/)
+  assert.match(headers, /img-src[^;]*https:\/\/assets\.qrordering\.my\.id/)
+  assert.match(headers, /img-src[^;]*https:\/\/qrordering-r2-staging\.official-b0d\.workers\.dev/)
+  assert.match(headers, /connect-src[^;]*https:\/\/qrordering-r2-staging\.official-b0d\.workers\.dev/)
+  assert.match(headers, /connect-src[^;]*https:\/\/qrordering-r2-production\.official-b0d\.workers\.dev/)
 })
 
 test('Kelola Meja and QR generation contracts remain present', () => {

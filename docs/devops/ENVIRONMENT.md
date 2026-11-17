@@ -1,4 +1,4 @@
-# Environment & Secrets — Time 420s
+# Environment & Secrets — QR Ordering
 
 Daftar variabel environment, lingkungan, dan pengelolaan secret untuk semua app.
 
@@ -13,8 +13,8 @@ Daftar variabel environment, lingkungan, dan pengelolaan secret untuk semua app.
 |-----|--------|---------|
 | `VITE_SUPABASE_URL` | `https://<ref>.supabase.co` | publik |
 | `VITE_SUPABASE_ANON_KEY` | `eyJ...` | anon key (publik) |
-| `VITE_APP_NAME` | `Time 420s` | |
-| `VITE_MENU_BASE_URL` | `https://times420s-menu.pages.dev` | base URL QR menu |
+| `VITE_APP_NAME` | `QR Ordering` | |
+| `VITE_MENU_BASE_URL` | `https://qrordering-menu.pages.dev` | base URL QR menu |
 
 File: `apps/owner-panel/.env` (lokal, **gitignored**), `.env.example` (template, di-commit).
 Di produksi/preview: set di **Cloudflare Pages → Settings → Environment variables** (lihat [CICD_PIPELINE.md](./CICD_PIPELINE.md)).
@@ -29,7 +29,7 @@ Konfigurasi Supabase di-load di runtime (anon key/URL). Tidak ada secret. Sesuai
 |-----|---------|
 | `SUPABASE_URL` | publik |
 | `SUPABASE_ANON_KEY` | anon key (publik) |
-File: `apps/mobile/time420s/.env` (**gitignored**). Inject saat build/CI; jangan commit. Aset (mis. `assets/images/logo.png`) tetap di repo.
+File: `apps/mobile/qrordering/.env` (**gitignored**). Inject saat build/CI; jangan commit. Aset (mis. `assets/images/logo.png`) tetap di repo.
 
 ### Supabase Edge Functions (server-side secrets)
 | Var | Catatan |
@@ -64,10 +64,10 @@ Set via: `supabase secrets set NAMA=nilai`. **Tidak pernah** ada di klien web/mo
 ```
 VITE_SUPABASE_URL=https://your-ref.supabase.co
 VITE_SUPABASE_ANON_KEY=your-anon-key
-VITE_APP_NAME=Time 420s
-VITE_MENU_BASE_URL=https://times420s-menu.pages.dev
+VITE_APP_NAME=QR Ordering
+VITE_MENU_BASE_URL=https://qrordering-menu.pages.dev
 ```
-`apps/mobile/time420s/.env.example` (buat bila belum ada):
+`apps/mobile/qrordering/.env.example` (buat bila belum ada):
 ```
 SUPABASE_URL=https://your-ref.supabase.co
 SUPABASE_ANON_KEY=your-anon-key
@@ -80,7 +80,7 @@ cd apps/owner-panel && cp .env.example .env   # isi nilai dari staging
 npm ci && npm run dev
 
 # 2. mobile
-cd apps/mobile/time420s && cp .env.example .env
+cd apps/mobile/qrordering && cp .env.example .env
 flutter pub get && flutter run
 
 # 3. (opsional) DB lokal
@@ -90,6 +90,6 @@ supabase start && supabase db reset           # Docker (lihat DOCKER_SETUP.md)
 ## 6. Verifikasi `.env` aman
 ```bash
 git check-ignore apps/owner-panel/.env        # harus: ignored
-git check-ignore apps/mobile/time420s/.env    # harus: ignored
+git check-ignore apps/mobile/qrordering/.env    # harus: ignored
 git ls-files | grep -E '\.env$'               # harus kosong
 ```

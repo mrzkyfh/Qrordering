@@ -1,4 +1,4 @@
-# CI/CD Pipeline — Time 420s
+# CI/CD Pipeline — QR Ordering
 
 Strategi deploy: **Cloudflare Pages built-in Git integration** (frontend) + **Supabase CLI** (database & functions) + **Flutter** (mobile). Tanpa runner CI eksternal untuk web.
 
@@ -32,8 +32,8 @@ Settings di Cloudflare Pages dashboard → Connect to Git → repo ini:
 ```
 VITE_SUPABASE_URL=...
 VITE_SUPABASE_ANON_KEY=...
-VITE_APP_NAME=Time 420s
-VITE_MENU_BASE_URL=https://times420s-menu.pages.dev
+VITE_APP_NAME=QR Ordering
+VITE_MENU_BASE_URL=https://qrordering-menu.pages.dev
 ```
 > ⚠️ Wajib di-set di Pages — tanpa ini build Vite menghasilkan klien Supabase tanpa kredensial (app gagal). Hanya anon key (aman di klien).
 
@@ -116,7 +116,7 @@ Pakai `--workdir apps` karena project Supabase berada di `apps/supabase/` (lihat
 ## 7. Mobile — Flutter Build & Release
 
 ```bash
-cd apps/mobile/time420s
+cd apps/mobile/qrordering
 flutter pub get
 flutter analyze && flutter test          # gate kualitas
 # Android

@@ -55,7 +55,7 @@ Jika bukan hanya data demo yang perlu dihapus, gunakan
 outlet, staf, dan akun Auth lain, tetapi mempertahankan satu akun owner serta
 `app_config`. Backup database dan baca instruksi di bagian atas file sebelum
 menjalankannya. Seluruh Supabase Storage bucket dan Cloudflare R2 bucket
-`time420s-images` harus dikosongkan lebih dahulu. Script otomatis batal jika
+`qrordering-images` harus dikosongkan lebih dahulu. Script otomatis batal jika
 Supabase Storage masih berisi file dan meminta konfirmasi operator eksplisit
 bahwa R2 sudah kosong karena SQL Supabase tidak dapat memeriksa Cloudflare.
 

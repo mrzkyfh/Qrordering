@@ -2,9 +2,9 @@ const primaryUrl = (import.meta.env.VITE_SUPABASE_URL as string | undefined)
   ?.trim()
   .replace(/\/+$/, '')
 const defaultFallbackUrl =
-  window.location.hostname === 'time420s-staging.official-b0d.workers.dev'
-    ? 'https://time420s-network-gateway-staging.official-b0d.workers.dev'
-    : 'https://api.time420s.my.id'
+  window.location.hostname === 'qrordering-staging.official-b0d.workers.dev'
+    ? 'https://qrordering-network-gateway-staging.official-b0d.workers.dev'
+    : 'https://api.qrordering.my.id'
 const fallbackUrl = (
   (import.meta.env.VITE_SUPABASE_FALLBACK_URL as string | undefined) ??
   defaultFallbackUrl
@@ -22,8 +22,8 @@ export interface BackendRoute {
 
 declare global {
   interface Window {
-    __TIME420S_BACKEND_URL__?: string
-    __TIME420S_BACKEND_ROUTE__?: RouteKind
+    __QRORDERING_BACKEND_URL__?: string
+    __QRORDERING_BACKEND_ROUTE__?: RouteKind
   }
 }
 

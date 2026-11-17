@@ -23,7 +23,7 @@
 --   2. SEBELUM menjalankan SQL ini, kosongkan semua bucket lewat Supabase
 --      Storage Dashboard/API. Auth user yang masih memiliki file tidak dapat
 --      dihapus. Jangan menghapus storage.objects langsung melalui SQL.
---   3. Kosongkan juga Cloudflare R2 bucket `time420s-images` melalui Dashboard.
+--   3. Kosongkan juga Cloudflare R2 bucket `qrordering-images` melalui Dashboard.
 --      SQL Supabase tidak dapat memeriksa atau menghapus object di Cloudflare.
 --   4. Jalankan script ini hanya melalui Supabase Dashboard -> SQL Editor.
 --   5. Edit TIGA nilai pada blok _pos_reset_config di bawah. Konfirmasi R2
@@ -52,7 +52,7 @@ INSERT INTO _pos_reset_config (owner_email, confirmation, r2_confirmation)
 VALUES (
   'GANTI_DENGAN_EMAIL_OWNER',
   'KETIK: HAPUS SEMUA DATA POS',
-  'KETIK: R2 TIME420S-IMAGES SUDAH KOSONG'
+  'KETIK: R2 QRORDERING-IMAGES SUDAH KOSONG'
 );
 
 -- Guard pertama: mencegah eksekusi tanpa konfirmasi eksplisit.
@@ -70,9 +70,9 @@ BEGIN
       'RESET DIBATALKAN: ubah confirmation menjadi persis "HAPUS SEMUA DATA POS".';
   END IF;
 
-  IF v_r2_confirmation <> 'R2 TIME420S-IMAGES SUDAH KOSONG' THEN
+  IF v_r2_confirmation <> 'R2 QRORDERING-IMAGES SUDAH KOSONG' THEN
     RAISE EXCEPTION
-      'RESET DIBATALKAN: kosongkan Cloudflare R2 bucket time420s-images, lalu ubah r2_confirmation menjadi persis "R2 TIME420S-IMAGES SUDAH KOSONG".';
+      'RESET DIBATALKAN: kosongkan Cloudflare R2 bucket qrordering-images, lalu ubah r2_confirmation menjadi persis "R2 QRORDERING-IMAGES SUDAH KOSONG".';
   END IF;
 END
 $$;
@@ -112,7 +112,7 @@ $$;
 -- Metadata boleh dibaca dari SQL, tetapi file wajib dihapus melalui API/Dashboard
 -- agar binary di storage provider ikut terhapus dan tidak menjadi orphan.
 -- Guard ini tidak mencakup Cloudflare R2; konfirmasi operator di atas wajib
--- diberikan hanya setelah bucket time420s-images benar-benar kosong.
+-- diberikan hanya setelah bucket qrordering-images benar-benar kosong.
 DO $$
 DECLARE
   v_storage_count BIGINT;
