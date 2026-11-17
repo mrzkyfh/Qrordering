@@ -1,0 +1,414 @@
+@page {
+  size: A4;
+  margin: 18mm 15mm 19mm;
+}
+
+:root {
+  --red: #e51c2a;
+  --red-dark: #a90f1a;
+  --ink: #1f2937;
+  --muted: #667085;
+  --line: #d9dee7;
+  --soft: #f6f7f9;
+  --gold: #f4b400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: var(--ink);
+  font-size: 10.4pt;
+  line-height: 1.52;
+}
+
+body {
+  margin: 0;
+  background: white;
+}
+
+.cover {
+  min-height: 297mm;
+  margin: -18mm -15mm -19mm;
+  padding: 35mm 25mm 22mm;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background:
+    linear-gradient(145deg, rgba(229, 28, 42, 0.96), rgba(128, 7, 17, 0.98)),
+    #e51c2a;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before,
+.cover::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.cover::before {
+  width: 180mm;
+  height: 180mm;
+  right: -75mm;
+  top: -55mm;
+}
+
+.cover::after {
+  width: 125mm;
+  height: 125mm;
+  right: -46mm;
+  bottom: -55mm;
+}
+
+.cover-logo {
+  width: 30mm;
+  height: 30mm;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2.5mm solid rgba(255, 255, 255, 0.94);
+  box-shadow: 0 5mm 14mm rgba(55, 0, 5, 0.25);
+  margin-bottom: 20mm;
+}
+
+.cover .eyebrow {
+  margin: 0 0 3mm;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 10pt;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+}
+
+.cover h1 {
+  color: white;
+  font-size: 38pt;
+  line-height: 1;
+  margin: 0 0 7mm;
+  border: 0;
+}
+
+.cover-subtitle {
+  max-width: 135mm;
+  margin: 0;
+  font-size: 17pt;
+  line-height: 1.35;
+  font-weight: 500;
+}
+
+.cover-meta {
+  margin-top: auto;
+  padding: 7mm 9mm;
+  min-width: 108mm;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 4mm;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.cover-meta p {
+  margin: 1.5mm 0;
+  color: white;
+}
+
+.cover-meta strong {
+  display: inline-block;
+  min-width: 38mm;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.cover-note {
+  margin: 8mm 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 9pt;
+}
+
+h1,
+h2,
+h3 {
+  color: #111827;
+  page-break-after: avoid;
+  break-after: avoid-page;
+}
+
+h1 {
+  margin: 0 0 7mm;
+  padding-bottom: 3mm;
+  border-bottom: 1.2mm solid var(--red);
+  font-size: 22pt;
+  line-height: 1.16;
+}
+
+h1:not(:first-of-type) {
+  margin-top: 3mm;
+}
+
+h2 {
+  margin: 7mm 0 3mm;
+  color: var(--red-dark);
+  font-size: 14.5pt;
+  line-height: 1.25;
+}
+
+h3 {
+  margin: 6mm 0 2mm;
+  font-size: 11.5pt;
+}
+
+p {
+  margin: 0 0 3mm;
+  orphans: 3;
+  widows: 3;
+}
+
+.list {
+  margin: 1.5mm 0 4mm;
+}
+
+.list.ordered {
+  counter-reset: manual-list;
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: 7mm minmax(0, 1fr);
+  column-gap: 0;
+  margin: 1mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.list-item::before {
+  grid-column: 1;
+  color: var(--red);
+  font-weight: 700;
+}
+
+.list-content {
+  grid-column: 2;
+  min-width: 0;
+}
+
+.list.unordered .list-item::before {
+  content: "•";
+  padding-left: 2mm;
+}
+
+.list.ordered .list-item::before {
+  content: counter(manual-list) ".";
+  counter-increment: manual-list;
+  padding-left: 1mm;
+}
+
+.list-item.check-item {
+  display: block;
+}
+
+.list-item.check-item::before {
+  display: none;
+}
+
+.list-item.check-item .list-content {
+  display: block;
+}
+
+li::marker {
+  color: var(--red);
+  font-weight: 700;
+}
+
+strong {
+  color: #111827;
+}
+
+code {
+  padding: 0.4mm 1.2mm;
+  border-radius: 1mm;
+  background: #f1f3f6;
+  color: #9f1239;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  padding: 4mm;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  border: 1px solid var(--line);
+  border-radius: 2.5mm;
+  background: #111827;
+  color: #f9fafb;
+  page-break-inside: avoid;
+}
+
+pre code {
+  padding: 0;
+  color: inherit;
+  background: transparent;
+}
+
+blockquote {
+  margin: 4mm 0;
+  padding: 3.5mm 5mm;
+  border-left: 1.2mm solid var(--red);
+  border-radius: 0 2mm 2mm 0;
+  background: #fff4f5;
+  color: #4b5563;
+  page-break-inside: avoid;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+table {
+  width: 100%;
+  margin: 4mm 0 6mm;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 9.2pt;
+}
+
+thead {
+  display: table-header-group;
+}
+
+tr {
+  page-break-inside: avoid;
+}
+
+th,
+td {
+  padding: 2.5mm 2.8mm;
+  border: 0.3mm solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+th {
+  background: #f9e6e8;
+  color: #7f1018;
+  font-weight: 700;
+}
+
+tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+a {
+  color: var(--red-dark);
+  text-decoration: none;
+}
+
+hr {
+  margin: 8mm 0;
+  border: 0;
+  border-top: 0.3mm solid var(--line);
+}
+
+.page-break {
+  break-after: page;
+  page-break-after: always;
+}
+
+.no-page-break {
+  height: 0;
+}
+
+.toc {
+  columns: 2;
+  column-gap: 12mm;
+  margin-top: 6mm;
+}
+
+.toc a {
+  display: block;
+  padding: 2mm 0;
+  break-inside: avoid;
+  color: #374151;
+  border-bottom: 0.2mm dotted #cbd0d8;
+}
+
+.toc a.level-1 {
+  margin-top: 1mm;
+  color: var(--red-dark);
+  font-weight: 700;
+  font-size: 10.5pt;
+}
+
+.toc a.level-2 {
+  padding-left: 4mm;
+  font-size: 9.2pt;
+}
+
+.checkbox {
+  display: inline-flex;
+  width: 4mm;
+  height: 4mm;
+  margin-right: 2mm;
+  align-items: center;
+  justify-content: center;
+  border: 0.35mm solid #8a94a3;
+  border-radius: 0.8mm;
+  vertical-align: -0.6mm;
+}
+
+.checkbox.checked {
+  border-color: var(--red);
+  background: var(--red);
+  color: white;
+}
+
+.document-meta {
+  margin-bottom: 7mm;
+  padding: 4mm;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 2mm;
+}
+
+.location {
+  margin: 2mm 0 4mm;
+  padding: 2.8mm 4mm;
+  border: 0.3mm solid #f2c9cd;
+  border-radius: 2mm;
+  background: #fff7f8;
+  color: #5f1820;
+  font-size: 9.5pt;
+}
+
+.location::before {
+  content: "LOKASI";
+  display: inline-block;
+  margin-right: 3mm;
+  color: var(--red);
+  font-size: 7.5pt;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+@media print {
+  .cover {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  h1 {
+    break-before: page;
+  }
+
+  .cover h1 {
+    break-before: auto;
+    page-break-before: auto;
+  }
+
+  .cover + .page-break + h1,
+  .no-page-break + h1,
+  body > h1:first-of-type {
+    break-before: auto;
+  }
+}

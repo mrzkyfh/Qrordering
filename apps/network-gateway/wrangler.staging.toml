@@ -1,0 +1,11 @@
+account_id = "b0d09d15b16ea37156b38470fd58350d"
+name = "time420s-network-gateway-staging"
+main = "src/index.ts"
+compatibility_date = "2026-07-25"
+compatibility_flags = ["global_fetch_strictly_public"]
+workers_dev = true
+
+[vars]
+UPSTREAM_ORIGIN = "https://yjmrabgpxjbunwtsiavs.supabase.co"
+ALLOWED_ORIGINS = "https://time420s-staging.official-b0d.workers.dev,https://time420s-menu-staging.official-b0d.workers.dev,https://time420s.my.id,https://menu.time420s.my.id,http://localhost:5173,http://127.0.0.1:5173"
+MAX_BODY_BYTES = "10485760"

@@ -1,0 +1,5 @@
+Yang baru:
+• Sinkronisasi offline kini memvalidasi ulang shift kasir saat koneksi kembali.
+• Transaksi dengan cache shift lama dipulihkan berdasarkan kasir, outlet, dan waktu transaksi.
+• Detail transaksi yang ditolak server kini dapat dilihat, disalin, dan dicoba ulang satu per satu.
+• Peningkatan kestabilan pembayaran tunai, non-tunai, dan split payment saat jaringan berubah.

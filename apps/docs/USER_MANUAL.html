@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modul Penggunaan Time420s</title>
+  <style>@page {
+  size: A4;
+  margin: 18mm 15mm 19mm;
+}
+
+:root {
+  --red: #e51c2a;
+  --red-dark: #a90f1a;
+  --ink: #1f2937;
+  --muted: #667085;
+  --line: #d9dee7;
+  --soft: #f6f7f9;
+  --gold: #f4b400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: var(--ink);
+  font-size: 10.4pt;
+  line-height: 1.52;
+}
+
+body {
+  margin: 0;
+  background: white;
+}
+
+.cover {
+  min-height: 297mm;
+  margin: -18mm -15mm -19mm;
+  padding: 35mm 25mm 22mm;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background:
+    linear-gradient(145deg, rgba(229, 28, 42, 0.96), rgba(128, 7, 17, 0.98)),
+    #e51c2a;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before,
+.cover::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.cover::before {
+  width: 180mm;
+  height: 180mm;
+  right: -75mm;
+  top: -55mm;
+}
+
+.cover::after {
+  width: 125mm;
+  height: 125mm;
+  right: -46mm;
+  bottom: -55mm;
+}
+
+.cover-logo {
+  width: 30mm;
+  height: 30mm;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2.5mm solid rgba(255, 255, 255, 0.94);
+  box-shadow: 0 5mm 14mm rgba(55, 0, 5, 0.25);
+  margin-bottom: 20mm;
+}
+
+.cover .eyebrow {
+  margin: 0 0 3mm;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 10pt;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+}
+
+.cover h1 {
+  color: white;
+  font-size: 38pt;
+  line-height: 1;
+  margin: 0 0 7mm;
+  border: 0;
+}
+
+.cover-subtitle {
+  max-width: 135mm;
+  margin: 0;
+  font-size: 17pt;
+  line-height: 1.35;
+  font-weight: 500;
+}
+
+.cover-meta {
+  margin-top: auto;
+  padding: 7mm 9mm;
+  min-width: 108mm;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 4mm;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.cover-meta p {
+  margin: 1.5mm 0;
+  color: white;
+}
+
+.cover-meta strong {
+  display: inline-block;
+  min-width: 38mm;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.cover-note {
+  margin: 8mm 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 9pt;
+}
+
+h1,
+h2,
+h3 {
+  color: #111827;
+  page-break-after: avoid;
+  break-after: avoid-page;
+}
+
+h1 {
+  margin: 0 0 7mm;
+  padding-bottom: 3mm;
+  border-bottom: 1.2mm solid var(--red);
+  font-size: 22pt;
+  line-height: 1.16;
+}
+
+h1:not(:first-of-type) {
+  margin-top: 3mm;
+}
+
+h2 {
+  margin: 7mm 0 3mm;
+  color: var(--red-dark);
+  font-size: 14.5pt;
+  line-height: 1.25;
+}
+
+h3 {
+  margin: 6mm 0 2mm;
+  font-size: 11.5pt;
+}
+
+p {
+  margin: 0 0 3mm;
+  orphans: 3;
+  widows: 3;
+}
+
+.list {
+  margin: 1.5mm 0 4mm;
+}
+
+.list.ordered {
+  counter-reset: manual-list;
+}
+
+.list-item {
+  display: grid;
+  grid-template-columns: 7mm minmax(0, 1fr);
+  column-gap: 0;
+  margin: 1mm 0;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.list-item::before {
+  grid-column: 1;
+  color: var(--red);
+  font-weight: 700;
+}
+
+.list-content {
+  grid-column: 2;
+  min-width: 0;
+}
+
+.list.unordered .list-item::before {
+  content: "•";
+  padding-left: 2mm;
+}
+
+.list.ordered .list-item::before {
+  content: counter(manual-list) ".";
+  counter-increment: manual-list;
+  padding-left: 1mm;
+}
+
+.list-item.check-item {
+  display: block;
+}
+
+.list-item.check-item::before {
+  display: none;
+}
+
+.list-item.check-item .list-content {
+  display: block;
+}
+
+li::marker {
+  color: var(--red);
+  font-weight: 700;
+}
+
+strong {
+  color: #111827;
+}
+
+code {
+  padding: 0.4mm 1.2mm;
+  border-radius: 1mm;
+  background: #f1f3f6;
+  color: #9f1239;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  padding: 4mm;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  border: 1px solid var(--line);
+  border-radius: 2.5mm;
+  background: #111827;
+  color: #f9fafb;
+  page-break-inside: avoid;
+}
+
+pre code {
+  padding: 0;
+  color: inherit;
+  background: transparent;
+}
+
+blockquote {
+  margin: 4mm 0;
+  padding: 3.5mm 5mm;
+  border-left: 1.2mm solid var(--red);
+  border-radius: 0 2mm 2mm 0;
+  background: #fff4f5;
+  color: #4b5563;
+  page-break-inside: avoid;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+table {
+  width: 100%;
+  margin: 4mm 0 6mm;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 9.2pt;
+}
+
+thead {
+  display: table-header-group;
+}
+
+tr {
+  page-break-inside: avoid;
+}
+
+th,
+td {
+  padding: 2.5mm 2.8mm;
+  border: 0.3mm solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+th {
+  background: #f9e6e8;
+  color: #7f1018;
+  font-weight: 700;
+}
+
+tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+a {
+  color: var(--red-dark);
+  text-decoration: none;
+}
+
+hr {
+  margin: 8mm 0;
+  border: 0;
+  border-top: 0.3mm solid var(--line);
+}
+
+.page-break {
+  break-after: page;
+  page-break-after: always;
+}
+
+.no-page-break {
+  height: 0;
+}
+
+.toc {
+  columns: 2;
+  column-gap: 12mm;
+  margin-top: 6mm;
+}
+
+.toc a {
+  display: block;
+  padding: 2mm 0;
+  break-inside: avoid;
+  color: #374151;
+  border-bottom: 0.2mm dotted #cbd0d8;
+}
+
+.toc a.level-1 {
+  margin-top: 1mm;
+  color: var(--red-dark);
+  font-weight: 700;
+  font-size: 10.5pt;
+}
+
+.toc a.level-2 {
+  padding-left: 4mm;
+  font-size: 9.2pt;
+}
+
+.checkbox {
+  display: inline-flex;
+  width: 4mm;
+  height: 4mm;
+  margin-right: 2mm;
+  align-items: center;
+  justify-content: center;
+  border: 0.35mm solid #8a94a3;
+  border-radius: 0.8mm;
+  vertical-align: -0.6mm;
+}
+
+.checkbox.checked {
+  border-color: var(--red);
+  background: var(--red);
+  color: white;
+}
+
+.document-meta {
+  margin-bottom: 7mm;
+  padding: 4mm;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 2mm;
+}
+
+.location {
+  margin: 2mm 0 4mm;
+  padding: 2.8mm 4mm;
+  border: 0.3mm solid #f2c9cd;
+  border-radius: 2mm;
+  background: #fff7f8;
+  color: #5f1820;
+  font-size: 9.5pt;
+}
+
+.location::before {
+  content: "LOKASI";
+  display: inline-block;
+  margin-right: 3mm;
+  color: var(--red);
+  font-size: 7.5pt;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+@media print {
+  .cover {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  h1 {
+    break-before: page;
+  }
+
+  .cover h1 {
+    break-before: auto;
+    page-break-before: auto;
+  }
+
+  .cover + .page-break + h1,
+  .no-page-break + h1,
+  body > h1:first-of-type {
+    break-before: auto;
+  }
+}
+</style>
+</head>
+<body><section class="cover">
+  <img class="cover-logo" src="../owner-panel/src/assets/logo.png" alt="Logo Time420s">
+  <p class="eyebrow">MODUL PENGGUNAAN RESMI</p>
+  <h1>Time420s</h1>
+  <p class="cover-subtitle">Web Owner Panel, Aplikasi Kasir, Menu Digital Pelanggan, Persediaan, Laporan, dan Perangkat Cetak</p>
+  <div class="cover-meta">
+    <p><strong>Versi dokumen</strong> 2.0</p>
+    <p><strong>Diperbarui</strong> 24 Juli 2026</p>
+    <p><strong>Ditujukan untuk</strong> Owner, Admin, Manajer, dan Kasir</p>
+  </div>
+  <p class="cover-note">Panduan operasional untuk penggunaan harian dan proses onboarding outlet.</p>
+</section>
+<div class="page-break"></div>
+<h1 id="tentang-modul-ini">Tentang modul ini</h1>
+<p>Modul ini menjelaskan cara menggunakan Time420s dari tahap persiapan outlet sampai operasional harian. Nama menu, tombol, dan alur mengikuti versi aplikasi yang berlaku saat dokumen ini diterbitkan.</p>
+<p>Time420s terdiri dari tiga bagian utama:</p>
+<div class="list ordered"><div class="list-item"><div class="list-content"><strong>Web Owner Panel</strong> adalah halaman pengelolaan untuk mengatur data utama, cabang, sumber daya manusia, persediaan, dan laporan.</div></div><div class="list-item"><div class="list-content"><strong>Aplikasi POS (Point of Sale)</strong> adalah aplikasi kasir untuk mencatat waktu masuk, membuat transaksi, mengelola pesanan, menerima pembayaran, mengatur giliran kerja, mencatat kehadiran, dan menggunakan printer.</div></div><div class="list-item"><div class="list-content"><strong>E-Menu pelanggan</strong> adalah halaman menu digital yang dapat dibuka pelanggan dengan memindai kode respons cepat atau kode QR pada meja.</div></div></div>
+<blockquote><p><strong>Penting:</strong> tampilan menu dapat berbeda sesuai dengan peran pengguna. Jika suatu menu tidak muncul, periksa peran akun dan cabang yang dipilih sebelum menyimpulkan bahwa aplikasi mengalami gangguan.</p></blockquote>
+<h2 id="cara-menggunakan-modul">Cara menggunakan modul</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Pengguna baru sebaiknya membaca bagian <strong>Mulai Cepat</strong> dan <strong>Persiapan Outlet</strong> terlebih dahulu.</div></div><div class="list-item"><div class="list-content">Kasir dapat langsung menuju bagian <strong>Operasional POS</strong>.</div></div><div class="list-item"><div class="list-content">Admin operasional dapat membaca bagian <strong>Produk</strong>, <strong>Persediaan</strong>, <strong>Pembayaran</strong>, dan <strong>Laporan</strong>.</div></div><div class="list-item"><div class="list-content">Cara memasang dan mengatasi masalah printer dijelaskan pada bagian <strong>Stasiun Cetak dan Printer</strong>.</div></div><div class="list-item"><div class="list-content">Daftar pemeriksaan pada bagian akhir dapat dicetak dan digunakan sebagai prosedur operasional standar harian.</div></div></div>
+<p>Nama tombol dan nama menu ditulis dengan huruf tebal, misalnya <strong>Simpan</strong> atau <strong>Tambah Menu</strong>. Istilah asing yang merupakan nama resmi fitur tetap ditulis seperti yang tampil di aplikasi. Arti istilah tersebut dijelaskan saat pertama kali digunakan dan dirangkum kembali pada bagian Glosarium.</p>
+<h1 id="daftar-isi">Daftar isi</h1>
+<nav class="toc"><a class="level-1" href="#1-mulai-cepat">1. Mulai cepat</a><a class="level-1" href="#2-komponen-sistem-dan-hak-akses">2. Komponen sistem dan hak akses</a><a class="level-1" href="#3-mengenal-antarmuka-dan-tombol">3. Mengenal antarmuka dan tombol</a><a class="level-1" href="#4-persiapan-outlet">4. Persiapan outlet</a><a class="level-1" href="#5-produk-dan-menu">5. Produk dan menu</a><a class="level-1" href="#6-persediaan-dan-inventori">6. Persediaan dan inventori</a><a class="level-1" href="#7-meja-kode-qr-dan-pesanan-pelanggan">7. Meja, kode QR, dan pesanan pelanggan</a><a class="level-1" href="#8-pembayaran-pajak-biaya-dan-struk">8. Pembayaran, pajak, biaya, dan struk</a><a class="level-1" href="#9-stasiun-cetak-dan-printer">9. Stasiun cetak dan printer</a><a class="level-1" href="#10-promosi-kupon-program-loyalitas-dan-data-pelanggan">10. Promosi, kupon, program loyalitas, dan data pelanggan</a><a class="level-1" href="#11-operasional-aplikasi-kasir">11. Operasional aplikasi kasir</a><a class="level-1" href="#12-pengelolaan-pesanan">12. Pengelolaan pesanan</a><a class="level-1" href="#13-giliran-kerja-kas-dan-absensi">13. Giliran kerja, kas, dan absensi</a><a class="level-1" href="#14-pengeluaran">14. Pengeluaran</a><a class="level-1" href="#15-laporan">15. Laporan</a><a class="level-1" href="#16-pemantauan-perangkat-dan-penggunaan-tanpa-internet">16. Pemantauan perangkat dan penggunaan tanpa internet</a><a class="level-1" href="#17-catatan-kesalahan-sistem">17. Catatan kesalahan sistem</a><a class="level-1" href="#18-prosedur-operasional-standar-harian">18. Prosedur operasional standar harian</a><a class="level-1" href="#19-penyelesaian-masalah">19. Penyelesaian masalah</a><a class="level-1" href="#20-keamanan-dan-pengelolaan-data">20. Keamanan dan pengelolaan data</a><a class="level-1" href="#21-daftar-pemeriksaan-penerimaan-sistem">21. Daftar pemeriksaan penerimaan sistem</a><a class="level-1" href="#22-glosarium">22. Glosarium</a><a class="level-1" href="#23-informasi-dukungan">23. Informasi dukungan</a></nav>
+<h1 id="1-mulai-cepat">1. Mulai cepat</h1>
+<p>Bagian ini adalah urutan minimum agar satu cabang dapat mulai menerima transaksi.</p>
+<h2 id="1-1-daftar-persiapan-minimum">1.1 Daftar persiapan minimum</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Pastikan akun Owner dapat masuk ke Web Owner Panel.</div></div><div class="list-item"><div class="list-content">Buat atau periksa data cabang melalui <strong>Cabang → Monitoring Cabang</strong>.</div></div><div class="list-item"><div class="list-content">Pilih cabang aktif dari pemilih cabang di bagian atas halaman.</div></div><div class="list-item"><div class="list-content">Buat <strong>Akun Perangkat</strong> untuk tablet atau perangkat POS cabang.</div></div><div class="list-item"><div class="list-content">Buat data staf Kasir, lalu tetapkan nomor identifikasi pribadi sebanyak empat digit.</div></div><div class="list-item"><div class="list-content">Buat struktur produk: <strong>Departemen → Kategori → Menu → Ekstra</strong>.</div></div><div class="list-item"><div class="list-content">Atur meja dan buat kode QR jika menggunakan E-Menu.</div></div><div class="list-item"><div class="list-content">Aktifkan metode pembayaran yang diterima.</div></div><div class="list-item"><div class="list-content">Atur pajak, biaya layanan, pembulatan, dan desain struk.</div></div><div class="list-item"><div class="list-content">Buat stasiun cetak, lalu hubungkan kategori menu ke stasiun yang tepat.</div></div><div class="list-item"><div class="list-content">Masuk ke aplikasi POS menggunakan Akun Perangkat.</div></div><div class="list-item"><div class="list-content">Catat waktu masuk menggunakan nama staf dan nomor identifikasi pribadi.</div></div><div class="list-item"><div class="list-content">Buka giliran kerja kasir atau <strong>shift</strong>, lalu masukkan modal awal.</div></div><div class="list-item"><div class="list-content">Buat satu transaksi percobaan sampai pembayaran selesai dan struk tercetak.</div></div><div class="list-item"><div class="list-content">Periksa laporan penjualan dan stok setelah transaksi uji.</div></div></div>
+<h2 id="1-2-urutan-konfigurasi-yang-disarankan">1.2 Urutan konfigurasi yang disarankan</h2>
+<table><thead><tr><th>Urutan</th><th>Modul</th><th>Hasil yang harus tersedia</th></tr></thead><tbody><tr><td>1</td><td>Cabang</td><td>Nama, alamat, telepon, kota, status aktif</td></tr><tr><td>2</td><td>Staf dan perangkat</td><td>Akun perangkat, staf, peran, nomor identifikasi pribadi</td></tr><tr><td>3</td><td>Produk</td><td>Departemen, kategori, menu, ekstra, paket</td></tr><tr><td>4</td><td>Persediaan</td><td>Bahan baku, satuan, pemasok, stok awal</td></tr><tr><td>5</td><td>Operasional</td><td>Meja, kode QR, penerimaan pesanan melalui internet</td></tr><tr><td>6</td><td>Pembayaran</td><td>Metode bayar, pajak, biaya, struk</td></tr><tr><td>7</td><td>Printer</td><td>Tujuan pencetakan dan printer fisik</td></tr><tr><td>8</td><td>Uji transaksi</td><td>Pesanan, pembayaran, pencetakan, laporan, stok</td></tr></tbody></table>
+<blockquote><p>Jangan langsung melakukan transaksi sungguhan sebelum pengujian pembayaran, struk, printer dapur, dan penutupan giliran kerja berhasil.</p></blockquote>
+<div class="no-page-break"></div>
+<h1 id="2-komponen-sistem-dan-hak-akses">2. Komponen sistem dan hak akses</h1>
+<h2 id="2-1-web-owner-panel">2.1 Web Owner Panel</h2>
+<p>Web Owner Panel dibuka melalui aplikasi penjelajah internet, seperti Google Chrome atau Safari. Gunakan komputer atau tablet dengan layar yang cukup lebar agar tabel dan formulir lebih mudah dibaca.</p>
+<p>Fungsi utama:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Melihat performa semua cabang.</div></div><div class="list-item"><div class="list-content">Mengelola cabang dan staf.</div></div><div class="list-item"><div class="list-content">Mengelola menu, harga, ekstra, paket, dan ketersediaan.</div></div><div class="list-item"><div class="list-content">Mengatur stok, pemasok, pengeluaran, meja, kode QR, promosi, program loyalitas pelanggan, pembayaran, pajak, struk, dan stasiun cetak.</div></div><div class="list-item"><div class="list-content">Melihat serta mengekspor laporan.</div></div></div>
+<h2 id="2-2-aplikasi-pos">2.2 Aplikasi POS</h2>
+<p>Aplikasi POS digunakan pada perangkat kasir. POS merupakan singkatan dari <em>Point of Sale</em> dan dalam modul ini berarti aplikasi kasir. Perangkat masuk menggunakan <strong>Akun Perangkat</strong>. Setelah itu, setiap staf memilih namanya dan memasukkan nomor identifikasi pribadi untuk mencatat waktu masuk.</p>
+<p>Fungsi utama:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Membuka dan menutup giliran kerja kasir.</div></div><div class="list-item"><div class="list-content">Membuat pesanan makan di tempat atau dibawa pulang.</div></div><div class="list-item"><div class="list-content">Menahan dan melanjutkan pesanan.</div></div><div class="list-item"><div class="list-content">Menerima pembayaran.</div></div><div class="list-item"><div class="list-content">Mengelola pesanan yang masih aktif.</div></div><div class="list-item"><div class="list-content">Membatalkan pesanan, mengembalikan pembayaran, mengembalikan sebagian pembayaran, memindahkan meja, dan menggabungkan tagihan sesuai izin pengguna.</div></div><div class="list-item"><div class="list-content">Mengatur printer lokal.</div></div><div class="list-item"><div class="list-content">Menyimpan transaksi dalam antrean ketika sambungan internet terputus, jika jenis transaksi tersebut mendukung penggunaan tanpa internet.</div></div></div>
+<h2 id="2-3-e-menu-pelanggan">2.3 E-Menu pelanggan</h2>
+<p>E-Menu dibuka ketika pelanggan memindai kode QR pada meja. Pelanggan dapat memilih menu, menambah jumlah, menulis catatan jika diizinkan, dan mengirim pesanan.</p>
+<p>E-Menu mengikuti:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Status tersedia dan aktif pada menu.</div></div><div class="list-item"><div class="list-content">Jam penerimaan pesanan melalui internet.</div></div><div class="list-item"><div class="list-content">Kewajiban nama pelanggan.</div></div><div class="list-item"><div class="list-content">Izin catatan pesanan.</div></div><div class="list-item"><div class="list-content">Pajak, biaya layanan, dan pembulatan nilai transaksi pada cabang.</div></div><div class="list-item"><div class="list-content">Menu yang ditandai <strong>Unggulan</strong>.</div></div></div>
+<h2 id="2-4-peran-pengguna-dan-hak-akses">2.4 Peran pengguna dan hak akses</h2>
+<table><thead><tr><th>Peran</th><th>Akses utama</th><th>Batas utama</th></tr></thead><tbody><tr><td><strong>Owner</strong></td><td>Semua cabang, pengaturan, laporan gabungan, staf, dan sistem</td><td>Tidak dibatasi ke satu cabang</td></tr><tr><td><strong>Admin</strong></td><td>Master data dan konfigurasi cabang yang ditetapkan</td><td>Tidak mengelola seluruh jaringan kecuali diberi cakupan</td></tr><tr><td><strong>Manajer</strong></td><td>Operasional, laporan, pesanan, pengeluaran, staf, dan absensi</td><td>Tidak mengubah sebagian besar data utama dan pengaturan</td></tr><tr><td><strong>Kasir</strong></td><td>Aplikasi kasir, pesanan, pembayaran, giliran kerja, dan absensi</td><td>Tindakan sensitif membutuhkan izin atau persetujuan atasan</td></tr><tr><td><strong>Perangkat</strong></td><td>Akun untuk masuk ke perangkat kasir</td><td>Bukan akun manusia dan tidak dipilih saat mencatat waktu masuk</td></tr></tbody></table>
+<h3 id="catatan-tentang-proses-dapur">Catatan tentang proses dapur</h3>
+<p>Versi operasional saat ini menggunakan <strong>Routing Tiket Dapur dan printer stasiun</strong>. Fitur ini mengarahkan tiket pesanan ke bagian yang tepat, misalnya Dapur, Bar, atau bagian Hidangan Penutup. Akun layar dapur yang terpisah bukan alur utama pada versi ini.</p>
+<h2 id="2-5-cara-masuk-ke-web-dan-aplikasi-kasir">2.5 Cara masuk ke web dan aplikasi kasir</h2>
+<p><strong>Masuk ke Web Owner Panel:</strong></p>
+<div class="list ordered"><div class="list-item"><div class="list-content">Masukkan alamat surel dan kata sandi.</div></div><div class="list-item"><div class="list-content">Tekan <strong>Masuk</strong>.</div></div><div class="list-item"><div class="list-content">Sistem menampilkan menu sesuai dengan peran pengguna.</div></div><div class="list-item"><div class="list-content">Owner memilih cabang aktif melalui pemilih cabang di bagian atas halaman.</div></div></div>
+<p><strong>Masuk ke aplikasi POS:</strong></p>
+<div class="list ordered"><div class="list-item"><div class="list-content">Masukkan alamat surel dan kata sandi <strong>Akun Perangkat</strong>.</div></div><div class="list-item"><div class="list-content">Pilih nama staf.</div></div><div class="list-item"><div class="list-content">Masukkan nomor identifikasi pribadi sebanyak empat digit.</div></div><div class="list-item"><div class="list-content">Setelah berhasil, aplikasi menampilkan menu sesuai dengan peran staf.</div></div></div>
+<blockquote><p>Lima kali kesalahan memasukkan nomor identifikasi pribadi dapat mengunci akses sementara selama lima menit. Setiap staf harus menggunakan nomor miliknya sendiri.</p></blockquote>
+<h1 id="3-mengenal-antarmuka-dan-tombol">3. Mengenal antarmuka dan tombol</h1>
+<h2 id="3-1-pemilih-cabang">3.1 Pemilih cabang</h2>
+<p>Nama cabang aktif tampil di bagian atas Web Owner Panel. Data pada bagian <strong>OUTLET</strong> mengikuti cabang yang sedang dipilih.</p>
+<p>Sebelum membuat atau mengubah data:</p>
+<div class="list ordered"><div class="list-item"><div class="list-content">Periksa nama cabang di header.</div></div><div class="list-item"><div class="list-content">Ganti cabang bila diperlukan.</div></div><div class="list-item"><div class="list-content">Tunggu data selesai dimuat.</div></div><div class="list-item"><div class="list-content">Baru tekan tombol tambah, edit, atau simpan.</div></div></div>
+<p>Kesalahan memilih cabang dapat membuat menu, pajak, printer, atau staff tercatat pada outlet yang salah.</p>
+<h2 id="3-2-pola-tombol">3.2 Pola tombol</h2>
+<table><thead><tr><th>Tampilan tombol</th><th>Arti umum</th></tr></thead><tbody><tr><td>Merah/utama</td><td>Tindakan utama seperti Tambah, Simpan, Bayar, atau Proses</td></tr><tr><td>Outline</td><td>Tindakan sekunder seperti Batal, Kembali, atau pengaturan tambahan</td></tr><tr><td>Ikon pensil</td><td>Mengedit data</td></tr><tr><td>Ikon mata</td><td>Melihat detail atau mengubah visibilitas sesuai konteks</td></tr><tr><td>Ikon kunci</td><td>Mengatur PIN atau password</td></tr><tr><td>Ikon tempat sampah</td><td>Menghapus; biasanya meminta konfirmasi</td></tr><tr><td>Toggle</td><td>Mengaktifkan atau menonaktifkan status</td></tr></tbody></table>
+<h2 id="3-3-status-proses">3.3 Status proses</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Tombol bertuliskan <strong>Menyimpan...</strong>, <strong>Memproses...</strong>, atau spinner berarti permintaan sedang berjalan.</div></div><div class="list-item"><div class="list-content">Jangan menekan tombol berulang kali saat proses belum selesai.</div></div><div class="list-item"><div class="list-content">Notifikasi hijau/normal berarti berhasil.</div></div><div class="list-item"><div class="list-content">Notifikasi merah berarti gagal dan harus dibaca sebelum mencoba ulang.</div></div><div class="list-item"><div class="list-content">Banner kesalahan data biasanya menyediakan tombol <strong>Coba lagi</strong>.</div></div></div>
+<h2 id="3-4-penghapusan-dan-penonaktifan">3.4 Penghapusan dan penonaktifan</h2>
+<p>Gunakan <strong>Nonaktifkan</strong> untuk data yang mungkin digunakan kembali. Gunakan <strong>Hapus Permanen</strong> hanya jika yakin karena tindakan tersebut dapat tidak bisa dikembalikan.</p>
+<p>Data yang sudah memiliki riwayat transaksi biasanya diarsipkan atau dipertahankan agar laporan lama tidak rusak.</p>
+<h1 id="4-persiapan-outlet">4. Persiapan outlet</h1>
+<h2 id="4-1-membuat-dan-mengatur-cabang">4.1 Membuat dan mengatur cabang</h2>
+<div class="location"><strong>OWNER → Cabang → Monitoring Cabang</strong></div>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tekan <strong>Tambah Cabang</strong>.</div></div><div class="list-item"><div class="list-content">Isi nama cabang.</div></div><div class="list-item"><div class="list-content">Isi alamat, kota, dan nomor telepon.</div></div><div class="list-item"><div class="list-content">Pastikan status cabang aktif.</div></div><div class="list-item"><div class="list-content">Simpan.</div></div><div class="list-item"><div class="list-content">Pilih cabang baru melalui pemilih cabang di header.</div></div></div>
+<p>Pada daftar cabang, Owner dapat:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Melihat status outlet.</div></div><div class="list-item"><div class="list-content">Mengubah detail cabang.</div></div><div class="list-item"><div class="list-content">Mengaktifkan atau menonaktifkan outlet.</div></div><div class="list-item"><div class="list-content">Membuka dashboard outlet.</div></div><div class="list-item"><div class="list-content">Menghapus cabang dengan konfirmasi ketat.</div></div></div>
+<blockquote><p>Menghapus cabang adalah tindakan berisiko tinggi. Periksa transaksi, staff, menu, dan data historis sebelum melanjutkan.</p></blockquote>
+<h2 id="4-2-membuat-akun-perangkat">4.2 Membuat Akun Perangkat</h2>
+<div class="location"><strong>OWNER → SDM → Manajemen Staff</strong></div>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tekan <strong>Akun Perangkat</strong>.</div></div><div class="list-item"><div class="list-content">Pilih cabang.</div></div><div class="list-item"><div class="list-content">Isi nama perangkat yang mudah dikenali, misalnya <code>POS Kasir Depan</code>.</div></div><div class="list-item"><div class="list-content">Isi email login khusus perangkat.</div></div><div class="list-item"><div class="list-content">Buat password yang kuat.</div></div><div class="list-item"><div class="list-content">Simpan.</div></div></div>
+<p>Rekomendasi:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Satu perangkat utama memiliki satu akun perangkat.</div></div><div class="list-item"><div class="list-content">Jangan menggunakan email pribadi kasir sebagai Akun Perangkat.</div></div><div class="list-item"><div class="list-content">Catat hubungan nama perangkat dengan lokasi fisiknya.</div></div><div class="list-item"><div class="list-content">Jika perangkat hilang, nonaktifkan akun atau ubah password segera.</div></div></div>
+<h2 id="4-3-membuat-staff">4.3 Membuat staff</h2>
+<div class="location"><strong>OWNER → SDM → Manajemen Staff</strong></div>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tekan <strong>Tambah Staff</strong>.</div></div><div class="list-item"><div class="list-content">Isi nama lengkap.</div></div><div class="list-item"><div class="list-content">Pilih role.</div></div><div class="list-item"><div class="list-content">Pilih cabang untuk Manajer atau Kasir.</div></div><div class="list-item"><div class="list-content">Masukkan PIN empat digit.</div></div><div class="list-item"><div class="list-content">Isi nomor telepon bila diperlukan.</div></div><div class="list-item"><div class="list-content">Untuk Admin atau Manajer yang membutuhkan akses web, isi email dan password.</div></div><div class="list-item"><div class="list-content">Simpan.</div></div></div>
+<h3 id="filter-staff-per-cabang">Filter staff per cabang</h3>
+<p>Gunakan <strong>Filter cabang</strong> di atas tabel:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content"><strong>Semua cabang</strong> menampilkan seluruh akun.</div></div><div class="list-item"><div class="list-content">Nama cabang menampilkan akun yang ditugaskan khusus ke cabang itu.</div></div><div class="list-item"><div class="list-content"><strong>Akun global</strong> menampilkan akun seperti Owner yang berlaku di semua cabang.</div></div></div>
+<h3 id="pengaturan-staff">Pengaturan staff</h3>
+<p>Pada setiap baris tersedia tindakan sesuai role pengguna:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Aktifkan/nonaktifkan staff.</div></div><div class="list-item"><div class="list-content">Beri atau cabut <strong>Akses Refund</strong>.</div></div><div class="list-item"><div class="list-content">Atur PIN.</div></div><div class="list-item"><div class="list-content">Reset password web bila akun memiliki email login.</div></div><div class="list-item"><div class="list-content">Edit nama, role, cabang, dan telepon.</div></div><div class="list-item"><div class="list-content">Hapus akun secara permanen.</div></div></div>
+<h2 id="4-4-keamanan-akun">4.4 Keamanan akun</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Gunakan PIN berbeda untuk setiap staff.</div></div><div class="list-item"><div class="list-content">Jangan menempelkan PIN di dekat kasir.</div></div><div class="list-item"><div class="list-content">Nonaktifkan staff yang sudah berhenti.</div></div><div class="list-item"><div class="list-content">Jangan berbagi akun Owner.</div></div><div class="list-item"><div class="list-content">Gunakan akun Admin atau Manajer untuk pekerjaan rutin.</div></div><div class="list-item"><div class="list-content">Ubah password perangkat jika perangkat berpindah lokasi atau operator.</div></div></div>
+<h1 id="5-produk-dan-menu">5. Produk dan menu</h1>
+<h2 id="5-1-struktur-produk">5.1 Struktur produk</h2>
+<p>Struktur yang disarankan:</p>
+<p><code>Departemen → Kategori → Menu → Ekstra</code></p>
+<p>Contoh:</p>
+<p><code>Makanan → Ayam → Ayam Goreng → Level Pedas</code></p>
+<p>Paket/Bundling dikelola sebagai produk gabungan yang berisi beberapa komponen menu.</p>
+<h2 id="5-2-departemen">5.2 Departemen</h2>
+<div class="location"><strong>OUTLET → Produk → Departemen</strong></div>
+<p>Departemen adalah kelompok besar untuk laporan dan organisasi menu, misalnya Makanan, Minuman, atau Merchandise.</p>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tekan <strong>Tambah Departemen</strong>.</div></div><div class="list-item"><div class="list-content">Isi nama.</div></div><div class="list-item"><div class="list-content">Atur status aktif.</div></div><div class="list-item"><div class="list-content">Simpan.</div></div><div class="list-item"><div class="list-content">Hubungkan kategori yang sesuai bila opsi tersedia.</div></div></div>
+<p>Gunakan nama singkat dan konsisten agar laporan mudah dibaca.</p>
+<h2 id="5-3-kategori">5.3 Kategori</h2>
+<div class="location"><strong>OUTLET → Produk → Kategori</strong></div>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tekan <strong>Tambah Kategori</strong>.</div></div><div class="list-item"><div class="list-content">Isi nama kategori.</div></div><div class="list-item"><div class="list-content">Pilih departemen.</div></div><div class="list-item"><div class="list-content">Atur ikon atau urutan jika diperlukan.</div></div><div class="list-item"><div class="list-content">Pastikan status aktif.</div></div><div class="list-item"><div class="list-content">Simpan.</div></div></div>
+<p>Kategori dipakai untuk:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Filter menu pada POS dan E-Menu.</div></div><div class="list-item"><div class="list-content">Laporan penjualan kategori.</div></div><div class="list-item"><div class="list-content">Routing tiket ke stasiun cetak.</div></div><div class="list-item"><div class="list-content">Pengelompokan perangkat printer.</div></div></div>
+<h2 id="5-4-menu">5.4 Menu</h2>
+<div class="location"><strong>OUTLET → Produk → Menu</strong></div>
+<h3 id="menambah-menu">Menambah menu</h3>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tekan <strong>Tambah Menu</strong>.</div></div><div class="list-item"><div class="list-content">Unggah foto menu bila tersedia.</div></div><div class="list-item"><div class="list-content">Isi <strong>Nama Menu</strong>.</div></div><div class="list-item"><div class="list-content">Pilih <strong>Kategori</strong>.</div></div><div class="list-item"><div class="list-content">Isi harga.</div></div><div class="list-item"><div class="list-content">Isi deskripsi singkat.</div></div><div class="list-item"><div class="list-content">Isi waktu masak dalam menit bila ingin mencatat estimasi.</div></div><div class="list-item"><div class="list-content">Isi tags bila diperlukan.</div></div><div class="list-item"><div class="list-content">Aktifkan <strong>Tersedia</strong>.</div></div><div class="list-item"><div class="list-content">Aktifkan <strong>Unggulan</strong> bila produk perlu diprioritaskan.</div></div><div class="list-item"><div class="list-content">Hubungkan ekstra yang dapat dipilih.</div></div><div class="list-item"><div class="list-content">Tekan <strong>Tambah</strong> atau <strong>Simpan Perubahan</strong>.</div></div></div>
+<h3 id="arti-tersedia">Arti Tersedia</h3>
+<div class="list unordered"><div class="list-item"><div class="list-content">Aktif: menu dapat dipilih pada POS dan E-Menu.</div></div><div class="list-item"><div class="list-content">Nonaktif: menu tetap tersimpan, tetapi tidak dapat dipesan.</div></div></div>
+<p>Gunakan status tidak tersedia untuk stok habis sementara. Jangan menghapus menu hanya karena sedang habis.</p>
+<h3 id="arti-unggulan">Arti Unggulan</h3>
+<p>Menu Unggulan:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Ditampilkan sebelum menu biasa.</div></div><div class="list-item"><div class="list-content">Tetap mengikuti filter kategori dan pencarian.</div></div><div class="list-item"><div class="list-content">Memiliki badge bintang <strong>Unggulan</strong> pada POS dan E-Menu pelanggan.</div></div><div class="list-item"><div class="list-content">Di antara sesama menu unggulan, urutan manual tetap dihormati.</div></div></div>
+<p>Gunakan untuk menu signature, best seller, promosi utama, atau produk dengan prioritas penjualan.</p>
+<h3 id="arti-tags">Arti tags</h3>
+<p>Tags adalah metadata seperti <code>pedas</code>, <code>baru</code>, atau <code>vegetarian</code>. Pada versi ini tags disimpan sebagai informasi klasifikasi dan belum menjadi filter pelanggan. Jangan menggunakan tags sebagai pengganti kategori atau toggle Unggulan.</p>
+<h3 id="foto-menu">Foto menu</h3>
+<div class="list unordered"><div class="list-item"><div class="list-content">Gunakan foto terang dan fokus.</div></div><div class="list-item"><div class="list-content">Rasio persegi atau mendekati persegi memberikan hasil paling konsisten.</div></div><div class="list-item"><div class="list-content">Hindari file yang terlalu besar.</div></div><div class="list-item"><div class="list-content">Pastikan foto sesuai produk yang dijual.</div></div></div>
+<h2 id="5-5-ekstra">5.5 Ekstra</h2>
+<div class="location"><strong>OUTLET → Produk → Ekstra</strong></div>
+<p>Ekstra digunakan untuk topping, ukuran, level pedas, pilihan saus, dan pilihan tambahan lain.</p>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tekan <strong>Tambah Ekstra</strong>.</div></div><div class="list-item"><div class="list-content">Isi nama grup, misalnya <code>Level Pedas</code>.</div></div><div class="list-item"><div class="list-content">Tambahkan minimal satu pilihan.</div></div><div class="list-item"><div class="list-content">Isi harga tambahan setiap pilihan; gunakan nol jika gratis.</div></div><div class="list-item"><div class="list-content">Atur apakah pilihan wajib.</div></div><div class="list-item"><div class="list-content">Atur jumlah minimum/maksimum jika tersedia.</div></div><div class="list-item"><div class="list-content">Simpan.</div></div><div class="list-item"><div class="list-content">Hubungkan grup ekstra ke menu terkait melalui form Menu.</div></div></div>
+<p>Lakukan transaksi uji untuk memastikan harga tambahan masuk ke subtotal dan tercetak pada tiket.</p>
+<h2 id="5-6-paket-bundling">5.6 Paket/Bundling</h2>
+<div class="location"><strong>OUTLET → Produk → Paket / Bundling</strong></div>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tekan <strong>Tambah Paket</strong>.</div></div><div class="list-item"><div class="list-content">Isi nama paket.</div></div><div class="list-item"><div class="list-content">Isi harga jual paket.</div></div><div class="list-item"><div class="list-content">Tambahkan minimal satu komponen menu.</div></div><div class="list-item"><div class="list-content">Tentukan jumlah setiap komponen.</div></div><div class="list-item"><div class="list-content">Simpan.</div></div></div>
+<p>Paket berbeda dari promo. Paket memiliki item gabungan dan harga sendiri, sedangkan promo memberikan potongan berdasarkan ketentuan.</p>
+<h2 id="5-7-checklist-produk-sebelum-tayang">5.7 Checklist produk sebelum tayang</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Nama dan harga benar.</div></div><div class="list-item"><div class="list-content">Kategori benar.</div></div><div class="list-item"><div class="list-content">Foto tidak tertukar.</div></div><div class="list-item"><div class="list-content">Menu tersedia hanya jika benar-benar bisa dijual.</div></div><div class="list-item"><div class="list-content">Menu unggulan dipilih secukupnya.</div></div><div class="list-item"><div class="list-content">Ekstra terhubung ke menu yang tepat.</div></div><div class="list-item"><div class="list-content">Paket memiliki semua komponen.</div></div><div class="list-item"><div class="list-content">Tiket tercetak ke stasiun yang benar.</div></div><div class="list-item"><div class="list-content">Pajak dan biaya dihitung sesuai kebijakan outlet.</div></div></div>
+<h1 id="6-persediaan-dan-inventori">6. Persediaan dan inventori</h1>
+<h2 id="6-1-stok-bahan-baku">6.1 Stok bahan baku</h2>
+<div class="location"><strong>OUTLET → Inventori → Stok Bahan Baku</strong></div>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tekan <strong>Tambah Bahan Baku</strong>.</div></div><div class="list-item"><div class="list-content">Isi nama bahan.</div></div><div class="list-item"><div class="list-content">Pilih satuan yang konsisten, misalnya gram, kilogram, mililiter, liter, atau pcs.</div></div><div class="list-item"><div class="list-content">Isi stok awal.</div></div><div class="list-item"><div class="list-content">Isi batas minimum.</div></div><div class="list-item"><div class="list-content">Isi biaya satuan bila digunakan untuk HPP.</div></div><div class="list-item"><div class="list-content">Simpan.</div></div></div>
+<p>Jangan mencampur satuan pembelian dan satuan resep tanpa konversi yang jelas.</p>
+<h2 id="6-2-penyesuaian-stok">6.2 Penyesuaian stok</h2>
+<p>Gunakan penyesuaian untuk:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Pembelian atau penerimaan bahan.</div></div><div class="list-item"><div class="list-content">Koreksi jumlah.</div></div><div class="list-item"><div class="list-content">Pemakaian di luar transaksi.</div></div><div class="list-item"><div class="list-content">Waste, rusak, atau kedaluwarsa.</div></div></div>
+<p>Setiap penyesuaian harus memiliki alasan yang dapat diaudit. Hindari mengubah angka tanpa keterangan.</p>
+<h2 id="6-3-supplier">6.3 Supplier</h2>
+<div class="location"><strong>OUTLET → Inventori → Supplier</strong></div>
+<p>Simpan:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Nama supplier.</div></div><div class="list-item"><div class="list-content">Kontak.</div></div><div class="list-item"><div class="list-content">Telepon.</div></div><div class="list-item"><div class="list-content">Alamat atau catatan.</div></div></div>
+<p>Gunakan nama yang konsisten agar riwayat pembelian mudah ditelusuri.</p>
+<h2 id="6-4-stock-opname">6.4 Stock Opname</h2>
+<div class="location"><strong>OUTLET → Inventori → Stok Opname</strong></div>
+<div class="list ordered"><div class="list-item"><div class="list-content">Buat sesi opname.</div></div><div class="list-item"><div class="list-content">Hitung stok fisik.</div></div><div class="list-item"><div class="list-content">Masukkan jumlah aktual setiap bahan.</div></div><div class="list-item"><div class="list-content">Periksa selisih sistem dan fisik.</div></div><div class="list-item"><div class="list-content">Tambahkan catatan untuk selisih besar.</div></div><div class="list-item"><div class="list-content">Finalisasi opname.</div></div></div>
+<blockquote><p>Setelah finalisasi, hasil digunakan sebagai catatan resmi penyesuaian. Periksa semua angka sebelum menekan tombol finalisasi.</p></blockquote>
+<h2 id="6-5-resep-dan-hpp">6.5 Resep dan HPP</h2>
+<p>Resep menghubungkan menu dengan bahan baku. Pastikan kuantitas bahan per porsi memakai satuan yang sama dengan master bahan.</p>
+<p>Contoh:</p>
+<table><thead><tr><th>Menu</th><th>Bahan</th><th>Jumlah per porsi</th></tr></thead><tbody><tr><td>Ayam Goreng</td><td>Ayam</td><td>1 pcs</td></tr><tr><td>Ayam Goreng</td><td>Minyak</td><td>30 ml</td></tr><tr><td>Es Teh</td><td>Teh</td><td>5 gram</td></tr><tr><td>Es Teh</td><td>Gula</td><td>20 gram</td></tr></tbody></table>
+<p>Transaksi yang diproses sistem akan memengaruhi stok sesuai resep dan aturan transaksi. Periksa <strong>Laporan Stok</strong> setelah transaksi uji.</p>
+<h2 id="6-6-laporan-stok-dan-waste">6.6 Laporan stok dan waste</h2>
+<div class="location"></div>
+<div class="list unordered"><div class="list-item"><div class="list-content"><strong>Inventori → Laporan Stok</strong></div></div><div class="list-item"><div class="list-content"><strong>Inventori → Laporan Waste</strong></div></div></div>
+<p>Gunakan laporan untuk memeriksa:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Saldo awal dan akhir.</div></div><div class="list-item"><div class="list-content">Penambahan dan pengurangan.</div></div><div class="list-item"><div class="list-content">Bahan kritis.</div></div><div class="list-item"><div class="list-content">Penyesuaian manual.</div></div><div class="list-item"><div class="list-content">Waste dan alasannya.</div></div></div>
+<h1 id="7-meja-kode-qr-dan-pesanan-pelanggan">7. Meja, kode QR, dan pesanan pelanggan</h1>
+<h2 id="7-1-kelola-meja">7.1 Kelola meja</h2>
+<div class="location"><strong>OUTLET → Operasional → Kelola Meja</strong></div>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tekan <strong>Tambah Meja</strong>.</div></div><div class="list-item"><div class="list-content">Isi nomor atau nama meja.</div></div><div class="list-item"><div class="list-content">Isi area bila diperlukan, misalnya Indoor atau Lantai 2.</div></div><div class="list-item"><div class="list-content">Isi kapasitas.</div></div><div class="list-item"><div class="list-content">Pastikan meja aktif.</div></div><div class="list-item"><div class="list-content">Simpan.</div></div></div>
+<p>Gunakan penamaan unik. Jangan membuat dua meja aktif dengan identitas yang membingungkan.</p>
+<h2 id="7-2-kode-qr">7.2 Kode QR</h2>
+<div class="location"><strong>OUTLET → Operasional → QR Code</strong></div>
+<div class="list ordered"><div class="list-item"><div class="list-content">Pilih meja.</div></div><div class="list-item"><div class="list-content">Buat atau tampilkan QR.</div></div><div class="list-item"><div class="list-content">Unduh QR.</div></div><div class="list-item"><div class="list-content">Cetak dengan ukuran yang mudah dipindai.</div></div><div class="list-item"><div class="list-content">Pasang pada meja yang sesuai.</div></div><div class="list-item"><div class="list-content">Uji menggunakan kamera ponsel.</div></div></div>
+<p>QR harus membuka outlet dan meja yang benar. Jangan menyalin QR satu meja ke meja lain.</p>
+<h2 id="7-3-order-online">7.3 Order Online</h2>
+<div class="location">aplikasi POS: <strong>Pengaturan → Order Online</strong></div>
+<p>Pengaturan yang tersedia meliputi:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Terima pesanan online.</div></div><div class="list-item"><div class="list-content">Pembatasan jam operasional.</div></div><div class="list-item"><div class="list-content">Nama pelanggan wajib atau opsional.</div></div><div class="list-item"><div class="list-content">Izin catatan pesanan.</div></div><div class="list-item"><div class="list-content">Konfirmasi otomatis.</div></div></div>
+<p>Uji order di dalam dan di luar jam operasional.</p>
+<h2 id="7-4-alur-pelanggan">7.4 Alur pelanggan</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Pelanggan memindai QR.</div></div><div class="list-item"><div class="list-content">Sistem mengenali meja dan outlet.</div></div><div class="list-item"><div class="list-content">Pelanggan melihat menu tersedia.</div></div><div class="list-item"><div class="list-content">Menu unggulan muncul lebih dulu dengan badge.</div></div><div class="list-item"><div class="list-content">Pelanggan memilih jumlah item.</div></div><div class="list-item"><div class="list-content">Pelanggan membuka keranjang.</div></div><div class="list-item"><div class="list-content">Pelanggan mengisi nama/catatan bila diminta.</div></div><div class="list-item"><div class="list-content">Pelanggan memeriksa total.</div></div><div class="list-item"><div class="list-content">Pelanggan mengirim order.</div></div><div class="list-item"><div class="list-content">POS menerima order dan notifikasi sesuai konfigurasi.</div></div></div>
+<h1 id="8-pembayaran-pajak-biaya-dan-struk">8. Pembayaran, pajak, biaya, dan struk</h1>
+<h2 id="8-1-metode-pembayaran">8.1 Metode pembayaran</h2>
+<div class="location">web: <strong>OUTLET → Pembayaran → Metode Pembayaran</strong> Lokasi POS: <strong>Pengaturan → Pembayaran Nontunai</strong></div>
+<p>Metode yang dapat digunakan mencakup:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Tunai.</div></div><div class="list-item"><div class="list-content">QRIS.</div></div><div class="list-item"><div class="list-content">Debit.</div></div><div class="list-item"><div class="list-content">Kredit.</div></div><div class="list-item"><div class="list-content">E-wallet.</div></div><div class="list-item"><div class="list-content">Transfer.</div></div></div>
+<p>Tunai dipertahankan sebagai jalur pembayaran dasar. Aktifkan hanya metode yang benar-benar diterima cabang.</p>
+<h2 id="8-2-pajak">8.2 Pajak</h2>
+<div class="location"><strong>OUTLET → Pembayaran → Pajak</strong></div>
+<div class="list ordered"><div class="list-item"><div class="list-content">Isi nama pajak.</div></div><div class="list-item"><div class="list-content">Isi persentase.</div></div><div class="list-item"><div class="list-content">Pilih status aktif.</div></div><div class="list-item"><div class="list-content">Pilih <strong>Exclusive</strong> jika pajak harus ditambahkan setelah harga produk dijumlahkan.</div></div><div class="list-item"><div class="list-content">Pilih <strong>Inclusive</strong> jika pajak sudah termasuk di dalam harga produk.</div></div><div class="list-item"><div class="list-content">Tentukan apakah pajak dihitung sebelum atau sesudah potongan harga, jika pilihan tersebut tersedia.</div></div><div class="list-item"><div class="list-content">Pilih jenis pesanan yang dikenai pajak.</div></div><div class="list-item"><div class="list-content">Periksa kembali persentase dan cara perhitungannya.</div></div><div class="list-item"><div class="list-content">Tekan <strong>Simpan</strong>.</div></div></div>
+<p>Lakukan transaksi nominal sederhana agar perhitungan mudah diperiksa.</p>
+<h2 id="8-3-biaya-dan-service-charge">8.3 Biaya dan service charge</h2>
+<div class="location"><strong>OUTLET → Pembayaran → Biaya</strong></div>
+<p>Gunakan untuk mengatur biaya layanan atau komponen biaya lain yang memang berlaku. Pastikan kebijakan sesuai operasional dan informasi kepada pelanggan.</p>
+<h2 id="8-4-pembulatan">8.4 Pembulatan</h2>
+<p>Jika pembulatan digunakan, pilih nominal yang sesuai kebijakan outlet. Pembulatan dilakukan pada total sesuai konfigurasi sistem.</p>
+<h2 id="8-5-struk">8.5 Struk</h2>
+<div class="location">web: <strong>OUTLET → Pembayaran → Struk</strong> Lokasi POS: <strong>Pengaturan → Struk &amp; Biaya</strong></div>
+<p>Konfigurasi dapat mencakup:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Nama bisnis.</div></div><div class="list-item"><div class="list-content">Alamat dan telepon.</div></div><div class="list-item"><div class="list-content">Logo.</div></div><div class="list-item"><div class="list-content">Header.</div></div><div class="list-item"><div class="list-content">Field tambahan.</div></div><div class="list-item"><div class="list-content">Footer.</div></div><div class="list-item"><div class="list-content">Tampilan pajak dan service charge.</div></div><div class="list-item"><div class="list-content">Perataan dan gaya elemen.</div></div></div>
+<p>Gunakan preview, simpan, lalu cetak transaksi uji pada printer sebenarnya.</p>
+<h1 id="9-stasiun-cetak-dan-printer">9. Stasiun cetak dan printer</h1>
+<h2 id="9-1-apa-itu-stasiun-cetak">9.1 Apa itu stasiun cetak?</h2>
+<p>Stasiun cetak adalah <strong>tujuan logis</strong>, bukan printer fisik.</p>
+<p>Contoh:</p>
+<table><thead><tr><th>Stasiun logis</th><th>Kategori yang diarahkan</th><th>Printer fisik</th></tr></thead><tbody><tr><td>Dapur</td><td>Makanan, Snack</td><td>Printer dapur</td></tr><tr><td>Bar</td><td>Kopi, Minuman</td><td>Printer bar</td></tr><tr><td>Dessert</td><td>Dessert</td><td>Printer dessert</td></tr></tbody></table>
+<p>Dengan pemisahan ini, kategori dapat diatur dari web dan setiap perangkat POS menghubungkan stasiun tersebut ke printer fisik di lokasi.</p>
+<h2 id="9-2-membuat-stasiun-di-web">9.2 Membuat stasiun di web</h2>
+<div class="location"><strong>OUTLET → Pembayaran → Routing Tiket Dapur</strong></div>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tekan tambah stasiun.</div></div><div class="list-item"><div class="list-content">Isi nama stasiun, misalnya <code>Dapur Utama</code>.</div></div><div class="list-item"><div class="list-content">Pilih kategori menu yang harus masuk ke stasiun tersebut.</div></div><div class="list-item"><div class="list-content">Atur urutan atau status bila tersedia.</div></div><div class="list-item"><div class="list-content">Simpan.</div></div></div>
+<p>Satu kategori sebaiknya memiliki tujuan yang jelas agar tiket tidak salah cetak.</p>
+<h2 id="9-3-menghubungkan-printer-pada-pos">9.3 Menghubungkan printer pada POS</h2>
+<div class="location"><strong>Pengaturan → Perangkat</strong></div>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tambahkan printer.</div></div><div class="list-item"><div class="list-content">Pilih koneksi Bluetooth atau LAN.</div></div><div class="list-item"><div class="list-content">Isi nama perangkat.</div></div><div class="list-item"><div class="list-content">Tentukan peran printer, misalnya Struk atau Dapur.</div></div><div class="list-item"><div class="list-content">Untuk printer dapur, pilih stasiun yang dibuat dari web.</div></div><div class="list-item"><div class="list-content">Atur ukuran kertas.</div></div><div class="list-item"><div class="list-content">Aktifkan jenis auto-print yang dibutuhkan.</div></div><div class="list-item"><div class="list-content">Simpan.</div></div><div class="list-item"><div class="list-content">Jalankan tes cetak.</div></div></div>
+<h2 id="9-4-satu-printer-untuk-beberapa-peran">9.4 Satu printer untuk beberapa peran</h2>
+<p>Satu printer fisik dapat digunakan untuk lebih dari satu peran jika konfigurasi dan kapasitas operasional memungkinkan. Namun untuk outlet sibuk, pisahkan printer Struk dan Dapur agar antrean tidak saling menghambat.</p>
+<h2 id="9-5-auto-print">9.5 Auto-print</h2>
+<p>Periksa pengaturan:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Auto-print saat pembayaran.</div></div><div class="list-item"><div class="list-content"><strong>Cetak tiket saat order dikirim</strong> untuk membuat tiket dapur secara otomatis ketika kasir menekan <strong>Ke Dapur</strong>.</div></div><div class="list-item"><div class="list-content"><strong>Cetak tiket saat void</strong> untuk mengirim pemberitahuan pembatalan ke stasiun dapur.</div></div><div class="list-item"><div class="list-content">Jumlah salinan.</div></div><div class="list-item"><div class="list-content">Kategori/stasiun tujuan.</div></div></div>
+<p>Cetak manual tetap tersedia dari Daftar Order sesuai fungsi pada halaman.</p>
+<p>Jika printer sedang terputus saat pencetakan, tiket disimpan dalam antrean cetak. Setelah printer kembali siap, buka pengaturan printer dan jalankan ulang antrean yang belum tercetak.</p>
+<h2 id="9-6-troubleshooting-printer">9.6 Troubleshooting printer</h2>
+<p><strong>Printer Bluetooth tidak ditemukan</strong></p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Pastikan Bluetooth aktif.</div></div><div class="list-item"><div class="list-content">Pastikan printer menyala dan tidak terhubung ke perangkat lain.</div></div><div class="list-item"><div class="list-content">Berikan izin perangkat sekitar bila diminta Android.</div></div><div class="list-item"><div class="list-content">Hapus pasangan lama lalu pasangkan ulang.</div></div></div>
+<p><strong>Printer LAN gagal</strong></p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Pastikan POS dan printer berada pada jaringan yang sama.</div></div><div class="list-item"><div class="list-content">Periksa IP dan port.</div></div><div class="list-item"><div class="list-content">Hindari IP dinamis; gunakan reservasi DHCP atau IP tetap.</div></div><div class="list-item"><div class="list-content">Tes koneksi setelah perubahan router.</div></div></div>
+<p><strong>Tiket masuk ke printer yang salah</strong></p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Periksa kategori menu.</div></div><div class="list-item"><div class="list-content">Periksa mapping kategori pada Routing Tiket Dapur.</div></div><div class="list-item"><div class="list-content">Periksa stasiun yang dipilih pada printer POS.</div></div><div class="list-item"><div class="list-content">Pastikan tidak ada konfigurasi printer lama yang duplikat.</div></div></div>
+<p><strong>Tiket tercetak dua kali</strong></p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Periksa apakah printer yang sama tersimpan ganda.</div></div><div class="list-item"><div class="list-content">Periksa jumlah salinan.</div></div><div class="list-item"><div class="list-content">Periksa auto-print pada setiap peran.</div></div><div class="list-item"><div class="list-content">Periksa lebih dari satu perangkat POS yang mendengarkan order yang sama.</div></div></div>
+<h1 id="10-promosi-kupon-program-loyalitas-dan-data-pelanggan">10. Promosi, kupon, program loyalitas, dan data pelanggan</h1>
+<h2 id="10-1-promosi-dan-kupon">10.1 Promosi dan kupon</h2>
+<div class="location"><strong>OUTLET → Promosi → Promo &amp; Voucher</strong></div>
+<p>Jenis utama:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Potongan persentase.</div></div><div class="list-item"><div class="list-content">Potongan nominal tetap.</div></div></div>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tekan <strong>Tambah Promo</strong>.</div></div><div class="list-item"><div class="list-content">Isi nama dan kode.</div></div><div class="list-item"><div class="list-content">Pilih jenis diskon.</div></div><div class="list-item"><div class="list-content">Isi nilai diskon.</div></div><div class="list-item"><div class="list-content">Isi minimum transaksi bila diperlukan.</div></div><div class="list-item"><div class="list-content">Isi batas maksimum diskon untuk persentase jika digunakan.</div></div><div class="list-item"><div class="list-content">Atur periode aktif.</div></div><div class="list-item"><div class="list-content">Atur batas penggunaan.</div></div><div class="list-item"><div class="list-content">Aktifkan promo.</div></div><div class="list-item"><div class="list-content">Simpan.</div></div></div>
+<p>Paket atau gabungan menu dikelola melalui menu Produk, bukan sebagai jenis promosi.</p>
+<h2 id="10-2-menggunakan-promosi-pada-aplikasi-kasir">10.2 Menggunakan promosi pada aplikasi kasir</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tambahkan item ke keranjang.</div></div><div class="list-item"><div class="list-content">Masukkan kode promo.</div></div><div class="list-item"><div class="list-content">Sistem memvalidasi cabang, periode, minimum transaksi, dan batas penggunaan.</div></div><div class="list-item"><div class="list-content">Pastikan nilai diskon tampil pada ringkasan.</div></div><div class="list-item"><div class="list-content">Lanjutkan pembayaran.</div></div></div>
+<p>Jika isi keranjang berubah, sistem memvalidasi ulang promo. Promo yang tidak lagi memenuhi syarat akan dilepas.</p>
+<h2 id="10-3-anggota-program-loyalitas">10.3 Anggota program loyalitas</h2>
+<div class="location"><strong>OUTLET → Loyalty → Member Loyalty</strong></div>
+<p>Gunakan halaman untuk:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Mencari member.</div></div><div class="list-item"><div class="list-content">Memeriksa poin.</div></div><div class="list-item"><div class="list-content">Meninjau aktivitas loyalty.</div></div><div class="list-item"><div class="list-content">Mengelola data yang tersedia sesuai izin.</div></div></div>
+<p>Pada aplikasi kasir, pencarian anggota dilakukan menggunakan nomor telepon. Pastikan nomor ditulis dengan format yang konsisten.</p>
+<h2 id="10-4-data-pelanggan-dan-crm">10.4 Data pelanggan dan CRM</h2>
+<div class="location"><strong>OUTLET → Loyalty → Pelanggan (CRM)</strong></div>
+<p>CRM merupakan singkatan dari <em>Customer Relationship Management</em> atau pengelolaan hubungan pelanggan. Fitur ini membantu pengguna melihat riwayat dan informasi pelanggan. Gunakan data hanya untuk pekerjaan yang sah dan berikan akses hanya kepada pengguna yang memerlukannya.</p>
+<div class="no-page-break"></div>
+<h1 id="11-operasional-aplikasi-kasir">11. Operasional aplikasi kasir</h1>
+<h2 id="11-1-masuk-menggunakan-akun-perangkat">11.1 Masuk menggunakan akun perangkat</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Buka aplikasi.</div></div><div class="list-item"><div class="list-content">Masukkan alamat surel dan kata sandi Akun Perangkat.</div></div><div class="list-item"><div class="list-content">Tunggu sampai halaman utama selesai dimuat.</div></div><div class="list-item"><div class="list-content">Periksa nama cabang yang tampil.</div></div><div class="list-item"><div class="list-content">Jika cabang salah, keluar dari aplikasi dan masuk kembali menggunakan akun perangkat untuk cabang yang benar.</div></div></div>
+<h2 id="11-2-mencatat-waktu-masuk-staf">11.2 Mencatat waktu masuk staf</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Pilih nama staf yang akan menggunakan kasir.</div></div><div class="list-item"><div class="list-content">Masukkan nomor identifikasi pribadi sebanyak empat digit.</div></div><div class="list-item"><div class="list-content">Tekan tombol untuk mencatat waktu masuk.</div></div><div class="list-item"><div class="list-content">Periksa nama pengguna aktif yang tampil di aplikasi.</div></div><div class="list-item"><div class="list-content">Jika nama yang tampil salah, keluar dari sesi staf sebelum membuat transaksi.</div></div></div>
+<h2 id="11-3-membuka-giliran-kerja-kasir">11.3 Membuka giliran kerja kasir</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Buka halaman Kasir atau halaman <strong>Shift</strong>.</div></div><div class="list-item"><div class="list-content">Pilih <strong>Buka Kasir</strong> jika belum ada giliran kerja yang aktif.</div></div><div class="list-item"><div class="list-content">Masukkan modal awal tunai.</div></div><div class="list-item"><div class="list-content">Periksa kembali jumlah modal awal.</div></div><div class="list-item"><div class="list-content">Konfirmasi pembukaan kasir.</div></div><div class="list-item"><div class="list-content">Pastikan status giliran kerja berubah menjadi terbuka.</div></div></div>
+<p>Satu kasir tidak boleh membuka dua giliran kerja aktif pada waktu yang sama.</p>
+<h2 id="11-4-membuat-pesanan">11.4 Membuat pesanan</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Tentukan jenis pesanan.</div></div><div class="list-item"><div class="list-content">Pilih <strong>Dine In</strong> jika pelanggan makan di tempat.</div></div><div class="list-item"><div class="list-content">Pilih <strong>Takeaway</strong> jika pesanan akan dibawa pulang.</div></div><div class="list-item"><div class="list-content">Untuk pesanan makan di tempat, pilih meja yang digunakan pelanggan.</div></div><div class="list-item"><div class="list-content">Pilih kategori atau gunakan kolom pencarian untuk menemukan menu.</div></div><div class="list-item"><div class="list-content">Menu yang ditandai <strong>Unggulan</strong> tampil lebih dahulu.</div></div><div class="list-item"><div class="list-content">Tekan menu untuk melihat pilihan atau menambahkannya ke keranjang.</div></div><div class="list-item"><div class="list-content">Pilih varian atau ekstra jika tersedia.</div></div><div class="list-item"><div class="list-content">Isi catatan jika pelanggan memiliki permintaan khusus.</div></div><div class="list-item"><div class="list-content">Atur jumlah pesanan.</div></div><div class="list-item"><div class="list-content">Periksa seluruh isi keranjang sebelum melanjutkan.</div></div></div>
+<h2 id="11-5-tahan-pesanan">11.5 Tahan Pesanan</h2>
+<p>Gunakan <strong>Tahan Pesanan</strong> ketika pelanggan belum siap membayar atau transaksi harus dilanjutkan nanti.</p>
+<div class="list ordered"><div class="list-item"><div class="list-content">Pastikan keranjang memiliki item.</div></div><div class="list-item"><div class="list-content">Tekan <strong>Tahan Pesanan</strong>.</div></div><div class="list-item"><div class="list-content">Isi identitas yang diperlukan.</div></div><div class="list-item"><div class="list-content">Simpan.</div></div><div class="list-item"><div class="list-content">Buka kembali dari daftar pesanan ditahan.</div></div></div>
+<p>Jangan menggunakan tahan pesanan sebagai pengganti order aktif yang sudah dikirim ke dapur.</p>
+<h2 id="11-6-mengirim-order-dan-menambah-pesanan">11.6 Mengirim order dan menambah pesanan</h2>
+<p>Untuk mengirim pesanan dari Daftar Order:</p>
+<div class="list ordered"><div class="list-item"><div class="list-content">Buka <strong>Daftar Order</strong>.</div></div><div class="list-item"><div class="list-content">Temukan pesanan yang masih berstatus Draft.</div></div><div class="list-item"><div class="list-content">Tekan <strong>Ke Dapur</strong>.</div></div><div class="list-item"><div class="list-content">Sistem mengubah status pesanan menjadi Dikonfirmasi.</div></div><div class="list-item"><div class="list-content">Setelah status berhasil disimpan, sistem membuat tiket dapur secara otomatis.</div></div><div class="list-item"><div class="list-content">Tiket dibagi ke printer Dapur berdasarkan stasiun dan kategori menu.</div></div><div class="list-item"><div class="list-content">Jika printer terputus, tiket masuk antrean cetak dan tidak mengubah kembali status pesanan.</div></div></div>
+<p>Pastikan peran <strong>Dapur</strong> dan pengaturan <strong>Cetak tiket saat order dikirim</strong> sudah aktif pada printer yang digunakan.</p>
+<p>Order aktif dapat ditambahkan item melalui fungsi <strong>Tambah Pesanan</strong>. Item tambahan dicatat ke order yang sama tanpa membuat tagihan terpisah.</p>
+<p>Order yang sudah dicetak tidak diedit bebas. Gunakan Tambah Pesanan, Void, atau Refund sesuai status transaksi agar audit tetap benar.</p>
+<h2 id="11-7-pembayaran">11.7 Pembayaran</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Periksa item, jumlah, ekstra, catatan, meja, subtotal, diskon, pajak, dan service charge.</div></div><div class="list-item"><div class="list-content">Tekan <strong>Bayar</strong>.</div></div><div class="list-item"><div class="list-content">Pilih metode pembayaran.</div></div><div class="list-item"><div class="list-content">Untuk tunai, masukkan nominal diterima dan periksa kembalian.</div></div><div class="list-item"><div class="list-content">Untuk nontunai, pastikan transaksi eksternal benar-benar berhasil.</div></div><div class="list-item"><div class="list-content">Konfirmasi pembayaran satu kali.</div></div><div class="list-item"><div class="list-content">Tunggu status berhasil.</div></div><div class="list-item"><div class="list-content">Cetak atau bagikan struk sesuai kebutuhan.</div></div></div>
+<blockquote><p>Jangan menekan Bayar berulang kali. Sistem memiliki perlindungan transaksi, tetapi operator tetap harus menunggu hasil proses.</p></blockquote>
+<h2 id="11-8-pembayaran-terpisah">11.8 Pembayaran terpisah</h2>
+<p>Jika fitur split digunakan:</p>
+<div class="list ordered"><div class="list-item"><div class="list-content">Buka order.</div></div><div class="list-item"><div class="list-content">Pilih pembagian pembayaran.</div></div><div class="list-item"><div class="list-content">Tentukan item atau nominal untuk masing-masing pembayaran.</div></div><div class="list-item"><div class="list-content">Proses setiap bagian.</div></div><div class="list-item"><div class="list-content">Finalisasi setelah seluruh total terpenuhi.</div></div></div>
+<p>Jangan menutup order sebelum semua bagian pembayaran berhasil.</p>
+<div class="no-page-break"></div>
+<h1 id="12-pengelolaan-pesanan">12. Pengelolaan pesanan</h1>
+<h2 id="12-1-daftar-order">12.1 Daftar Order</h2>
+<div class="location">POS: <strong>Daftar Order</strong> Lokasi web: <strong>OUTLET → Pesanan → Daftar Pesanan</strong></div>
+<p>Gunakan filter status, pencarian, atau periode untuk menemukan order.</p>
+<p>Status umum:</p>
+<table><thead><tr><th>Status</th><th>Arti</th></tr></thead><tbody><tr><td>Draft</td><td>Belum dikirim/dikonfirmasi</td></tr><tr><td>Confirmed</td><td>Diterima untuk diproses</td></tr><tr><td>Preparing</td><td>Sedang disiapkan</td></tr><tr><td>Ready</td><td>Siap disajikan/diambil</td></tr><tr><td>Served</td><td>Sudah disajikan</td></tr><tr><td>Paid</td><td>Sudah dibayar</td></tr><tr><td>Void</td><td>Dibatalkan</td></tr><tr><td>Refunded</td><td>Dikembalikan</td></tr></tbody></table>
+<h2 id="12-2-pindah-meja">12.2 Pindah meja</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Buka order dine-in aktif.</div></div><div class="list-item"><div class="list-content">Pilih <strong>Pindah Meja</strong>.</div></div><div class="list-item"><div class="list-content">Pilih meja tujuan yang sesuai.</div></div><div class="list-item"><div class="list-content">Konfirmasi.</div></div><div class="list-item"><div class="list-content">Pastikan nomor meja pada order berubah.</div></div></div>
+<h2 id="12-3-gabung-tagihan">12.3 Gabung tagihan</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Buka salah satu order dine-in aktif.</div></div><div class="list-item"><div class="list-content">Pilih <strong>Gabung</strong>.</div></div><div class="list-item"><div class="list-content">Pilih order tujuan.</div></div><div class="list-item"><div class="list-content">Periksa kedua order.</div></div><div class="list-item"><div class="list-content">Konfirmasi.</div></div></div>
+<p>Setelah digabung, item berpindah ke order tujuan dan sumber diproses sesuai aturan audit sistem.</p>
+<h2 id="12-4-void">12.4 Void</h2>
+<p>Void digunakan untuk membatalkan order yang belum diselesaikan sebagai transaksi pembayaran final.</p>
+<div class="list ordered"><div class="list-item"><div class="list-content">Buka order.</div></div><div class="list-item"><div class="list-content">Pilih <strong>Void</strong>.</div></div><div class="list-item"><div class="list-content">Isi alasan.</div></div><div class="list-item"><div class="list-content">Masukkan PIN approver bila diminta.</div></div><div class="list-item"><div class="list-content">Konfirmasi.</div></div></div>
+<p>Approver harus Owner, Admin, Manajer, atau staff dengan izin yang sesuai.</p>
+<p>Setelah Void berhasil disimpan:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Printer Struk mencetak dokumen <strong>STRUK VOID</strong> yang berisi nomor order, daftar item, nilai transaksi, alasan pembatalan, nama pemberi persetujuan, dan waktu Void.</div></div><div class="list-item"><div class="list-content">Printer Dapur yang mengaktifkan <strong>Cetak tiket saat void</strong> menerima tiket dengan tanda <strong>VOID</strong> agar pesanan yang sudah dibatalkan tidak dilanjutkan.</div></div><div class="list-item"><div class="list-content">Jika printer sedang terputus, dokumen masuk antrean cetak. Void tetap sah dan tidak dijalankan ulang.</div></div><div class="list-item"><div class="list-content">Aplikasi menampilkan hasil apakah struk sudah tercetak, masuk antrean, atau belum memiliki printer Struk yang aktif.</div></div></div>
+<h2 id="12-5-refund-penuh">12.5 Refund penuh</h2>
+<p>Refund digunakan setelah transaksi dibayar.</p>
+<div class="list ordered"><div class="list-item"><div class="list-content">Buka order paid.</div></div><div class="list-item"><div class="list-content">Pilih <strong>Refund</strong>.</div></div><div class="list-item"><div class="list-content">Isi alasan.</div></div><div class="list-item"><div class="list-content">Masukkan PIN approver.</div></div><div class="list-item"><div class="list-content">Konfirmasi.</div></div><div class="list-item"><div class="list-content">Lakukan pengembalian dana nyata sesuai metode pembayaran.</div></div></div>
+<p>Sistem mencatat refund, tetapi proses pengembalian pada bank, QRIS, atau E-wallet dapat tetap memerlukan tindakan pada penyedia pembayaran.</p>
+<h2 id="12-6-refund-sebagian">12.6 Refund sebagian</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Buka order paid.</div></div><div class="list-item"><div class="list-content">Pilih <strong>Refund Sebagian</strong>.</div></div><div class="list-item"><div class="list-content">Pilih item dan jumlah yang dikembalikan.</div></div><div class="list-item"><div class="list-content">Periksa nominal.</div></div><div class="list-item"><div class="list-content">Isi alasan dan persetujuan.</div></div><div class="list-item"><div class="list-content">Konfirmasi.</div></div></div>
+<p>Jangan melakukan refund penuh setelah semua nilai sudah dikembalikan melalui refund sebagian.</p>
+<h1 id="13-giliran-kerja-kas-dan-absensi">13. Giliran kerja, kas, dan absensi</h1>
+<h2 id="13-1-kas-masuk">13.1 Kas Masuk</h2>
+<p>Gunakan untuk dana tambahan di laci kas yang bukan penjualan, misalnya tambahan uang kecil.</p>
+<div class="list ordered"><div class="list-item"><div class="list-content">Buka halaman shift.</div></div><div class="list-item"><div class="list-content">Tekan <strong>Kas Masuk</strong>.</div></div><div class="list-item"><div class="list-content">Isi nominal.</div></div><div class="list-item"><div class="list-content">Isi alasan.</div></div><div class="list-item"><div class="list-content">Simpan.</div></div></div>
+<h2 id="13-2-kas-keluar">13.2 Kas Keluar</h2>
+<p>Gunakan <strong>Kas Keluar</strong> ketika uang benar-benar diambil dari laci kasir selama giliran kerja masih aktif. Contohnya adalah membayar pembelian gas, ongkos pengiriman, parkir, atau kebutuhan mendadak lainnya menggunakan uang tunai dari laci.</p>
+<p>Owner, Admin, dan Manajer dapat mencatat pergerakan kas pada cabang yang menjadi tanggung jawabnya. Kasir hanya dapat mencatat Kas Keluar pada giliran kerja miliknya sendiri.</p>
+<div class="list ordered"><div class="list-item"><div class="list-content">Buka halaman <strong>Shift</strong> pada aplikasi kasir.</div></div><div class="list-item"><div class="list-content">Pastikan giliran kerja masih aktif.</div></div><div class="list-item"><div class="list-content">Tekan <strong>Kas Keluar</strong>.</div></div><div class="list-item"><div class="list-content">Masukkan jumlah uang yang diambil dari laci.</div></div><div class="list-item"><div class="list-content">Pilih kategori Pengeluaran.</div></div><div class="list-item"><div class="list-content">Isi alasan yang jelas, misalnya <code>Beli gas LPG - nota 024</code>.</div></div><div class="list-item"><div class="list-content">Periksa kembali kategori, jumlah, dan keterangannya.</div></div><div class="list-item"><div class="list-content">Tekan <strong>Simpan Kas Keluar</strong>.</div></div></div>
+<p>Kas Keluar mengurangi jumlah kas yang seharusnya tersedia di laci saat giliran kerja ditutup. Sistem juga langsung membuat catatan Pengeluaran pada cabang, tanggal, kategori, nominal, dan keterangan yang sama.</p>
+<blockquote><p>Pengguna hanya perlu mengisi formulir Kas Keluar satu kali. Jangan membuat Pengeluaran manual untuk transaksi yang sama karena sistem sudah membuatnya secara otomatis.</p></blockquote>
+<h2 id="13-3-menutup-shift">13.3 Menutup shift</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Pastikan semua order selesai atau ditangani.</div></div><div class="list-item"><div class="list-content">Hitung uang tunai fisik.</div></div><div class="list-item"><div class="list-content">Buka <strong>Tutup Kasir</strong>.</div></div><div class="list-item"><div class="list-content">Masukkan kas aktual.</div></div><div class="list-item"><div class="list-content">Periksa kas sistem, selisih, pembayaran tunai, dan nontunai.</div></div><div class="list-item"><div class="list-content">Isi catatan jika ada selisih.</div></div><div class="list-item"><div class="list-content">Konfirmasi tutup shift.</div></div><div class="list-item"><div class="list-content">Simpan/cetak rekap bila diperlukan.</div></div></div>
+<h2 id="13-4-absensi">13.4 Absensi</h2>
+<p>Menu <strong>Absensi</strong> mencatat kehadiran sesuai fungsi aplikasi. Pastikan staff melakukan proses dengan akun dan PIN sendiri agar laporan tidak tertukar.</p>
+<div class="no-page-break"></div>
+<h1 id="14-pengeluaran">14. Pengeluaran</h1>
+<div class="location"><strong>OUTLET → Keuangan → Pengeluaran</strong></div>
+<p>Halaman ini menampilkan biaya usaha yang dibuat secara manual maupun otomatis. Pengeluaran otomatis berasal dari Kas Keluar dan diberi tanda <strong>Kas Keluar Otomatis</strong>.</p>
+<h2 id="14-1-pengguna-yang-dapat-mengelola-pengeluaran">14.1 Pengguna yang dapat mengelola pengeluaran</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content"><strong>Owner</strong> dapat menambah, mengubah, dan menghapus pengeluaran pada cabang yang dipilih.</div></div><div class="list-item"><div class="list-content"><strong>Admin</strong> dapat menambah, mengubah, dan menghapus pengeluaran pada cabangnya.</div></div><div class="list-item"><div class="list-content"><strong>Manajer</strong> dapat menambah dan mengubah pengeluaran pada cabangnya, tetapi tidak dapat menghapus.</div></div><div class="list-item"><div class="list-content"><strong>Kasir</strong> tidak memiliki akses ke halaman Pengeluaran pada Web Owner Panel. Pengeluaran yang dicatat Kasir melalui <strong>Kas Keluar</strong> tetap masuk secara otomatis.</div></div></div>
+<h2 id="14-2-cara-mencatat-pengeluaran">14.2 Cara mencatat pengeluaran</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Pilih cabang yang benar melalui pemilih cabang di bagian atas halaman.</div></div><div class="list-item"><div class="list-content">Buka <strong>Keuangan → Pengeluaran</strong>.</div></div><div class="list-item"><div class="list-content">Tekan <strong>Tambah</strong>.</div></div><div class="list-item"><div class="list-content">Pilih tanggal pengeluaran. Tanggal tidak boleh berada di masa depan.</div></div><div class="list-item"><div class="list-content">Pilih kategori yang paling sesuai.</div></div><div class="list-item"><div class="list-content">Masukkan nominal yang lebih besar dari nol.</div></div><div class="list-item"><div class="list-content">Isi keterangan yang mudah diperiksa, misalnya nama barang, nomor nota, atau tujuan pembayaran.</div></div><div class="list-item"><div class="list-content">Periksa kembali cabang, tanggal, kategori, nominal, dan keterangan.</div></div><div class="list-item"><div class="list-content">Tekan <strong>Simpan</strong>.</div></div></div>
+<p>Contoh kategori:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Bahan Baku.</div></div><div class="list-item"><div class="list-content">Operasional.</div></div><div class="list-item"><div class="list-content">Gaji.</div></div><div class="list-item"><div class="list-content">Peralatan.</div></div><div class="list-item"><div class="list-content">Pemasaran.</div></div><div class="list-item"><div class="list-content">Lain-lain.</div></div></div>
+<h2 id="14-3-menentukan-cara-pencatatan">14.3 Menentukan cara pencatatan</h2>
+<table><thead><tr><th>Cara pembayaran</th><th>Tindakan pengguna</th><th>Hasil sistem</th></tr></thead><tbody><tr><td>Dibayar menggunakan uang dari laci kasir</td><td>Isi <strong>Kas Keluar</strong> satu kali</td><td>Saldo laci berkurang dan Pengeluaran dibuat otomatis</td></tr><tr><td>Dibayar melalui transfer rekening perusahaan</td><td>Isi <strong>Tambah Pengeluaran</strong></td><td>Pengeluaran masuk ke laporan tanpa mengubah saldo laci</td></tr><tr><td>Dibayar menggunakan kartu atau dompet digital perusahaan</td><td>Isi <strong>Tambah Pengeluaran</strong></td><td>Pengeluaran masuk ke laporan tanpa mengubah saldo laci</td></tr></tbody></table>
+<p>Contoh: kasir mengambil Rp100.000 dari laci untuk membeli gas. Kasir cukup mengisi <strong>Kas Keluar Rp100.000</strong>, memilih kategori Operasional, lalu mengisi keterangannya. Sistem mengurangi kas shift dan membuat Pengeluaran Rp100.000 secara bersamaan.</p>
+<h2 id="14-4-laporan-pengeluaran-kasir">14.4 Laporan pengeluaran Kasir</h2>
+<p>Pengeluaran yang dibuat dari Kas Keluar masuk ke:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content"><strong>OUTLET → Keuangan → Pengeluaran</strong>, dengan tanda <strong>Kas Keluar Otomatis</strong>.</div></div><div class="list-item"><div class="list-content">Ringkasan <strong>Total Pengeluaran</strong> pada Dashboard cabang.</div></div><div class="list-item"><div class="list-content">Rincian pengeluaran berdasarkan kategori.</div></div><div class="list-item"><div class="list-content">Laporan keuangan dan perhitungan laba bersih sesuai aturan kategori.</div></div><div class="list-item"><div class="list-content">Rekap kas shift sebagai Kas Keluar untuk menghitung Kas Seharusnya.</div></div></div>
+<p>Catatan tersebut menggunakan cabang dari giliran kerja Kasir. Karena itu, pengeluaran tidak tercampur dengan cabang lain.</p>
+<h1 id="15-laporan">15. Laporan</h1>
+<h2 id="15-1-laporan-owner">15.1 Laporan Owner</h2>
+<p>Menu Owner:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Dashboard semua cabang.</div></div><div class="list-item"><div class="list-content">Monitoring Cabang.</div></div><div class="list-item"><div class="list-content">Laporan Keuangan.</div></div><div class="list-item"><div class="list-content">Detail metode pembayaran.</div></div><div class="list-item"><div class="list-content">Performa outlet.</div></div><div class="list-item"><div class="list-content">Produk teratas.</div></div><div class="list-item"><div class="list-content">Penjualan per kategori.</div></div><div class="list-item"><div class="list-content">Penjualan per kasir.</div></div></div>
+<p>Gunakan filter outlet dan periode sebelum membaca angka.</p>
+<h2 id="15-2-laporan-outlet">15.2 Laporan outlet</h2>
+<p>Menu laporan tersedia:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Ringkasan Penjualan.</div></div><div class="list-item"><div class="list-content">Detail Penjualan.</div></div><div class="list-item"><div class="list-content">Departemen.</div></div><div class="list-item"><div class="list-content">Kategori.</div></div><div class="list-item"><div class="list-content">Extra.</div></div><div class="list-item"><div class="list-content">Pajak.</div></div><div class="list-item"><div class="list-content">Service Charge.</div></div><div class="list-item"><div class="list-content">Menu.</div></div><div class="list-item"><div class="list-content">Sub Extra.</div></div><div class="list-item"><div class="list-content">Tutup Kasir.</div></div><div class="list-item"><div class="list-content">Refund.</div></div><div class="list-item"><div class="list-content">Refund Sebagian.</div></div><div class="list-item"><div class="list-content">Void.</div></div></div>
+<h2 id="15-3-menggunakan-filter-laporan">15.3 Menggunakan filter laporan</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Pilih periode.</div></div><div class="list-item"><div class="list-content">Pilih kasir atau outlet jika tersedia.</div></div><div class="list-item"><div class="list-content">Tunggu data selesai dimuat.</div></div><div class="list-item"><div class="list-content">Periksa kartu ringkasan.</div></div><div class="list-item"><div class="list-content">Periksa tabel.</div></div><div class="list-item"><div class="list-content">Ekspor CSV, Excel, atau PDF bila tombol tersedia.</div></div></div>
+<p>Jika hasil kosong:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Periksa cabang.</div></div><div class="list-item"><div class="list-content">Periksa periode.</div></div><div class="list-item"><div class="list-content">Pastikan transaksi berstatus sesuai laporan.</div></div><div class="list-item"><div class="list-content">Hapus filter pencarian.</div></div></div>
+<h2 id="15-4-membaca-ringkasan-penjualan">15.4 Membaca Ringkasan Penjualan</h2>
+<p>Komponen dapat mencakup:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Penjualan kotor.</div></div><div class="list-item"><div class="list-content">Pajak.</div></div><div class="list-item"><div class="list-content">Service charge.</div></div><div class="list-item"><div class="list-content">Total pendapatan.</div></div><div class="list-item"><div class="list-content">Diskon promo/voucher.</div></div><div class="list-item"><div class="list-content">Tukar poin.</div></div><div class="list-item"><div class="list-content">Refund atau pengembalian.</div></div><div class="list-item"><div class="list-content">Penjualan bersih.</div></div><div class="list-item"><div class="list-content">HPP.</div></div><div class="list-item"><div class="list-content">Laba kotor.</div></div><div class="list-item"><div class="list-content">Pengeluaran.</div></div><div class="list-item"><div class="list-content">Laba bersih.</div></div></div>
+<p>Gunakan definisi yang sama setiap kali membandingkan cabang.</p>
+<h1 id="16-pemantauan-perangkat-dan-penggunaan-tanpa-internet">16. Pemantauan perangkat dan penggunaan tanpa internet</h1>
+<h2 id="16-1-monitoring-perangkat">16.1 Monitoring Perangkat</h2>
+<div class="location">POS: <strong>Pengaturan → Monitoring Perangkat</strong></div>
+<p>Halaman ini membantu melihat:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Status antrean transaksi offline.</div></div><div class="list-item"><div class="list-content">Transaksi yang ditolak server.</div></div><div class="list-item"><div class="list-content">Antrean cetak gagal.</div></div><div class="list-item"><div class="list-content">Opsi mencoba ulang.</div></div></div>
+<h2 id="16-2-saat-internet-terputus">16.2 Saat internet terputus</h2>
+<div class="list ordered"><div class="list-item"><div class="list-content">Jangan menutup paksa aplikasi.</div></div><div class="list-item"><div class="list-content">Periksa indikator jaringan.</div></div><div class="list-item"><div class="list-content">Lanjutkan hanya transaksi yang memang didukung antrean offline.</div></div><div class="list-item"><div class="list-content">Jangan membuat transaksi yang sama di perangkat lain.</div></div><div class="list-item"><div class="list-content">Setelah jaringan kembali, buka Monitoring Perangkat.</div></div><div class="list-item"><div class="list-content">Pastikan antrean tersinkron.</div></div><div class="list-item"><div class="list-content">Tangani transaksi ditolak satu per satu.</div></div></div>
+<h2 id="16-3-dead-letter-atau-transaksi-ditolak">16.3 Dead-letter atau transaksi ditolak</h2>
+<p>Transaksi yang ditolak tidak terus menghambat transaksi lain. Operator dapat:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Membaca penyebab.</div></div><div class="list-item"><div class="list-content">Memperbaiki kondisi terkait.</div></div><div class="list-item"><div class="list-content">Mencoba ulang.</div></div><div class="list-item"><div class="list-content">Menghubungi admin bila data tidak dapat diperbaiki dari POS.</div></div></div>
+<p>Jangan membuang catatan transaksi ditolak sebelum memastikan transaksi memang tidak sah atau sudah dicatat dengan cara lain.</p>
+<h1 id="17-catatan-kesalahan-sistem">17. Catatan kesalahan sistem</h1>
+<div class="location"><strong>OWNER → Sistem → Log Error</strong></div>
+<p>Gunakan log untuk melihat:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Pesan error.</div></div><div class="list-item"><div class="list-content">Platform.</div></div><div class="list-item"><div class="list-content">Versi aplikasi.</div></div><div class="list-item"><div class="list-content">Role pengguna.</div></div><div class="list-item"><div class="list-content">Waktu kejadian.</div></div><div class="list-item"><div class="list-content">Stack trace teknis.</div></div></div>
+<p>Saat melaporkan masalah, sertakan:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Waktu kejadian.</div></div><div class="list-item"><div class="list-content">Cabang.</div></div><div class="list-item"><div class="list-content">Nama pengguna.</div></div><div class="list-item"><div class="list-content">Langkah sebelum error.</div></div><div class="list-item"><div class="list-content">Screenshot.</div></div><div class="list-item"><div class="list-content">Status jaringan.</div></div><div class="list-item"><div class="list-content">Printer/perangkat terkait.</div></div></div>
+<p>Log lama memiliki kebijakan retensi agar tidak memenuhi database. Jangan menggunakan Log Error sebagai arsip bisnis.</p>
+<h1 id="18-prosedur-operasional-standar-harian">18. Prosedur operasional standar harian</h1>
+<h2 id="18-1-sop-buka-outlet">18.1 SOP buka outlet</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Nyalakan router dan periksa internet.</div></div><div class="list-item"><div class="list-content">Nyalakan printer dan periksa kertas.</div></div><div class="list-item"><div class="list-content">Login menggunakan Akun Perangkat cabang yang benar.</div></div><div class="list-item"><div class="list-content">Clock-in dengan PIN pribadi.</div></div><div class="list-item"><div class="list-content">Buka shift dengan modal awal.</div></div><div class="list-item"><div class="list-content">Tes cetak struk.</div></div><div class="list-item"><div class="list-content">Tes printer dapur/bar.</div></div><div class="list-item"><div class="list-content">Periksa menu habis dan status Tersedia.</div></div><div class="list-item"><div class="list-content">Periksa order online.</div></div><div class="list-item"><div class="list-content">Periksa stok kritis.</div></div></div>
+<h2 id="18-2-sop-saat-operasional">18.2 SOP saat operasional</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Pastikan meja sesuai order.</div></div><div class="list-item"><div class="list-content">Konfirmasi ekstra dan catatan.</div></div><div class="list-item"><div class="list-content">Jangan berbagi PIN.</div></div><div class="list-item"><div class="list-content">Tunggu hasil pembayaran.</div></div><div class="list-item"><div class="list-content">Tangani order gagal dari Monitoring Perangkat.</div></div><div class="list-item"><div class="list-content">Catat kas masuk/keluar beserta alasan.</div></div><div class="list-item"><div class="list-content">Gunakan Void/Refund sesuai status.</div></div><div class="list-item"><div class="list-content">Jangan menghapus data untuk menutupi kesalahan transaksi.</div></div></div>
+<h2 id="18-3-sop-tutup-outlet">18.3 SOP tutup outlet</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Selesaikan order aktif.</div></div><div class="list-item"><div class="list-content">Sinkronkan antrean offline.</div></div><div class="list-item"><div class="list-content">Coba ulang cetak yang masih tertunda bila diperlukan.</div></div><div class="list-item"><div class="list-content">Hitung kas fisik.</div></div><div class="list-item"><div class="list-content">Tutup shift dan catat selisih.</div></div><div class="list-item"><div class="list-content">Periksa ringkasan penjualan.</div></div><div class="list-item"><div class="list-content">Catat pengeluaran.</div></div><div class="list-item"><div class="list-content">Lakukan stock opname sesuai jadwal.</div></div><div class="list-item"><div class="list-content">Matikan printer setelah seluruh tiket selesai.</div></div><div class="list-item"><div class="list-content">Logout jika perangkat tidak ditinggal di lokasi aman.</div></div></div>
+<h1 id="19-penyelesaian-masalah">19. Penyelesaian masalah</h1>
+<h2 id="19-1-tidak-bisa-login-web">19.1 Tidak bisa login web</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Periksa email dan password.</div></div><div class="list-item"><div class="list-content">Pastikan akun aktif.</div></div><div class="list-item"><div class="list-content">Pastikan akun memiliki akses web.</div></div><div class="list-item"><div class="list-content">Coba reset password melalui Owner jika diizinkan.</div></div><div class="list-item"><div class="list-content">Periksa tanggal dan waktu perangkat.</div></div></div>
+<h2 id="19-2-nama-staff-tidak-muncul-saat-clock-in">19.2 Nama staff tidak muncul saat clock-in</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Pastikan Akun Perangkat terhubung ke cabang yang benar.</div></div><div class="list-item"><div class="list-content">Pastikan staff ditetapkan pada cabang itu.</div></div><div class="list-item"><div class="list-content">Pastikan staff aktif.</div></div><div class="list-item"><div class="list-content">Muat ulang daftar atau login ulang perangkat.</div></div></div>
+<h2 id="19-3-pin-ditolak">19.3 PIN ditolak</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Pastikan empat digit benar.</div></div><div class="list-item"><div class="list-content">Periksa apakah akun terkunci sementara setelah percobaan gagal.</div></div><div class="list-item"><div class="list-content">Tunggu masa kunci berakhir.</div></div><div class="list-item"><div class="list-content">Minta Owner/Admin mengatur ulang PIN.</div></div></div>
+<h2 id="19-4-menu-tidak-muncul-di-pos">19.4 Menu tidak muncul di POS</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Pastikan cabang benar.</div></div><div class="list-item"><div class="list-content">Pastikan menu aktif dan Tersedia.</div></div><div class="list-item"><div class="list-content">Pastikan kategori aktif.</div></div><div class="list-item"><div class="list-content">Hapus filter kategori/pencarian.</div></div><div class="list-item"><div class="list-content">Muat ulang aplikasi.</div></div><div class="list-item"><div class="list-content">Periksa koneksi dan cache data.</div></div></div>
+<h2 id="19-5-menu-unggulan-tidak-berada-di-atas">19.5 Menu Unggulan tidak berada di atas</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Pastikan toggle Unggulan sudah disimpan.</div></div><div class="list-item"><div class="list-content">Pastikan aplikasi memakai versi terbaru.</div></div><div class="list-item"><div class="list-content">Muat ulang daftar menu.</div></div><div class="list-item"><div class="list-content">Periksa apakah pencarian/kategori menyembunyikan produk.</div></div></div>
+<h2 id="19-6-qr-tidak-bisa-dibuka">19.6 QR tidak bisa dibuka</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Pastikan meja aktif.</div></div><div class="list-item"><div class="list-content">Pastikan QR tidak rusak.</div></div><div class="list-item"><div class="list-content">Uji dari jaringan seluler.</div></div><div class="list-item"><div class="list-content">Buat ulang QR bila token tidak valid.</div></div><div class="list-item"><div class="list-content">Pastikan order online aktif dan berada dalam jam operasional.</div></div></div>
+<h2 id="19-7-total-pelanggan-berbeda">19.7 Total pelanggan berbeda</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Periksa pajak inclusive/exclusive.</div></div><div class="list-item"><div class="list-content">Periksa service charge.</div></div><div class="list-item"><div class="list-content">Periksa pembulatan.</div></div><div class="list-item"><div class="list-content">Periksa promo dan loyalty.</div></div><div class="list-item"><div class="list-content">Pastikan E-Menu dan POS memakai konfigurasi outlet yang sama.</div></div></div>
+<h2 id="19-8-pembayaran-terlihat-gagal">19.8 Pembayaran terlihat gagal</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Jangan langsung mengulang.</div></div><div class="list-item"><div class="list-content">Periksa Daftar Order.</div></div><div class="list-item"><div class="list-content">Periksa riwayat pembayaran.</div></div><div class="list-item"><div class="list-content">Periksa Monitoring Perangkat.</div></div><div class="list-item"><div class="list-content">Untuk nontunai, periksa aplikasi penyedia pembayaran.</div></div><div class="list-item"><div class="list-content">Ulang hanya setelah yakin transaksi pertama tidak tercatat.</div></div></div>
+<h2 id="19-9-data-laporan-kosong">19.9 Data laporan kosong</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Periksa rentang tanggal.</div></div><div class="list-item"><div class="list-content">Periksa cabang.</div></div><div class="list-item"><div class="list-content">Periksa status order.</div></div><div class="list-item"><div class="list-content">Periksa filter kasir atau pencarian.</div></div><div class="list-item"><div class="list-content">Pastikan transaksi sudah tersinkron.</div></div></div>
+<h2 id="19-10-stok-tidak-sesuai">19.10 Stok tidak sesuai</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Periksa resep.</div></div><div class="list-item"><div class="list-content">Periksa satuan.</div></div><div class="list-item"><div class="list-content">Periksa transaksi stok manual.</div></div><div class="list-item"><div class="list-content">Periksa waste.</div></div><div class="list-item"><div class="list-content">Periksa order void/refund.</div></div><div class="list-item"><div class="list-content">Lakukan stock opname dan catat penyebab selisih.</div></div></div>
+<h1 id="20-keamanan-dan-pengelolaan-data">20. Keamanan dan pengelolaan data</h1>
+<h2 id="20-1-prinsip-akses-minimum">20.1 Prinsip akses minimum</h2>
+<p>Berikan role sesuai kebutuhan. Jangan memberikan akses Owner kepada staff yang hanya perlu melihat laporan.</p>
+<h2 id="20-2-tindakan-sensitif">20.2 Tindakan sensitif</h2>
+<p>Tindakan berikut harus diawasi:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Refund.</div></div><div class="list-item"><div class="list-content">Refund sebagian.</div></div><div class="list-item"><div class="list-content">Void.</div></div><div class="list-item"><div class="list-content">Reset password.</div></div><div class="list-item"><div class="list-content">Perubahan PIN.</div></div><div class="list-item"><div class="list-content">Penghapusan staff.</div></div><div class="list-item"><div class="list-content">Penghapusan cabang.</div></div><div class="list-item"><div class="list-content">Finalisasi stock opname.</div></div><div class="list-item"><div class="list-content">Perubahan pajak.</div></div></div>
+<h2 id="20-3-data-pelanggan">20.3 Data pelanggan</h2>
+<div class="list unordered"><div class="list-item"><div class="list-content">Gunakan hanya untuk operasional yang sah.</div></div><div class="list-item"><div class="list-content">Batasi ekspor.</div></div><div class="list-item"><div class="list-content">Jangan membagikan nomor telepon.</div></div><div class="list-item"><div class="list-content">Simpan file laporan di lokasi aman.</div></div><div class="list-item"><div class="list-content">Hapus file ekspor yang tidak lagi diperlukan sesuai kebijakan bisnis.</div></div></div>
+<h1 id="21-daftar-pemeriksaan-penerimaan-sistem">21. Daftar pemeriksaan penerimaan sistem</h1>
+<p>Gunakan daftar ini sebelum outlet dinyatakan siap produksi.</p>
+<h2 id="21-1-akun-dan-akses">21.1 Akun dan akses</h2>
+<div class="list unordered"><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Owner dapat login.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Admin/Manajer melihat menu sesuai role.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Akun Perangkat terhubung ke cabang benar.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Kasir dapat clock-in.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>PIN unik dan terdokumentasi aman.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Akses Refund sesuai kebijakan.</div></div></div>
+<h2 id="21-2-produk">21.2 Produk</h2>
+<div class="list unordered"><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Departemen dan kategori benar.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Menu dan harga benar.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Menu Unggulan tampil di atas dan memiliki badge.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Menu habis tidak dapat dipilih.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Ekstra dan harga tambahan benar.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Paket memiliki komponen benar.</div></div></div>
+<h2 id="21-3-transaksi">21.3 Transaksi</h2>
+<div class="list unordered"><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Dine In meminta meja.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Takeaway tidak meminta meja.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Tahan Pesanan dapat dilanjutkan.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Tambah Pesanan bekerja pada order aktif.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Pembayaran tunai dan nontunai tercatat.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Split payment dapat difinalisasi.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Void dan refund meminta persetujuan.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Pindah meja dan gabung tagihan berhasil.</div></div></div>
+<h2 id="21-4-printer">21.4 Printer</h2>
+<div class="list unordered"><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Struk tercetak.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Tiket dapur masuk ke stasiun benar.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Tiket bar tidak masuk ke dapur.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Auto-print sesuai pengaturan.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Cetak ulang manual bekerja.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Tidak ada printer duplikat.</div></div></div>
+<h2 id="21-5-laporan-dan-stok">21.5 Laporan dan stok</h2>
+<div class="list unordered"><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Transaksi uji muncul di laporan.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Pajak dan biaya layanan dihitung dengan benar.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Giliran kerja kasir dapat ditutup.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Stok berubah sesuai resep.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Pengembalian dana dan pembatalan muncul pada laporan terkait.</div></div><div class="list-item check-item"><div class="list-content"><span class="checkbox"></span>Pengeluaran memengaruhi laporan keuangan.</div></div></div>
+<div class="no-page-break"></div>
+<h1 id="22-glosarium">22. Glosarium</h1>
+<table><thead><tr><th>Istilah</th><th>Arti</th></tr></thead><tbody><tr><td><strong>Outlet atau Cabang</strong></td><td>Lokasi usaha yang memiliki pengaturan dan data operasional sendiri</td></tr><tr><td><strong>Akun Perangkat</strong></td><td>Akun untuk masuk ke tablet atau perangkat kasir. Akun ini bukan akun staf</td></tr><tr><td><strong>Clock-in atau Catat Waktu Masuk</strong></td><td>Proses ketika staf memilih namanya dan memasukkan nomor identifikasi pribadi sebelum mulai bekerja</td></tr><tr><td><strong>Shift atau Giliran Kerja</strong></td><td>Sesi kerja kasir yang dimulai dengan pencatatan modal awal dan diakhiri dengan pemeriksaan kas</td></tr><tr><td><strong>Dine In atau Makan di Tempat</strong></td><td>Pesanan yang dimakan di lokasi usaha dan biasanya terhubung dengan nomor meja</td></tr><tr><td><strong>Takeaway atau Bawa Pulang</strong></td><td>Pesanan yang dibawa pulang oleh pelanggan</td></tr><tr><td><strong>Self-Order atau Pesan Mandiri</strong></td><td>Pesanan yang dibuat sendiri oleh pelanggan melalui kode QR</td></tr><tr><td><strong>Unggulan</strong></td><td>Menu prioritas yang tampil lebih dahulu dan memiliki tanda bintang</td></tr><tr><td><strong>Tags atau Penanda</strong></td><td>Informasi tambahan untuk mengelompokkan menu. Penanda belum menjadi penyaring bagi pelanggan</td></tr><tr><td><strong>Stasiun Cetak</strong></td><td>Tujuan pencetakan tiket, misalnya Dapur atau Bar. Stasiun cetak bukan printer fisik</td></tr><tr><td><strong>Printer Fisik</strong></td><td>Perangkat pencetak yang terhubung melalui Bluetooth atau jaringan lokal</td></tr><tr><td><strong>Void atau Pembatalan</strong></td><td>Pembatalan pesanan sesuai dengan status pesanan dan aturan pencatatan sistem</td></tr><tr><td><strong>Refund atau Pengembalian Dana</strong></td><td>Pengembalian pembayaran untuk transaksi yang sudah dibayar</td></tr><tr><td><strong>Refund Sebagian</strong></td><td>Pengembalian dana hanya untuk sebagian barang atau sebagian nilai transaksi</td></tr><tr><td><strong>Stock Opname atau Pemeriksaan Stok</strong></td><td>Proses mencocokkan jumlah stok di dalam sistem dengan jumlah barang yang tersedia secara fisik</td></tr><tr><td><strong>HPP atau Harga Pokok Penjualan</strong></td><td>Perkiraan biaya produk berdasarkan harga bahan yang digunakan</td></tr><tr><td><strong>Dead-letter atau Antrean Gagal</strong></td><td>Transaksi yang tidak dapat diproses otomatis dan harus diperiksa oleh pengguna yang berwenang</td></tr></tbody></table>
+<div class="no-page-break"></div>
+<h1 id="23-informasi-dukungan">23. Informasi dukungan</h1>
+<p>Saat meminta bantuan, siapkan:</p>
+<div class="list unordered"><div class="list-item"><div class="list-content">Nama outlet.</div></div><div class="list-item"><div class="list-content">Nama dan peran pengguna.</div></div><div class="list-item"><div class="list-content">Tanggal serta waktu kejadian.</div></div><div class="list-item"><div class="list-content">Nomor pesanan jika ada.</div></div><div class="list-item"><div class="list-content">Gambar layar atau video singkat.</div></div><div class="list-item"><div class="list-content">Jenis perangkat dan versi aplikasi.</div></div><div class="list-item"><div class="list-content">Status internet.</div></div><div class="list-item"><div class="list-content">Nama printer dan tipe koneksi.</div></div></div>
+<p><strong>Kontak dukungan:</strong> isi sesuai kontak resmi penyedia Time420s. <strong>Jam dukungan:</strong> isi sesuai perjanjian layanan.</p>
+<hr>
+<p>Dokumen ini adalah panduan operasional. Kebijakan bisnis, perpajakan, perlindungan data, dan prosedur pengembalian dana tetap mengikuti keputusan serta kewajiban hukum pemilik usaha.</p></body>
+</html>

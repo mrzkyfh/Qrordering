@@ -1,0 +1,66 @@
+# Claude Code — jangan di-push ke GitHub
+claude/
+skills-lock.json
+
+# Environment variables (.env.example TETAP boleh di-commit sebagai template)
+.env
+.env.r2-staging
+.env.cloudflare-staging
+.env.cloudflare-production
+.env.local
+.env.*.local
+**/.env
+
+# ── Kunci & kredensial — JANGAN PERNAH commit (defensif seluruh repo) ──────────
+# Android signing
+**/*.jks
+**/*.keystore
+**/key.properties
+# Service account / API keys Google (rilis Play, dll)
+**/*service-account*.json
+**/*service_account*.json
+# Sertifikat & kunci privat
+**/*.p12
+**/*.pem
+**/*.pfx
+**/*.mobileprovision
+
+# Python virtualenv (tooling rilis Play)
+.venv/
+**/.venv/
+
+# Node modules
+node_modules/
+**/node_modules/
+
+# Build output
+dist/
+build/
+.output/
+
+# Flutter
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/build/
+.DS_Store
+**/.DS_Store
+apps/owner-panel/playwright-report/
+apps/owner-panel/test-results/
+apps/customer-menu/dist/
+apps/customer-menu/playwright-report/
+apps/customer-menu/test-results/
+supabase/.temp/
+apps/supabase/.temp/
+.wrangler/
+backups/
+
+# Generated marketing renders (source assets/scripts remain tracked)
+marketing/time420s/tiktok-portfolio-white-01/
+
+# Local tooling / editor
+.claude/
+.vscode/
+.idea/
+**/.gradle/
+.git.broken-worktree-pointer

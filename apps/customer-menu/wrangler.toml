@@ -1,0 +1,7 @@
+name = "times420s-menu"
+account_id = "b0d09d15b16ea37156b38470fd58350d"
+compatibility_date = "2026-09-12"
+workers_dev = true
+
+[assets]
+directory = "./dist"

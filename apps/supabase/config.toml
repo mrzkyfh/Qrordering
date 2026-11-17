@@ -1,0 +1,25 @@
+# Supabase CLI project config (Time 420s)
+# Project ini memakai layout non-standar: migrations & functions ada di
+# apps/supabase/. Karena itu perintah CLI dijalankan dengan: --workdir apps
+#   supabase db push --workdir apps
+#   supabase functions deploy --workdir apps --project-ref <REF>
+# project_id di bawah hanya identifier lokal; project remote di-link via
+# `supabase link --project-ref <REF>` (ref disimpan sbg secret di CI).
+
+project_id = "qrorder"
+
+[db]
+major_version = 17
+
+# clock-in dipanggil SETELAH perangkat login akun cabang (gerbang keamanan).
+# verify_jwt = true (default) → hanya perangkat terautentikasi yang bisa memanggil.
+
+[functions.archive-orders]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/archive-orders/index.ts"
+
+[functions.transaction-archive]
+enabled = true
+verify_jwt = true
+entrypoint = "./functions/transaction-archive/index.ts"

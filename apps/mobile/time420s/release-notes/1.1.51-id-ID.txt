@@ -1,0 +1,6 @@
+Yang baru:
+• Pemulihan transaksi offline lintas pergantian shift kini lebih andal.
+• Pembayaran biasa dan split payment tetap tersimpan sampai dikonfirmasi server.
+• Detail transaksi bermasalah kini menjelaskan order, outlet, till, pengguna, nominal, dan tindakan yang aman.
+• Retry dapat dilakukan per pembayaran tanpa mengulang void, refund, atau pergerakan kas secara otomatis.
+• Peningkatan keamanan dan kestabilan sinkronisasi saat jaringan atau sesi pengguna berubah.

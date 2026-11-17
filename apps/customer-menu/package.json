@@ -1,0 +1,33 @@
+{
+  "name": "customer-menu",
+  "version": "1.0.0",
+  "description": "QR Ordering - Customer E-Menu (self-order via QR code)",
+  "scripts": {
+    "dev": "npm run build && http-server dist -p 3001 -o --cors -c-1",
+    "build": "node scripts/build.mjs",
+    "check": "node --check app.js && node scripts/audit-static.mjs",
+    "test": "playwright test",
+    "deploy": "npm run build && wrangler deploy",
+    "deploy:prod": "npm run build && wrangler deploy",
+    "preview:worker": "npm run build && wrangler dev",
+    "check:worker": "npm run build && wrangler deploy --dry-run"
+  },
+  "keywords": [
+    "restaurant",
+    "emenu",
+    "qr",
+    "self-order"
+  ],
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "http-server": "14.1.1",
+    "wrangler": "4.131.1"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.110.8"
+  },
+  "overrides": {
+    "undici": "7.29.0"
+  }
+}

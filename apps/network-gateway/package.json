@@ -1,0 +1,14 @@
+{
+  "name": "time420s-network-gateway",
+  "private": true,
+  "scripts": {
+    "check": "npx wrangler deploy --dry-run",
+    "deploy": "npx wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.118.0"
+  },
+  "overrides": {
+    "undici": "7.29.0"
+  }
+}

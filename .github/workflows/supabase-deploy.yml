@@ -1,0 +1,50 @@
+name: Supabase Deploy
+
+# Apply migrations + deploy Edge Functions ke Supabase — MANUAL.
+# Sengaja TANPA trigger push: dijalankan dari tab Actions -> Supabase Deploy
+# -> "Run workflow" agar tidak pernah auto-migrate ke produksi tanpa sengaja.
+# (Untuk perubahan kecil, apply SQL via Supabase SQL Editor juga tetap boleh.)
+# Frontend memakai Workers Builds (integrasi GitHub dikonfigurasi di Cloudflare).
+#
+# Secret yang dibutuhkan (Repo Settings -> Secrets and variables -> Actions):
+#   SUPABASE_ACCESS_TOKEN   -> Personal access token (supabase.com/dashboard/account/tokens)
+#   SUPABASE_PROJECT_REF    -> Ref project (mis. abcd1234...) dari URL project
+#   SUPABASE_DB_PASSWORD    -> Password database project (utk `db push`)
+
+on:
+  workflow_dispatch: {}   # HANYA manual dari tab Actions
+
+concurrency:
+  group: supabase-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+    steps:
+      # Commit pin mencegah tag Action berubah di luar review repository.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@46f7f98c7f948ad727d22c1e67fab04c223a0520 # v3.0.0
+        with:
+          version: 2.109.1
+
+      # Repository menyimpan salinan fungsi ini di root untuk kompatibilitas
+      # tooling lama. Gagalkan deploy jika salinan tersebut tertinggal, supaya
+      # versi lemah tidak pernah tidak sengaja dideploy.
+      - name: Verify Edge Function copies are in sync
+        run: diff -u supabase/functions/create-staff/index.ts apps/supabase/functions/create-staff/index.ts
+
+      - name: Link project
+        run: supabase link --project-ref "$PROJECT_REF" --workdir apps
+
+      - name: Push migrations (DB)
+        run: supabase db push --workdir apps
+
+      - name: Deploy Edge Functions
+        run: supabase functions deploy --project-ref "$PROJECT_REF" --workdir apps

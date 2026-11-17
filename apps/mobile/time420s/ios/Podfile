@@ -1,0 +1,69 @@
+platform :ios, '13.0'
+
+# CocoaPods analytics sends network stats synchronously affecting flutter build latency.
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+project 'Runner', {
+  'Debug' => :debug,
+  'Profile' => :release,
+  'Release' => :release,
+}
+
+def flutter_root
+  generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
+  unless File.exist?(generated_xcode_build_settings_path)
+    raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get is executed first"
+  end
+
+  File.foreach(generated_xcode_build_settings_path) do |line|
+    matches = line.match(/FLUTTER_ROOT\=(.*)/)
+    return matches[1].strip if matches
+  end
+  raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}. Try deleting Generated.xcconfig, then run flutter pub get"
+end
+
+require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
+
+flutter_ios_podfile_setup
+
+target 'Runner' do
+  # bluetooth_print_plus bundles the GSDK ObjC SDK with non-modular headers,
+  # which breaks dynamic framework modules. Static linkage avoids it.
+  use_frameworks! :linkage => :static
+
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
+  target 'RunnerTests' do
+    inherit! :search_paths
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    flutter_additional_ios_build_settings(target)
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      # bluetooth_print_plus's umbrella header imports GSDK headers via <GSDK/...>;
+      # keep this as a belt-and-suspenders for any remaining non-modular includes.
+      config.build_settings['CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES'] = 'YES'
+      # GSDK.framework ships no arm64 iOS-simulator slice; build x86_64 for the
+      # simulator (Rosetta on Apple Silicon). Device builds keep arm64.
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+    end
+  end
+
+  # bluetooth_print_plus's umbrella imports GSDK headers via <GSDK/...>. Those headers
+  # are exposed (as a non-modular dir) under Pods/Headers/Public/GSDK, so including them
+  # inside the bluetooth_print_plus Clang module is a hard error. Clang decides which
+  # module a header belongs to by looking for a module.modulemap in the header's
+  # directory, so drop one there declaring module GSDK -> the include becomes modular.
+  gsdk_public = File.join(__dir__, 'Pods', 'Headers', 'Public', 'GSDK')
+  if Dir.exist?(gsdk_public)
+    File.write(File.join(gsdk_public, 'module.modulemap'), <<~MODMAP)
+      module GSDK {
+        umbrella "."
+        export *
+      }
+    MODMAP
+  end
+end

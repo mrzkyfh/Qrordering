@@ -1,0 +1,11 @@
+account_id = "b0d09d15b16ea37156b38470fd58350d"
+name = "time420s-network-gateway"
+main = "src/index.ts"
+compatibility_date = "2026-07-25"
+compatibility_flags = ["global_fetch_strictly_public"]
+workers_dev = true
+
+[vars]
+UPSTREAM_ORIGIN = "https://yjmrabgpxjbunwtsiavs.supabase.co"
+ALLOWED_ORIGINS = "https://time420s.my.id,https://menu.time420s.my.id,https://time420s-47o.pages.dev,https://times420s-menu-c56.pages.dev,https://time420s.time420s-network-gateway.workers.dev,https://times420s-menu.time420s-network-gateway.workers.dev,https://time420s.official-b0d.workers.dev,https://times420s-menu.official-b0d.workers.dev"
+MAX_BODY_BYTES = "10485760"

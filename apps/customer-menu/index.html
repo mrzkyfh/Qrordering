@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>E-Menu</title>
+    <meta name="theme-color" content="#e11d2a">
+    <link rel="stylesheet" href="styles.css">
+    <script src="vendor/supabase.js"></script>
+</head>
+<body>
+
+    <!-- Scan QR Screen -->
+    <div id="scanScreen" class="fullscreen hidden">
+        <div class="center-content">
+            <div class="big-icon">📱</div>
+            <h2>Pindai Kode QR</h2>
+            <p>Pindai kode QR yang ada di meja untuk melihat menu.</p>
+        </div>
+    </div>
+
+    <!-- Loading Screen / Splash -->
+    <div id="loadingScreen" class="fullscreen splash">
+        <div class="splash-inner">
+            <img class="splash-logo" src="logo.png" alt="Logo" />
+            <h1 class="splash-outlet-name" id="splashOutletName"></h1>
+            <div class="splash-loader">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Screen -->
+    <div id="errorScreen" class="fullscreen hidden">
+        <div class="center-content">
+            <div class="big-icon">⚠️</div>
+            <h2>Gagal Memuat</h2>
+            <p id="errorMsg">QR code tidak valid atau menu tidak tersedia.</p>
+            <button type="button" class="btn-outline" id="retryBtn">Coba Lagi</button>
+        </div>
+    </div>
+
+    <!-- Welcome / service selection -->
+    <section id="welcomeScreen" class="welcome-screen hidden" aria-labelledby="welcomeTitle">
+        <div class="welcome-shell">
+            <div class="welcome-hero">
+                <img id="welcomeHeroBackdrop" class="welcome-hero-backdrop hidden" alt="" aria-hidden="true" />
+                <img id="welcomeHeroImage" class="welcome-hero-image hidden" alt="" />
+                <div class="welcome-hero-overlay"></div>
+                <div class="welcome-brand">
+                    <img id="welcomeLogo" src="logo.png" alt="" />
+                    <div>
+                        <span>SELAMAT DATANG DI</span>
+                        <h1 id="welcomeTitle">QR Ordering</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="welcome-body">
+                <div class="welcome-outlet-card" aria-label="Informasi outlet">
+                    <img id="welcomeOutletImage" src="logo.png" alt="Logo outlet" />
+                    <div>
+                        <strong id="welcomeOutletName">QR Ordering</strong>
+                        <span id="welcomeTableLabel">Meja —</span>
+                    </div>
+                </div>
+
+                <section class="welcome-how" aria-labelledby="welcomeHowTitle">
+                    <p class="welcome-eyebrow">MUDAH DAN PRAKTIS</p>
+                    <h2 id="welcomeHowTitle">Cara memesan</h2>
+                    <div class="welcome-steps">
+                        <div class="welcome-step">
+                            <span class="welcome-step-icon" aria-hidden="true">1</span>
+                            <strong>Pilih menu</strong>
+                            <small>Tambahkan pesanan</small>
+                        </div>
+                        <span class="welcome-step-arrow" aria-hidden="true">→</span>
+                        <div class="welcome-step">
+                            <span class="welcome-step-icon" aria-hidden="true">2</span>
+                            <strong>Kirim</strong>
+                            <small>Pesanan diterima kasir</small>
+                        </div>
+                        <span class="welcome-step-arrow" aria-hidden="true">→</span>
+                        <div class="welcome-step">
+                            <span class="welcome-step-icon" aria-hidden="true">3</span>
+                            <strong>Nikmati</strong>
+                            <small>Tunggu pesanan siap</small>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="welcome-service" aria-labelledby="welcomeServiceTitle">
+                    <h2 id="welcomeServiceTitle">Pesanan ingin dinikmati di mana?</h2>
+                    <p>Pilih jenis layanan sebelum melihat menu.</p>
+                    <div class="welcome-service-options">
+                        <button type="button" id="dineInBtn" class="welcome-service-btn">
+                            <span class="welcome-service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v8M3.5 3v5A2.5 2.5 0 0 0 6 10.5 2.5 2.5 0 0 0 8.5 8V3M6 10.5V21M15 3v18M15 3c3 1.5 4 4.5 4 7h-4"/></svg>
+                            </span>
+                            <span><strong>Makan di Tempat</strong><small id="dineInTableLabel">Pesan dari meja ini</small></span>
+                            <span aria-hidden="true">›</span>
+                        </button>
+                        <button type="button" id="pickupBtn" class="welcome-service-btn">
+                            <span class="welcome-service-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+                            </span>
+                            <span><strong>Bawa Pulang</strong><small>Ambil pesanan di kasir</small></span>
+                            <span aria-hidden="true">›</span>
+                        </button>
+                    </div>
+                </section>
+
+                <footer class="welcome-footer">
+                    <span>Didukung oleh</span>
+                    <strong>QR Ordering</strong>
+                </footer>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Initial customer name ─────────────────────────────── -->
+    <div class="modal-overlay hidden" id="initialNameOverlay">
+        <div class="modal slide-up initial-name-modal" role="dialog" aria-modal="true" aria-labelledby="initialNameTitle">
+            <div class="modal-handle"></div>
+            <div class="modal-header">
+                <h3 id="initialNameTitle">Nama Pemesan</h3>
+                <button type="button" class="btn-close" id="closeInitialName" aria-label="Tutup">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="initialCustomerName">Nama <span class="required-label">(wajib)</span></label>
+                    <input type="text" id="initialCustomerName" maxlength="80" autocomplete="name" placeholder="Nama kamu..." required aria-required="true" aria-describedby="initialNameError">
+                    <p id="initialNameError" class="field-error" aria-live="polite"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-primary" id="saveInitialName">Lanjut</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" class="hidden">
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header-inner">
+                <div>
+                    <p class="outlet-name" id="outletName">E-Menu</p>
+                    <button type="button" class="table-badge" id="tableBadge" aria-label="Ubah jenis layanan">Meja —</button>
+                </div>
+                <div class="header-actions">
+                    <button type="button" class="cart-icon-btn hidden" id="historyBtn" aria-label="Riwayat pesanan">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><path d="M12 7v5l3 3"/>
+                        </svg>
+                    </button>
+                    <button type="button" class="cart-icon-btn" id="cartBtn" aria-label="Keranjang">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                        </svg>
+                        <span class="cart-count hidden" id="cartCount">0</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Categories -->
+        <div class="category-filter" aria-label="Kategori menu">
+            <div id="categoryTabs" class="category-tabs" role="navigation" aria-label="Pilih kategori menu"></div>
+            <button type="button" id="searchToggleBtn" class="category-search-btn" aria-label="Cari menu" aria-expanded="false" aria-controls="searchWrap">
+                <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Search -->
+        <div class="search-wrap hidden" id="searchWrap">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input type="search" id="searchInput" class="search-input" placeholder="Cari menu..." aria-label="Cari menu">
+        </div>
+
+        <!-- Menu grouped by category -->
+        <main class="menu-wrap">
+            <div class="menu-catalog" id="menuGrid"></div>
+        </main>
+
+        <!-- Cart FAB -->
+        <div class="cart-fab hidden" id="cartFab">
+            <button type="button" class="cart-fab-btn" id="cartFabBtn">
+                <span id="fabCount">0 item</span>
+                <span class="fab-mid">·</span>
+                <span id="fabTotal">Rp0</span>
+                <span class="fab-arrow">Lihat Keranjang →</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ── Cart Modal ────────────────────────────────────── -->
+    <div class="modal-overlay hidden" id="cartOverlay">
+        <div class="modal slide-up" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+            <div class="modal-handle"></div>
+            <div class="modal-header">
+                <h3 id="cartTitle">Keranjang</h3>
+                <button type="button" class="btn-close" id="closeCart" aria-label="Tutup keranjang">✕</button>
+            </div>
+            <div class="modal-body" id="cartItems">
+                <p class="empty-msg">Keranjang kosong</p>
+            </div>
+            <div class="modal-footer">
+                <div class="price-row"><span>Subtotal</span><span id="cartSubtotal">Rp0</span></div>
+                <div class="price-row" id="taxRow" style="display:none"><span id="taxLabel">Pajak</span><span id="cartTax">Rp0</span></div>
+                <div class="price-row" id="serviceRow" style="display:none"><span id="serviceLabel">Service</span><span id="cartService">Rp0</span></div>
+                <div class="price-row price-total"><span>Total</span><span id="cartTotal">Rp0</span></div>
+                <button type="button" class="btn-primary" id="checkoutBtn" disabled>Pesan Sekarang</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Checkout Modal ─────────────────────────────────── -->
+    <div class="modal-overlay hidden" id="checkoutOverlay">
+        <div class="modal slide-up" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+            <div class="modal-handle"></div>
+            <div class="modal-header">
+                <h3 id="checkoutTitle">Konfirmasi Pesanan</h3>
+                <button type="button" class="btn-close" id="closeCheckout" aria-label="Kembali ke keranjang">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="customerName">Nama <span class="required-label">(wajib)</span></label>
+                    <input type="text" id="customerName" maxlength="80" autocomplete="name" placeholder="Nama kamu..." required aria-required="true">
+                </div>
+                <div class="form-group" id="orderNotesGroup">
+                    <label for="orderNotes">Catatan pesanan <span class="optional">(opsional)</span></label>
+                    <textarea id="orderNotes" rows="2" maxlength="850" placeholder="Contoh: antar semua menu bersamaan..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="promoCodeInput">Kode promo <span class="optional">(opsional)</span></label>
+                    <div style="display:flex;gap:8px">
+                        <input type="text" id="promoCodeInput" maxlength="64" autocomplete="off" placeholder="Masukkan kode promo..." style="flex:1;text-transform:uppercase">
+                        <button type="button" id="applyPromoBtn" style="padding:0 14px;border:1px solid #e11d2a;color:#e11d2a;border-radius:8px;background:#fff;font-size:13px;cursor:pointer;white-space:nowrap">Pakai</button>
+                    </div>
+                    <div id="promoFeedback" style="font-size:12px;margin-top:4px;min-height:16px"></div>
+                </div>
+                <div class="order-summary" id="checkoutItems"></div>
+                <div class="price-row price-total" style="margin-top:12px">
+                    <span>Total</span><span id="checkoutTotal">Rp0</span>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding-top:0">
+                <button type="button" class="btn-primary" id="submitBtn">Kirim Pesanan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Success Modal ──────────────────────────────────── -->
+    <div class="modal-overlay hidden" id="successOverlay">
+        <div class="modal slide-up" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+            <div class="modal-body" style="text-align:center; padding: 40px 24px">
+                <div class="big-icon">🎉</div>
+                <h3 id="successTitle">Pesanan Terkirim!</h3>
+                <p class="order-num-label">No. Pesanan</p>
+                <p class="order-num" id="successNum">—</p>
+                <p id="successDesc" style="color:var(--muted); font-size:14px">Pesanan kamu sedang diproses. Silakan tunggu dipanggil.</p>
+                <button type="button" class="btn-primary" style="margin-top:20px" id="doneBtn">Oke, Terima Kasih!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Riwayat Order Modal ───────────────────────────────── -->
+    <div class="modal-overlay hidden" id="historyOverlay">
+        <div class="modal slide-up" role="dialog" aria-modal="true" aria-labelledby="historyTitle">
+            <div class="modal-handle"></div>
+            <div class="modal-header">
+                <h3 id="historyTitle">Riwayat Pesanan</h3>
+                <button type="button" class="btn-close" id="historyClose" aria-label="Tutup riwayat pesanan">✕</button>
+            </div>
+            <div class="modal-body" id="historyBody">
+                <p class="history-empty">Belum ada pesanan.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Extras Modal ──────────────────────────────────────── -->
+    <div class="modal-overlay hidden" id="extrasOverlay">
+        <div class="modal slide-up" role="dialog" aria-modal="true" aria-labelledby="extrasItemName">
+            <div class="modal-handle"></div>
+            <div class="modal-header">
+                <h3 id="extrasItemName">Pilih Tambahan</h3>
+                <button type="button" class="btn-close" id="extrasCloseBtn" aria-label="Tutup pilihan tambahan">✕</button>
+            </div>
+            <div class="modal-body" id="extrasBody" style="max-height:55vh;overflow-y:auto"></div>
+            <div class="modal-footer" style="padding-top:0">
+                <button type="button" class="btn-primary" id="extrasConfirmBtn">Tambah ke Pesanan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Catatan Menu Modal ──────────────────────────────── -->
+    <div class="modal-overlay hidden" id="itemNoteOverlay">
+        <div class="modal slide-up" role="dialog" aria-modal="true" aria-labelledby="itemNoteMenuName">
+            <div class="modal-handle"></div>
+            <div class="modal-header">
+                <h3 id="itemNoteMenuName">Catatan Menu</h3>
+                <button type="button" class="btn-close" id="itemNoteCloseBtn" aria-label="Tutup catatan menu">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="itemNoteInput">Catatan khusus untuk menu ini <span class="optional">(opsional)</span></label>
+                    <textarea id="itemNoteInput" rows="3" maxlength="1000" placeholder="Contoh: tanpa bawang, sambal dipisah..."></textarea>
+                    <p class="item-note-help">Catatan hanya berlaku untuk menu ini, bukan seluruh pesanan.</p>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding-top:0">
+                <button type="button" class="btn-primary" id="itemNoteSaveBtn">Simpan Catatan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast hidden" id="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

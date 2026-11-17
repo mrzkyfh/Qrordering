@@ -1,0 +1,5 @@
+Yang baru:
+• Transaksi offline kini tersimpan aman dan otomatis disinkronkan saat koneksi kembali.
+• Split payment dapat diproses offline dan struk menampilkan seluruh metode pembayaran.
+• Riwayat pesanan, cetak ulang struk, void, dan refund kini lebih andal.
+• Peningkatan kestabilan Wi-Fi, printer Bluetooth, kamera, notifikasi, dan tampilan aplikasi.

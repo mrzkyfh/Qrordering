@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kebijakan Privasi – Time420s POS</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f9f9f9;
+      color: #222;
+      line-height: 1.7;
+    }
+    header {
+      background: #E24B4A;
+      color: #fff;
+      padding: 32px 24px 28px;
+    }
+    header h1 { font-size: 1.6rem; font-weight: 700; }
+    header p  { font-size: 0.9rem; opacity: 0.85; margin-top: 6px; }
+    main {
+      max-width: 780px;
+      margin: 40px auto;
+      padding: 0 24px 60px;
+    }
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 32px 0 8px;
+      color: #E24B4A;
+    }
+    p, li { font-size: 0.95rem; color: #444; }
+    ul { padding-left: 20px; margin-top: 6px; }
+    li { margin-bottom: 4px; }
+    .updated {
+      display: inline-block;
+      background: #fff3f3;
+      border: 1px solid #fcc;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      color: #c00;
+      margin-bottom: 24px;
+    }
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.8rem;
+      color: #999;
+      border-top: 1px solid #eee;
+    }
+    a { color: #E24B4A; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Kebijakan Privasi</h1>
+  <p>Time420s POS – Aplikasi Kasir & Manajemen Restoran</p>
+</header>
+
+<main>
+  <span class="updated">Terakhir diperbarui: 28 Juni 2026</span>
+
+  <p>
+    Kebijakan Privasi ini menjelaskan bagaimana <strong>Time420s</strong>
+    ("kami", "aplikasi") mengumpulkan, menggunakan, dan melindungi data Anda
+    saat menggunakan aplikasi <strong>Time420s POS</strong> di perangkat Android.
+  </p>
+
+  <h2>1. Data yang Dikumpulkan</h2>
+  <p>Aplikasi ini mengumpulkan data berikut untuk menjalankan fungsinya:</p>
+  <ul>
+    <li><strong>Data akun</strong> – nama, email, PIN, dan role pengguna (kasir/manajer/owner).</li>
+    <li><strong>Data transaksi</strong> – pesanan, item menu, metode pembayaran, dan total tagihan.</li>
+    <li><strong>Data outlet</strong> – nama usaha, alamat, nomor telepon, dan pengaturan toko.</li>
+    <li><strong>Data perangkat</strong> – informasi printer Bluetooth/LAN yang disimpan secara lokal.</li>
+  </ul>
+
+  <h2>2. Izin Perangkat yang Digunakan</h2>
+  <ul>
+    <li><strong>Kamera</strong> – untuk memindai kode QR pesanan pelanggan.</li>
+    <li><strong>Bluetooth</strong> – untuk terhubung ke printer termal nirkabel.</li>
+    <li><strong>Internet & Jaringan</strong> – untuk sinkronisasi data ke server secara real-time.</li>
+    <li><strong>Notifikasi</strong> – untuk memberi tahu kasir tentang pesanan baru (Android 13+).</li>
+    <li><strong>Lokasi (opsional)</strong> – diperlukan oleh sistem Android untuk pemindaian Bluetooth di beberapa versi perangkat. Kami tidak menyimpan atau membagikan data lokasi.</li>
+  </ul>
+
+  <h2>3. Cara Penggunaan Data</h2>
+  <p>Data yang dikumpulkan digunakan semata-mata untuk:</p>
+  <ul>
+    <li>Menjalankan sistem kasir (POS) dan manajemen pesanan.</li>
+    <li>Mencetak struk dan tiket ke printer yang dikonfigurasi.</li>
+    <li>Menampilkan laporan penjualan dan shift kepada pengelola outlet.</li>
+    <li>Menjaga keamanan akses dengan autentikasi berbasis PIN dan email.</li>
+  </ul>
+
+  <h2>4. Penyimpanan & Keamanan Data</h2>
+  <p>
+    Data transaksi dan akun disimpan di server <strong>Supabase</strong>
+    (PostgreSQL, dihosting di infrastruktur aman dengan enkripsi data saat
+    istirahat dan saat transit). Data perangkat printer disimpan secara lokal
+    di perangkat menggunakan <em>SharedPreferences</em> terenkripsi dan tidak
+    diunggah ke server.
+  </p>
+
+  <h2>5. Berbagi Data dengan Pihak Ketiga</h2>
+  <p>
+    Kami <strong>tidak menjual, menyewakan, atau membagikan</strong> data
+    pribadi pengguna kepada pihak ketiga untuk tujuan pemasaran. Data hanya
+    diproses oleh layanan berikut demi keberlangsungan aplikasi:
+  </p>
+  <ul>
+    <li><strong>Supabase</strong> – penyimpanan database dan autentikasi.</li>
+    <li><strong>Google Play</strong> – distribusi aplikasi.</li>
+  </ul>
+
+  <h2>6. Retensi Data</h2>
+  <p>
+    Data transaksi dan akun disimpan selama outlet aktif menggunakan layanan.
+    Penghapusan akun atau outlet dapat diminta dengan menghubungi kami; data
+    akan dihapus dalam 30 hari kerja.
+  </p>
+
+  <h2>7. Hak Pengguna</h2>
+  <p>Anda berhak untuk:</p>
+  <ul>
+    <li>Mengakses data pribadi yang kami simpan tentang Anda.</li>
+    <li>Meminta koreksi data yang tidak akurat.</li>
+    <li>Meminta penghapusan data (hak untuk dilupakan).</li>
+  </ul>
+  <p>Hubungi kami di email di bawah untuk mengajukan permintaan tersebut.</p>
+
+  <h2>8. Perubahan Kebijakan</h2>
+  <p>
+    Kami dapat memperbarui kebijakan ini sewaktu-waktu. Perubahan signifikan
+    akan diberitahukan melalui notifikasi di dalam aplikasi atau email.
+    Tanggal pembaruan terakhir selalu tercantum di bagian atas halaman ini.
+  </p>
+
+  <h2>9. Kontak</h2>
+  <p>
+    Jika Anda memiliki pertanyaan atau permintaan terkait privasi, silakan
+    hubungi kami:<br/>
+    📧 <a href="mailto:timess402coffee@gmail.com">timess402coffee@gmail.com</a>
+  </p>
+</main>
+
+<footer>
+  &copy; 2026 Time420s. Seluruh hak cipta dilindungi.
+</footer>
+
+</body>
+</html>

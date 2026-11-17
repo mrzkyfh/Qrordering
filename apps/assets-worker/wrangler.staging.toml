@@ -1,0 +1,24 @@
+# Resource yang sudah lulus staging dan dipromosikan menjadi production.
+# Nama/bucket dipertahankan agar URL dan object yang sudah diuji tidak berubah.
+account_id = "b0d09d15b16ea37156b38470fd58350d"
+name = "time420s-r2-staging"
+main = "src/index.ts"
+compatibility_date = "2026-08-26"
+workers_dev = true
+
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "time420s-assets-staging"
+
+[vars]
+# Tetap "staging" karena guard Worker mengikat tier ini ke nama bucket.
+# Resource dipakai sebagai production secara operasional sampai domain cutover.
+ENVIRONMENT = "staging"
+R2_BUCKET_NAME = "time420s-assets-staging"
+PUBLIC_ASSET_BASE_URL = "https://time420s-r2-staging.official-b0d.workers.dev"
+SUPABASE_URL = "https://yjmrabgpxjbunwtsiavs.supabase.co"
+ALLOWED_ORIGINS = "https://time420s-staging.official-b0d.workers.dev,https://time420s.my.id,https://menu.time420s.my.id,http://localhost:5173,http://127.0.0.1:5173"
+MAX_IMAGE_BYTES = "5242880"
+
+# SUPABASE_ANON_KEY harus tetap dikonfigurasi sebagai Worker secret.
+# Jangan menaruh kredensial R2 atau service-role key di file ini.
