@@ -20,6 +20,7 @@ const state = {
     table: null,
     tableToken: null,
     orderMode: null,
+    paymentMethod: 'qris',
     customerName: '',
     categories: [],
     menu: [],
@@ -1430,7 +1431,21 @@ function buildServiceNotes(userNotes) {
     const service = state.orderMode === 'pickup'
         ? 'Jenis layanan: Bawa Pulang'
         : `Jenis layanan: Makan di Tempat (Meja ${state.table?.table_number || '—'})`
-    return userNotes ? `${service}\n${userNotes}` : service
+    const payment = state.paymentMethod === 'qris'
+        ? 'Cara bayar: QRIS (menunggu verifikasi petugas)'
+        : 'Cara bayar: Bayar di kasir'
+    return userNotes ? `${service}\n${payment}\n${userNotes}` : `${service}\n${payment}`
+}
+
+function selectPaymentMethod(value) {
+    state.paymentMethod = value === 'pay_at_cashier' ? 'pay_at_cashier' : 'qris'
+    for (const option of document.querySelectorAll('.payment-option')) {
+        const input = option.querySelector('input[name="customerPaymentMethod"]')
+        const selected = input?.value === state.paymentMethod
+        if (input) input.checked = selected
+        option.classList.toggle('selected', selected)
+    }
+    clearOrderRequestId()
 }
 
 function renderWelcome() {
@@ -1851,6 +1866,11 @@ document.addEventListener('DOMContentLoaded', () => {
     el('cartNotes').addEventListener('input', event => {
         el('orderNotes').value = event.currentTarget.value
         clearOrderRequestId()
+    })
+    el('cartPaymentGroup').addEventListener('change', event => {
+        if (event.target instanceof HTMLInputElement) {
+            selectPaymentMethod(event.target.value)
+        }
     })
     el('submitBtn').addEventListener('click', submitOrder)
 

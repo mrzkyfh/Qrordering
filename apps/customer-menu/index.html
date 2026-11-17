@@ -219,6 +219,19 @@
                 <label for="cartNotes">Catatan untuk dapur <span>(opsional)</span></label>
                 <textarea id="cartNotes" rows="2" maxlength="850" placeholder="Contoh: tanpa bawang, saus dipisah"></textarea>
             </div>
+            <fieldset class="cart-payment" id="cartPaymentGroup">
+                <legend>Cara bayar</legend>
+                <label class="payment-option selected">
+                    <input type="radio" name="customerPaymentMethod" value="qris" checked>
+                    <span class="payment-radio" aria-hidden="true"></span>
+                    <span><strong>QRIS</strong><small>Bayar lewat aplikasi, lalu tunggu verifikasi petugas</small></span>
+                </label>
+                <label class="payment-option">
+                    <input type="radio" name="customerPaymentMethod" value="pay_at_cashier">
+                    <span class="payment-radio" aria-hidden="true"></span>
+                    <span><strong>Bayar di kasir</strong><small>Tunai atau metode lain di kasir</small></span>
+                </label>
+            </fieldset>
             <div class="modal-footer">
                 <div class="price-row"><span>Subtotal</span><span id="cartSubtotal">Rp0</span></div>
                 <div class="price-row" id="taxRow" style="display:none"><span id="taxLabel">Pajak</span><span id="cartTax">Rp0</span></div>
