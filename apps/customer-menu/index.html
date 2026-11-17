@@ -145,9 +145,12 @@
         <!-- Header -->
         <header class="header">
             <div class="header-inner">
-                <div>
-                    <p class="outlet-name" id="outletName">E-Menu</p>
-                    <button type="button" class="table-badge" id="tableBadge" aria-label="Ubah jenis layanan">Meja —</button>
+                <div class="header-brand">
+                    <img class="header-logo" src="logo.png" alt="" />
+                    <div>
+                        <p class="outlet-name" id="outletName">QR Ordering</p>
+                        <p class="header-subtitle">Pesan langsung dari meja</p>
+                    </div>
                 </div>
                 <div class="header-actions">
                     <button type="button" class="cart-icon-btn hidden" id="historyBtn" aria-label="Riwayat pesanan">
@@ -162,26 +165,27 @@
                         </svg>
                         <span class="cart-count hidden" id="cartCount">0</span>
                     </button>
+                    <button type="button" class="table-badge" id="tableBadge" aria-label="Ubah jenis layanan">Meja —</button>
                 </div>
             </div>
         </header>
 
+        <!-- Search -->
+        <div class="search-wrap" id="searchWrap">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input type="search" id="searchInput" class="search-input" placeholder="Cari menu" aria-label="Cari menu">
+        </div>
+
         <!-- Categories -->
         <div class="category-filter" aria-label="Kategori menu">
             <div id="categoryTabs" class="category-tabs" role="navigation" aria-label="Pilih kategori menu"></div>
-            <button type="button" id="searchToggleBtn" class="category-search-btn" aria-label="Cari menu" aria-expanded="false" aria-controls="searchWrap">
+            <button type="button" id="searchToggleBtn" class="category-search-btn hidden" aria-label="Cari menu" aria-expanded="true" aria-controls="searchWrap">
                 <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
                 </svg>
             </button>
-        </div>
-
-        <!-- Search -->
-        <div class="search-wrap hidden" id="searchWrap">
-            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-            </svg>
-            <input type="search" id="searchInput" class="search-input" placeholder="Cari menu..." aria-label="Cari menu">
         </div>
 
         <!-- Menu grouped by category -->
@@ -195,7 +199,7 @@
                 <span id="fabCount">0 item</span>
                 <span class="fab-mid">·</span>
                 <span id="fabTotal">Rp0</span>
-                <span class="fab-arrow">Lihat Keranjang →</span>
+                <span class="fab-arrow">Lihat keranjang</span>
             </button>
         </div>
     </div>

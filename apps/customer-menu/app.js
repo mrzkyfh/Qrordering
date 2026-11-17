@@ -261,7 +261,7 @@ function renderCategories() {
     if (!validSelection) state.selectedCat = 'all'
 
     tabs.innerHTML = ''
-    const categories = [{ id: 'all', name: 'Semua Produk' }, ...state.categories]
+    const categories = [{ id: 'all', name: 'Semua' }, ...state.categories]
     for (const category of categories) {
         const button = document.createElement('button')
         button.type = 'button'
@@ -323,6 +323,21 @@ function appendMenuSection(container, { id, title, items, recommendation = false
     container.appendChild(section)
 }
 
+function appendPromoBanner(container, item) {
+    if (!item) return
+    const banner = document.createElement('section')
+    banner.className = 'promo-banner'
+    banner.setAttribute('aria-label', 'Promo hari ini')
+    banner.innerHTML = `
+        <div class="promo-copy">
+            <span>PROMO HARI INI</span>
+            <strong>${esc(item.name)}</strong>
+            <b>${fmt(item.price)}</b>
+        </div>
+        <button type="button" data-action="add" data-id="${esc(item.id)}" aria-label="Pilih ${esc(item.name)}">Pilih</button>`
+    container.appendChild(banner)
+}
+
 // ── Render menu grouped by category ───────────────────────
 function renderMenu() {
     const search = el('searchInput').value.toLowerCase().trim()
@@ -339,12 +354,7 @@ function renderMenu() {
     }
 
     if (!search) {
-        appendMenuSection(catalog, {
-            id: 'menu-recommendation',
-            title: 'Rekomendasi Produk',
-            items: items.filter(item => item.is_featured),
-            recommendation: true,
-        })
+        appendPromoBanner(catalog, items.find(item => item.is_featured))
     }
 
     const categorizedIds = new Set()
@@ -380,7 +390,7 @@ function createCard(item, { recommendation = false } = {}) {
 
     // Items with extras always show "+ Tambah" to allow multiple selections
     const ctrlHtml = (qty === 0 || hasExtras)
-        ? `<button type="button" class="btn-add" data-action="add" data-id="${esc(item.id)}" aria-label="Tambah ${actionContext}${esc(item.name)}">+ Tambah</button>`
+        ? `<button type="button" class="btn-add" data-action="add" data-id="${esc(item.id)}" aria-label="Tambah ${actionContext}${esc(item.name)}">+</button>`
         : `<div class="qty-ctrl">
                <button type="button" class="btn-qty" data-action="dec" data-id="${esc(item.id)}" aria-label="Kurangi ${actionContext}${esc(item.name)}">−</button>
                <span class="qty-num">${qty}</span>
@@ -389,16 +399,15 @@ function createCard(item, { recommendation = false } = {}) {
 
     const imageUrl = safeImageUrl(item.image_url)
     card.innerHTML = `
-        <div class="menu-thumb">
-            ${item.is_featured ? '<span class="featured-badge" aria-label="Menu unggulan">★ Unggulan</span>' : ''}
-            ${imageUrl
-                ? `<img src="${esc(imageUrl)}" alt="${esc(item.name)}" loading="lazy" data-image-fallback="${esc(initials)}">`
-                : esc(initials)}
-        </div>
         <div class="menu-info">
             <div class="menu-name">${esc(item.name)}</div>
             ${item.description ? `<div class="menu-desc">${esc(item.description)}</div>` : ''}
             <div class="menu-price">${fmt(item.price)}</div>
+        </div>
+        <div class="menu-thumb">
+            ${imageUrl
+                ? `<img src="${esc(imageUrl)}" alt="${esc(item.name)}" loading="lazy" data-image-fallback="${esc(initials)}">`
+                : esc(initials)}
             ${ctrlHtml}
         </div>`
     installImageFallbacks(card)
@@ -754,7 +763,7 @@ function updateFab() {
     const qty = cartTotalQty()
     if (qty === 0) { el('cartFab').classList.add('hidden'); return }
     el('cartFab').classList.remove('hidden')
-    el('fabCount').textContent = `${qty} item`
+    el('fabCount').textContent = `${qty}`
     el('fabTotal').textContent = fmt(cartSubtotal())
 }
 
@@ -1492,10 +1501,8 @@ function updateServiceUi() {
     if (!state.table) return
     const badge = el('tableBadge')
     badge.textContent = state.orderMode === 'pickup'
-        ? 'Bawa Pulang · Ubah'
-        : state.orderMode === 'dine_in'
-            ? `Makan di Tempat · Meja ${state.table.table_number} · Ubah`
-            : `Meja ${state.table.table_number}`
+        ? 'Bawa Pulang'
+        : `Meja ${state.table.table_number}`
     for (const [mode, buttonId] of [['dine_in', 'dineInBtn'], ['pickup', 'pickupBtn']]) {
         const button = el(buttonId)
         const selected = state.orderMode === mode

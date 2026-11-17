@@ -42,8 +42,8 @@ if (!/id=["']initialCustomerName["'][^>]*\brequired\b/i.test(html)) {
 if (!/id=["']customerName["'][^>]*\brequired\b/i.test(html) || !/requireCustomerName\('customerName'\)/.test(app)) {
   violations.push('Nama pemesan wajib divalidasi kembali saat checkout.')
 }
-if (!/\.menu-thumb\s*\{[^}]*aspect-ratio:\s*5\s*\/\s*4;/s.test(styles)) {
-  violations.push('Area gambar kartu menu harus memakai rasio 5:4.')
+if (!/\.menu-thumb\s*\{[^}]*aspect-ratio:\s*1;/s.test(styles)) {
+  violations.push('Area gambar kartu menu harus memakai rasio persegi.')
 }
 if (!/\.menu-thumb img\s*\{[^}]*object-fit:\s*cover;/s.test(styles)) {
   violations.push('Gambar menu harus memenuhi seluruh area atas kartu.')
@@ -64,8 +64,8 @@ if (/welcomeBackBtn|welcome-back/.test(`${html}\n${app}\n${styles}`)) {
 if (!/id=["']categoryTabs["']/.test(html) || !/button\.addEventListener\('click',\s*\(\)\s*=>\s*selectCat/.test(app)) {
   violations.push('Navigasi kategori menu pelanggan harus berupa tab horizontal yang aktif.')
 }
-if (!/Rekomendasi Produk/.test(app) || !/menu-category-\$\{category\.id\}/.test(app)) {
-  violations.push('Menu pelanggan harus menampilkan rekomendasi dan membagi produk per kategori.')
+if (!/PROMO HARI INI/.test(app) || !/menu-category-\$\{category\.id\}/.test(app)) {
+  violations.push('Menu pelanggan harus menampilkan promo dan membagi produk per kategori.')
 }
 if (!/\.eq\('show_in_qr_menu', true\)/.test(app)) {
   violations.push('Jalur fallback menu pelanggan belum memfilter produk yang disembunyikan dari QR.')
