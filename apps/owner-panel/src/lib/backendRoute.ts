@@ -1,10 +1,7 @@
 const primaryUrl = (import.meta.env.VITE_SUPABASE_URL as string | undefined)
   ?.trim()
   .replace(/\/+$/, '')
-const defaultFallbackUrl =
-  window.location.hostname === 'qrordering-staging.official-b0d.workers.dev'
-    ? 'https://qrordering-network-gateway-staging.official-b0d.workers.dev'
-    : 'https://api.qrordering.my.id'
+const defaultFallbackUrl = ''
 const fallbackUrl = (
   (import.meta.env.VITE_SUPABASE_FALLBACK_URL as string | undefined) ??
   defaultFallbackUrl

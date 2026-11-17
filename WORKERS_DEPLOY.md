@@ -29,21 +29,19 @@ Masukkan ke **Settings → Builds → Variables and secrets** sebelum build pert
 | `VITE_SUPABASE_URL` | `https://yjmrabgpxjbunwtsiavs.supabase.co` |
 | `VITE_SUPABASE_ANON_KEY` | Publishable/anon key proyek Supabase baru |
 | `VITE_SUPABASE_FALLBACK_URL` | `https://api.qrordering.my.id` |
-| `VITE_MENU_BASE_URL` | `https://menu.qrordering.my.id` |
+| `VITE_MENU_BASE_URL` | Kosongkan jika panel dan menu memakai suffix `workers.dev` akun yang sama |
 | `VITE_IMAGE_STORAGE_BACKEND` | `r2-production` |
 | `VITE_R2_API_URL` | URL Worker R2 produksi QR Ordering |
 | `NODE_VERSION` | `24` |
 
 Jangan memasukkan service-role key ke build frontend.
 
-## Domain yang perlu disiapkan
+## URL gratis Cloudflare
 
-- Panel: `https://qrordering.my.id`
-- Menu pelanggan: `https://menu.qrordering.my.id`
-- Gateway API: `https://api.qrordering.my.id`
-- Aset: `https://assets.qrordering.my.id`
+- Panel: `https://qrordering.<subdomain-akun>.workers.dev`
+- Menu pelanggan: `https://qrordering-menu.<subdomain-akun>.workers.dev`
 
-Domain tersebut harus dibuat dan diarahkan ke Worker baru sebelum dipakai sebagai URL produksi. Sampai DNS siap, gunakan URL `workers.dev` yang diberikan Cloudflare.
+Panel otomatis membentuk URL menu pelanggan dari suffix `workers.dev` yang sama. Custom domain tidak diperlukan. Hapus atau kosongkan `VITE_MENU_BASE_URL` di Cloudflare agar deteksi otomatis digunakan.
 
 ## Verifikasi
 

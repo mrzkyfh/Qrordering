@@ -27,7 +27,19 @@ import { humanizeError } from '@/lib/errorMessage'
 import type { RestaurantTable } from '@/types/database'
 import logo from '@/assets/logo.png'
 
-const MENU_BASE_URL = import.meta.env.VITE_MENU_BASE_URL ?? 'https://menu.qrordering.my.id'
+function resolveMenuBaseUrl(): string {
+  const configured = (import.meta.env.VITE_MENU_BASE_URL as string | undefined)?.trim()
+  if (configured) return configured
+
+  // Workers dalam akun yang sama memakai suffix workers.dev yang sama. Dengan
+  // ini QR tidak memerlukan custom domain atau hardcode subdomain akun.
+  const hostname = window.location.hostname
+  if (hostname.startsWith('qrordering.') && hostname.endsWith('.workers.dev')) {
+    return `${window.location.protocol}//qrordering-menu.${hostname.slice('qrordering.'.length)}`
+  }
+
+  throw new Error('Alamat menu pelanggan belum dikonfigurasi.')
+}
 
 // Escape nilai dinamis agar tidak jadi DOM XSS saat ditulis ke window cetak.
 function escapeHtml(s: string): string {
@@ -50,7 +62,7 @@ function tableLabel(tableNumber: string): string {
 }
 
 function buildMenuUrl(token: string): string {
-  const url = new URL(MENU_BASE_URL)
+  const url = new URL(resolveMenuBaseUrl())
   const isLocal = url.hostname === 'localhost' || url.hostname === '127.0.0.1'
   if (!['http:', 'https:'].includes(url.protocol) || (import.meta.env.PROD && !isLocal && url.protocol !== 'https:')) {
     throw new Error('Alamat customer menu harus menggunakan HTTPS.')
