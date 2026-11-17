@@ -65,7 +65,9 @@ function itemHasNote(item) {
 function applyNotesSetting() {
     const allowed = itemNotesAllowed()
     el('orderNotesGroup').classList.toggle('hidden', !allowed)
+    el('cartNotesGroup').classList.toggle('hidden', !allowed)
     if (!allowed) el('orderNotes').value = ''
+    if (!allowed) el('cartNotes').value = ''
 }
 
 function isMissingMenuSnapshotRpc(error) {
@@ -993,6 +995,7 @@ function _renderCheckoutSummary() {
 function openCart() {
     renderCartItems()
     updateCartFooter()
+    el('cartNotes').value = el('orderNotes').value
     el('cartOverlay').classList.remove('hidden')
 }
 
@@ -1503,6 +1506,7 @@ function updateServiceUi() {
     badge.textContent = state.orderMode === 'pickup'
         ? 'Bawa Pulang'
         : `Meja ${state.table.table_number}`
+    el('cartTableBadge').textContent = badge.textContent
     for (const [mode, buttonId] of [['dine_in', 'dineInBtn'], ['pickup', 'pickupBtn']]) {
         const button = el(buttonId)
         const selected = state.orderMode === mode
@@ -1844,6 +1848,10 @@ document.addEventListener('DOMContentLoaded', () => {
         setCustomerName(event.currentTarget.value)
     })
     el('orderNotes').addEventListener('input', clearOrderRequestId)
+    el('cartNotes').addEventListener('input', event => {
+        el('orderNotes').value = event.currentTarget.value
+        clearOrderRequestId()
+    })
     el('submitBtn').addEventListener('click', submitOrder)
 
     // Success done

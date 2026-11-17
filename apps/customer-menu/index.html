@@ -206,14 +206,18 @@
 
     <!-- ── Cart Modal ────────────────────────────────────── -->
     <div class="modal-overlay hidden" id="cartOverlay">
-        <div class="modal slide-up" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
-            <div class="modal-handle"></div>
+        <div class="modal cart-page" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
             <div class="modal-header">
+                <button type="button" class="btn-close" id="closeCart" aria-label="Kembali ke menu">‹</button>
                 <h3 id="cartTitle">Keranjang</h3>
-                <button type="button" class="btn-close" id="closeCart" aria-label="Tutup keranjang">✕</button>
+                <span class="cart-table-badge" id="cartTableBadge">Meja —</span>
             </div>
             <div class="modal-body" id="cartItems">
                 <p class="empty-msg">Keranjang kosong</p>
+            </div>
+            <div class="cart-notes" id="cartNotesGroup">
+                <label for="cartNotes">Catatan untuk dapur <span>(opsional)</span></label>
+                <textarea id="cartNotes" rows="2" maxlength="850" placeholder="Contoh: tanpa bawang, saus dipisah"></textarea>
             </div>
             <div class="modal-footer">
                 <div class="price-row"><span>Subtotal</span><span id="cartSubtotal">Rp0</span></div>
