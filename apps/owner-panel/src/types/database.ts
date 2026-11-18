@@ -70,6 +70,17 @@ export interface OutletSettings {
   customer_menu_cover_url?: string | null
   // Payment
   payment_methods?: string[]
+  qris_image_url?: string | null
+  qris_merchant_name?: string
+  payment_timeout_minutes?: number
+  kitchen_after_payment?: boolean
+  allow_payment_proof?: boolean
+  timezone?: string
+  paper_size?: '58mm' | '80mm'
+  auto_print_receipt?: boolean
+  table_session_minutes?: number
+  default_low_stock_threshold?: number
+  auto_close_out_of_stock?: boolean
   // Tax (legacy single-tax fields — digunakan sebagai fallback)
   tax_name?: string
   tax_inclusive?: boolean
@@ -293,6 +304,24 @@ export interface Order {
   archived?: boolean
   archive_path?: string | null
   archived_cashier_name?: string | null
+  parent_order_id?: string | null
+  payment_claims?: PaymentClaim[]
+}
+
+export type PaymentClaimStatus = 'PENDING' | 'WAITING_VERIFICATION' | 'PAID' | 'VERIFICATION_FAILED' | 'EXPIRED' | 'CANCELLED' | 'REFUNDED'
+export interface PaymentClaim {
+  id: string
+  order_id: string
+  outlet_id: string
+  status: PaymentClaimStatus
+  proof_url: string | null
+  submitted_at: string | null
+  expires_at: string
+  reviewed_by: string | null
+  reviewed_at: string | null
+  rejection_reason: string | null
+  created_at: string
+  updated_at: string
 }
 
 export interface Ingredient {

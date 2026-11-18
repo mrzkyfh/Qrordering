@@ -18,7 +18,7 @@ export function useOrders(outletId: string, filters: OrderFilters = {}) {
     queryFn: async () => {
       let query = supabase
         .from('orders')
-        .select('id, outlet_id, shift_id, table_id, order_number, order_type, status, customer_name, subtotal, discount_amount, tax_amount, service_charge, total_amount, stock_deducted, created_by, created_at, updated_at, restaurant_tables(table_number, area), order_items(id, order_id, menu_item_id, quantity, unit_price, subtotal, notes, menu_items(name)), payments(id, method, amount, paid_at)')
+        .select('id, outlet_id, shift_id, table_id, parent_order_id, order_number, order_type, status, customer_name, subtotal, discount_amount, tax_amount, service_charge, total_amount, stock_deducted, created_by, created_at, updated_at, restaurant_tables(table_number, area), order_items(id, order_id, menu_item_id, quantity, unit_price, subtotal, notes, menu_items(name)), payments(id, method, amount, paid_at), payment_claims(id, order_id, outlet_id, status, proof_url, submitted_at, expires_at, reviewed_by, reviewed_at, rejection_reason, created_at, updated_at)')
         .eq('outlet_id', outletId)
         .order('created_at', { ascending: false })
 

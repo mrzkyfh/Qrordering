@@ -76,6 +76,14 @@
 }
 
 @layer components {
+  .admin-main { background: #f7f7f8; color: #1f2328; }
+  .admin-main input, .admin-main select, .admin-main textarea { min-height: 44px; }
+  .admin-main button:not([role="switch"]):not([data-radix-collection-item]) { min-height: 44px; }
+  .admin-card { @apply rounded-2xl border bg-white; border-color: #e5e7eb; }
+  .admin-section-title { @apply text-sm font-semibold; color: #1f2328; }
+  .admin-tabs { @apply flex items-center gap-1 overflow-x-auto rounded-xl border bg-white p-1; border-color: #e5e7eb; }
+  .admin-tab { @apply min-h-10 whitespace-nowrap rounded-lg px-4 text-sm font-medium; color: #6b7280; }
+  .admin-tab[data-active="true"] { background: #fdecec; color: #a61e1e; }
   .rounded-lg, .rounded-md { border-radius: 14px; }
   [data-radix-collection-item], button, input, textarea, select { transition: all 160ms ease; }
   main .bg-card, main [class*="rounded-lg"][class*="border"] {

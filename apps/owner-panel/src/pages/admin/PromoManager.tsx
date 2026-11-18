@@ -19,6 +19,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/hooks/use-toast'
 import { humanizeError } from '@/lib/errorMessage'
+import { cn } from '@/lib/utils'
 import { CurrencyDisplay } from '@/components/ui/CurrencyDisplay'
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import { format } from 'date-fns'
@@ -78,6 +79,7 @@ export default function PromoManager() {
   const [dialogOpen, setDialogOpen] = useState(false)
   const [editPromo, setEditPromo] = useState<Promo | undefined>()
   const [voucherPromo, setVoucherPromo] = useState<Promo | null>(null)
+  const [filter, setFilter] = useState<'all' | 'active' | 'scheduled' | 'ended'>('all')
   const qc = useQueryClient()
   const { toast } = useToast()
 
@@ -120,6 +122,14 @@ export default function PromoManager() {
   })
   const promoType = useWatch({ control: form.control, name: 'type' })
   const isPercentPromo = promoType === 'percentage'
+  const filteredPromos = promos.filter((promo) => {
+    const ended = Boolean(promo.end_date && promo.end_date.slice(0, 10) < today)
+    const scheduled = Boolean(promo.start_date && promo.start_date.slice(0, 10) > today)
+    if (filter === 'ended') return ended
+    if (filter === 'scheduled') return scheduled
+    if (filter === 'active') return promo.is_active && !ended && !scheduled
+    return true
+  })
 
   function openEdit(promo: Promo) {
     setEditPromo(promo)
@@ -135,6 +145,7 @@ export default function PromoManager() {
 
   async function onSubmit(values: PromoValues) {
     if (!activeOutletId) return
+    const editing = dialogOpen ? editPromo : undefined
     const numValue = parseFloat(values.value)
     if (values.type === 'percentage' && numValue > 100) {
       form.setError('value', { message: 'Nilai persentase tidak boleh melebihi 100%' })
@@ -147,29 +158,27 @@ export default function PromoManager() {
       max_discount: values.max_discount ? parseFloat(values.max_discount) : null,
       start_date: values.start_date || null, end_date: values.end_date || null,
       usage_limit: values.usage_limit ? parseInt(values.usage_limit) : null,
-      is_active: editPromo ? editPromo.is_active : true,
+      is_active: editing ? editing.is_active : true,
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const tbl = supabase.from('promos') as any
-    const { error } = editPromo ? await tbl.update(payload).eq('id', editPromo.id) : await tbl.insert(payload)
+    const { error } = editing ? await tbl.update(payload).eq('id', editing.id) : await tbl.insert(payload)
     if (error) { toast({ title: 'Gagal', description: humanizeError(error), variant: 'destructive' }); return }
-    toast({ title: editPromo ? 'Promo diperbarui' : 'Promo ditambahkan' })
+    toast({ title: editing ? 'Promo diperbarui' : 'Promo ditambahkan' })
     qc.invalidateQueries({ queryKey: ['promos', activeOutletId] })
     setDialogOpen(false)
+    if (!editing) form.reset()
   }
 
   if (!activeOutletId) return <NoOutlet />
 
   return (
     <div className="space-y-4">
-      <PageHeader title="Promo & Voucher">
-        <Button onClick={() => { setEditPromo(undefined); form.reset(); setDialogOpen(true) }}>
-          <Plus className="mr-2 h-4 w-4" /> Tambah Promo
-        </Button>
-      </PageHeader>
-
+      <PageHeader title="Promosi" subtitle="Harga khusus, diskon persentase, atau paket dengan periode berlaku yang jelas." />
+      <div className="flex gap-2 overflow-x-auto">{([['all','Semua'],['active','Aktif'],['scheduled','Terjadwal'],['ended','Berakhir']] as const).map(([value, label]) => <button key={value} type="button" onClick={() => setFilter(value)} className={cn('min-h-11 rounded-full border px-5 text-sm font-semibold', filter === value ? 'border-[#C62828] bg-[#C62828] text-white' : 'bg-white text-[#374151]')}>{label}</button>)}</div>
+      <div className="grid items-start gap-4 xl:grid-cols-[minmax(0,1fr)_360px]">
       <DataTable
-        data={promos}
+        data={filteredPromos}
         loading={isLoading}
         getRowKey={(r) => r.id}
         emptyMessage="Belum ada promo."
@@ -222,8 +231,10 @@ export default function PromoManager() {
           ), className: 'text-right' },
         ]}
       />
+      <aside className="admin-card p-6"><h2 className="text-lg font-bold">Buat promo</h2><form className="mt-5 space-y-4" onSubmit={form.handleSubmit(onSubmit)}><label className="block"><span className="mb-1.5 block text-sm font-medium">Nama promo</span><Input placeholder="Contoh: Paket Hemat Siang" {...form.register('name')} />{form.formState.errors.name && <span className="text-xs text-red-600">{form.formState.errors.name.message}</span>}</label><div className="grid grid-cols-2 gap-3"><label><span className="mb-1.5 block text-sm font-medium">Jenis</span><select className="min-h-11 w-full rounded-xl border bg-white px-3 text-sm" {...form.register('type')}><option value="percentage">Diskon persentase</option><option value="fixed">Harga khusus</option><option value="bundling">Paket</option></select></label><label><span className="mb-1.5 block text-sm font-medium">Nilai</span><Input inputMode="numeric" placeholder="10" {...form.register('value')} /></label></div><div className="grid grid-cols-2 gap-3"><label><span className="mb-1.5 block text-sm font-medium">Mulai</span><Input type="date" {...form.register('start_date')} /></label><label><span className="mb-1.5 block text-sm font-medium">Selesai</span><Input type="date" {...form.register('end_date')} />{form.formState.errors.end_date && <span className="text-xs text-red-600">{form.formState.errors.end_date.message}</span>}</label></div><label className="block"><span className="mb-1.5 block text-sm font-medium">Produk yang ikut</span><Input disabled placeholder="Berlaku sesuai aturan promo outlet" /></label><Button type="submit" className="w-full"><Plus className="mr-2 h-4 w-4" />Simpan promo</Button></form></aside>
+      </div>
 
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+      <Dialog open={dialogOpen} onOpenChange={(open) => { setDialogOpen(open); if (!open) { setEditPromo(undefined); form.reset() } }}>
         <DialogContent className="max-w-lg">
           <DialogHeader><DialogTitle>{editPromo ? 'Edit Promo' : 'Tambah Promo Baru'}</DialogTitle></DialogHeader>
           <Form {...form}>

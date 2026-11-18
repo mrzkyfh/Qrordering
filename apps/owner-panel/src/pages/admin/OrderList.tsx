@@ -14,13 +14,15 @@ import { StatusBadge } from '@/components/ui/StatusBadge'
 import { CurrencyDisplay } from '@/components/ui/CurrencyDisplay'
 import { DateRangePicker } from '@/components/ui/DateRangePicker'
 import { Button } from '@/components/ui/button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog'
 import { Textarea } from '@/components/ui/textarea'
 import { Separator } from '@/components/ui/separator'
+import { Input } from '@/components/ui/input'
+import { Search } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import { humanizeError } from '@/lib/errorMessage'
+import { cn } from '@/lib/utils'
 import { useOrderAuditLog } from '@/hooks/queries/useOrderAuditLog'
 import { Skeleton } from '@/components/ui/skeleton'
 import type { Order, OrderStatus, OrderType } from '@/types/database'
@@ -32,8 +34,12 @@ const ORDER_TYPE_LABELS: Record<OrderType, string> = {
   self_order: 'Self Order',
 }
 
-const FILTER_STATUSES: OrderStatus[] = ['confirmed', 'paid', 'cancelled', 'void']
 const VOIDABLE_STATUSES: OrderStatus[] = ['draft', 'confirmed', 'preparing', 'ready', 'served']
+const ORDER_TABS = [
+  { label: 'Semua', value: 'all' }, { label: 'Perlu verifikasi', value: 'confirmed' },
+  { label: 'Menunggu bayar', value: 'draft' }, { label: 'Diproses', value: 'preparing' },
+  { label: 'Selesai', value: 'paid' }, { label: 'Dibatalkan', value: 'cancelled' },
+] as const
 
 export default function OrderList() {
   const { activeOutletId } = useOutlet()
@@ -46,7 +52,8 @@ export default function OrderList() {
     to: endOfDay(new Date()),
   })
   const [statusFilter, setStatusFilter] = useState<string>('all')
-  const [typeFilter, setTypeFilter] = useState<string>('all')
+  const typeFilter = 'all'
+  const [search, setSearch] = useState('')
 
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
   const [sheetOpen, setSheetOpen] = useState(false)
@@ -66,7 +73,12 @@ export default function OrderList() {
     ...(statusFilter !== 'all' && { status: statusFilter as OrderStatus }),
     ...(typeFilter !== 'all' && { orderType: typeFilter as OrderType }),
   })
-  const orders = pageData?.rows ?? []
+  const rawOrders = pageData?.rows ?? []
+  const orders = rawOrders.filter((order) => {
+    const term = search.trim().toLowerCase()
+    if (!term) return true
+    return order.order_number.toLowerCase().includes(term) || order.restaurant_tables?.table_number?.toLowerCase().includes(term)
+  })
   const totalCount = pageData?.totalCount ?? 0
 
   // Filter berubah → kembali ke halaman pertama.
@@ -138,37 +150,15 @@ export default function OrderList() {
 
   return (
     <div className="space-y-4">
-      <PageHeader title="Daftar Pesanan" subtitle="Riwayat dan manajemen semua pesanan" />
+      <PageHeader title="Pesanan" subtitle="Pantau pembayaran dan proses dapur setiap pesanan outlet." />
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-2 items-center">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="relative min-w-[240px] flex-1"><Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" /><Input className="pl-9" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Cari nomor pesanan atau meja" aria-label="Cari pesanan" /></div>
         <DateRangePicker value={dateRange} onChange={setDateRange} />
-        <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-40">
-            <SelectValue placeholder="Semua Status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">Semua Status</SelectItem>
-            {FILTER_STATUSES.map((s) => (
-              <SelectItem key={s} value={s}>
-                <StatusBadge status={s} />
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select value={typeFilter} onValueChange={setTypeFilter}>
-          <SelectTrigger className="w-44">
-            <SelectValue placeholder="Semua Tipe" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">Semua Tipe</SelectItem>
-            {(Object.entries(ORDER_TYPE_LABELS) as [OrderType, string][]).map(([k, v]) => (
-              <SelectItem key={k} value={k}>{v}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
         <span className="text-sm text-muted-foreground ml-auto">{totalCount} pesanan</span>
       </div>
+      <div className="flex gap-2 overflow-x-auto pb-1" aria-label="Filter status pesanan">{ORDER_TABS.map((tab) => <button key={tab.value} type="button" onClick={() => setStatusFilter(tab.value)} className={cn('min-h-11 whitespace-nowrap rounded-full border px-4 text-sm font-semibold', statusFilter === tab.value ? 'border-[#C62828] bg-[#C62828] text-white' : 'bg-white text-[#374151] hover:bg-gray-50')}>{tab.label}</button>)}</div>
 
       <DataTable
         data={orders}
@@ -195,28 +185,28 @@ export default function OrderList() {
           },
           {
             key: 'date',
-            header: 'Tanggal',
-            cell: (r) => format(new Date(r.created_at), 'd MMM yyyy, HH:mm', { locale: id }),
+            header: 'Waktu',
+            cell: (r) => format(new Date(r.created_at), 'HH:mm', { locale: id }),
           },
           {
-            key: 'type',
-            header: 'Tipe',
-            cell: (r) => ORDER_TYPE_LABELS[r.order_type],
+            key: 'items',
+            header: 'Item',
+            cell: (r) => r.order_items?.length ? r.order_items.map((item) => `${item.quantity}× ${item.menu_items?.name ?? 'Item'}`).join(', ') : '—',
           },
           {
-            key: 'status',
-            header: 'Status',
+            key: 'payment',
+            header: 'Pembayaran',
+            cell: (r) => r.payments?.length ? <span className="rounded-full bg-green-100 px-2.5 py-1 text-xs font-semibold text-green-800">PAID</span> : <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-900">PENDING</span>,
+          },
+          {
+            key: 'kitchen',
+            header: 'Dapur',
             cell: (r) => <StatusBadge status={r.status} />,
           },
           {
             key: 'total',
             header: 'Total',
             cell: (r) => <CurrencyDisplay value={r.total_amount} className="font-medium" />,
-          },
-          {
-            key: 'kasir',
-            header: 'Kasir',
-            cell: (r) => r.archived_cashier_name ?? staffMap[r.created_by ?? ''] ?? '—',
           },
           {
             key: 'table',

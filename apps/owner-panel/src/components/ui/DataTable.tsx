@@ -51,9 +51,9 @@ export function DataTable<T>({
   return (
     <div className="w-full min-w-0 space-y-3">
       {/* Desktop / tablet: tabel biasa (scroll horizontal bila sempit) */}
-      <div className="hidden md:block bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="hidden md:block bg-white rounded-2xl border border-[#E5E7EB] shadow-sm overflow-hidden">
         <div className={scrollable ? 'overflow-x-auto' : ''}>
-          <table className="w-full text-sm">
+          <table className="w-full min-w-[900px] text-sm">
             <thead>
               <tr className="border-b bg-gray-50">
                 {columns.map((col) => (

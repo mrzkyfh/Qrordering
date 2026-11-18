@@ -41,8 +41,8 @@ export function Header() {
   const roleLabel: Record<string, string> = {
     owner: 'Owner',
     admin: 'Admin',
-    manajer: 'Manajer',
-    kasir: 'Kasir',
+    manajer: 'Pelayan',
+    kasir: 'Pelayan',
     pelanggan: 'Pelanggan',
   }
   const accountDestination =
@@ -53,7 +53,7 @@ export function Header() {
         : { href: '/dashboard', label: 'Dashboard' }
 
   return (
-    <header className="flex h-[72px] items-center justify-between border-b bg-white px-5 lg:px-8 shrink-0">
+    <header className="flex h-16 items-center justify-between border-b bg-white px-5 lg:px-8 shrink-0">
       {/* Left: outlet name */}
       <div className="flex items-center gap-2">
         <Store className="h-4 w-4 text-muted-foreground" />

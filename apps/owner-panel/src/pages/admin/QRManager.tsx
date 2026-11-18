@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router'
 import QRCode from 'qrcode'
 import { AlertCircle, QrCode, RefreshCw, Download } from 'lucide-react'
 import { useOutlet } from '@/hooks/useOutlet'
@@ -19,11 +20,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { Badge } from '@/components/ui/badge'
-import { DataTable } from '@/components/ui/DataTable'
 import { useToast } from '@/hooks/use-toast'
 import { useQueryClient } from '@tanstack/react-query'
 import { humanizeError } from '@/lib/errorMessage'
+import { cn } from '@/lib/utils'
 import type { RestaurantTable } from '@/types/database'
 import logo from '@/assets/logo.png'
 
@@ -404,14 +404,24 @@ export default function QRManager() {
     }
   }
 
+  async function activateTable(table: RestaurantTable) {
+    if (!activeOutletId || table.outlet_id !== activeOutletId) return
+    try {
+      const { error } = await supabase.from('restaurant_tables').update({ is_active: true, status: 'available' }).eq('id', table.id).eq('outlet_id', activeOutletId)
+      if (error) throw error
+      await qc.invalidateQueries({ queryKey: ['tables', activeOutletId] })
+      toast({ title: `${tableLabel(table.table_number)} diaktifkan` })
+    } catch (error) { toast({ title: 'Gagal mengaktifkan meja', description: humanizeError(error), variant: 'destructive' }) }
+  }
+
   if (!activeOutletId) return <NoOutlet />
 
   return (
     <div className="space-y-4">
       <PageHeader
-        title="QR Code Meja"
-        subtitle={`${tables.length} meja terdaftar · Generate dan kelola QR code untuk setiap meja`}
-      />
+        title="Meja dan QR"
+        subtitle={`${tables.filter((table) => table.status === 'occupied').length} dari ${tables.length} meja sedang terisi. Setiap QR memakai token acak, bukan nomor meja.`}
+      ><Button asChild><Link to="/admin/tables">Tambah meja</Link></Button></PageHeader>
 
       {isError ? (
         <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-red-200 bg-red-50 px-5 py-10 text-center">
@@ -427,45 +437,24 @@ export default function QRManager() {
           </Button>
         </div>
       ) : (
-        <DataTable
-          data={tables}
-          loading={isLoading}
-          getRowKey={(r) => r.id}
-          emptyMessage="Belum ada meja. Tambahkan meja di halaman Kelola Meja."
-          columns={[
-          { key: 'number', header: 'Meja', cell: (r) => <span className="font-medium">{tableLabel(r.table_number)}</span> },
-          { key: 'area', header: 'Area', cell: (r) => r.area ?? '—' },
-          { key: 'active', header: 'Status Meja', cell: (r) => (
-            r.is_active
-              ? <Badge className="bg-emerald-600 hover:bg-emerald-600">Aktif</Badge>
-              : <Badge variant="secondary">Nonaktif</Badge>
-          )},
-          { key: 'status', header: 'QR Code', cell: (r) => {
-            if (hasUsableQR(r)) return <Badge variant="default">Sudah dibuat</Badge>
-            if (hasAnyQRData(r)) return <Badge variant="destructive">Perlu dibuat ulang</Badge>
-            return <Badge variant="secondary">Belum ada</Badge>
-          }},
-          { key: 'generated', header: 'Terakhir Dibuat', cell: (r) => formatGeneratedAt(r.qr_generated_at) },
-          { key: 'actions', header: '', cell: (r) => (
-            <div className="flex gap-2 justify-end">
-              {hasUsableQR(r) && (
-                <Button variant="outline" size="sm" onClick={() => setPreview({ table: r, url: r.qr_code_url! })}>
-                  <QrCode className="h-4 w-4 mr-1" /> Lihat
-                </Button>
-              )}
-              <Button
-                variant="outline"
-                size="sm"
-                disabled={generating !== null || !r.is_active}
-                onClick={() => hasAnyQRData(r) ? setPendingRegenerate(r) : void generateQR(r)}
-              >
-                <RefreshCw className={`h-4 w-4 mr-1 ${generating === r.id ? 'animate-spin' : ''}`} />
-                {hasUsableQR(r) ? 'Buat Ulang' : hasAnyQRData(r) ? 'Perbaiki QR' : 'Generate'}
-              </Button>
-            </div>
-          ), className: 'text-right' },
-          ]}
-        />
+        isLoading ? <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">{Array.from({ length: 4 }).map((_, i) => <div key={i} className="h-64 animate-pulse rounded-2xl border bg-white" />)}</div> : tables.length === 0 ? <div className="admin-card py-16 text-center text-sm text-muted-foreground">Belum ada meja. Tambahkan meja terlebih dahulu.</div> :
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {tables.map((table) => {
+            const status = !table.is_active ? 'Nonaktif' : table.status === 'occupied' ? 'Terisi' : 'Kosong'
+            const statusClass = status === 'Kosong' ? 'bg-green-100 text-green-800' : status === 'Terisi' ? 'bg-blue-100 text-blue-900' : 'bg-gray-200 text-gray-700'
+            return <article key={table.id} className="admin-card p-4">
+              <div className="flex items-center justify-between gap-2"><h2 className="text-lg font-bold">{tableLabel(table.table_number)}</h2><span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${statusClass}`}>{status}</span></div>
+              <button type="button" onClick={() => hasUsableQR(table) && setPreview({ table, url: table.qr_code_url! })} className="mt-3 flex h-32 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-dashed bg-[#F9FAFB]" aria-label={`Lihat QR ${tableLabel(table.table_number)}`}>
+                {hasUsableQR(table) ? <img src={table.qr_code_url!} alt={`QR ${tableLabel(table.table_number)}`} className="h-24 w-24 object-contain" /> : <QrCode className="h-10 w-10 text-gray-400" />}
+              </button>
+              <p className="mt-2 text-center text-[11px] text-muted-foreground">Dibuat {formatGeneratedAt(table.qr_generated_at)}</p>
+              <div className="mt-3 grid grid-cols-[1fr_44px] gap-2">
+                <Button variant="outline" disabled={table.is_active && !hasUsableQR(table)} onClick={() => table.is_active ? (table.qr_code_url && void downloadQR(table.qr_code_url, table)) : void activateTable(table)}>{table.is_active ? <><Download className="mr-2 h-4 w-4" />Unduh QR</> : 'Aktifkan'}</Button>
+                <Button variant="outline" size="icon" disabled={generating !== null || !table.is_active} onClick={() => hasAnyQRData(table) ? setPendingRegenerate(table) : void generateQR(table)} aria-label={`Ganti token ${tableLabel(table.table_number)}`}><RefreshCw className={cn('h-4 w-4', generating === table.id && 'animate-spin')} /></Button>
+              </div>
+            </article>
+          })}
+        </div>
       )}
 
       <Dialog open={!!preview} onOpenChange={(o) => !o && setPreview(null)}>

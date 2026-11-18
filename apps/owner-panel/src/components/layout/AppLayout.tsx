@@ -59,7 +59,7 @@ export default function AppLayout() {
         </div>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto p-4 lg:p-8 xl:p-10">
+        <main className="admin-main flex-1 overflow-y-auto p-4 lg:p-8">
           <QueryErrorBanner />
           <Outlet />
         </main>
