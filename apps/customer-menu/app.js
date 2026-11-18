@@ -36,6 +36,7 @@ const state = {
     voucherId: null,
     discountAmount: 0,
     promoName: null,
+    productPromos: [],
     orderRequestId: null,
 }
 
@@ -203,6 +204,8 @@ async function init() {
         state.tableToken = token
         state.table  = tableRow
         state.outlet = outletRow
+        const promoResult = await sb.rpc('get_public_product_promos', { p_token: token })
+        state.productPromos = promoResult.error ? [] : (promoResult.data || [])
         applyNotesSetting()
 
         // Tombol Riwayat muncul kalau outlet ini pernah punya pesanan tersimpan
@@ -326,16 +329,36 @@ function appendMenuSection(container, { id, title, items, recommendation = false
     container.appendChild(section)
 }
 
-function appendPromoBanner(container, item) {
-    if (!item) return
+function promoForItem(itemId) {
+    return state.productPromos.find(promo =>
+        Array.isArray(promo.menu_item_ids) && promo.menu_item_ids.includes(itemId)) || null
+}
+
+function promoDiscount(promo, eligibleSubtotal) {
+    if (!promo || eligibleSubtotal <= 0) return 0
+    if (promo.type === 'percentage') {
+        const raw = Math.round(eligibleSubtotal * Number(promo.value || 0) / 100)
+        return promo.max_discount == null ? raw : Math.min(raw, Number(promo.max_discount))
+    }
+    if (promo.type === 'fixed') return Math.min(Number(promo.value || 0), eligibleSubtotal)
+    return 0
+}
+
+function promoPriceForItem(item, promo) {
+    return Math.max(0, Number(item.price) - promoDiscount(promo, Number(item.price)))
+}
+
+function appendPromoBanner(container, promo, item) {
+    if (!promo || !item) return
+    const promoPrice = promoPriceForItem(item, promo)
     const banner = document.createElement('section')
     banner.className = 'promo-banner'
     banner.setAttribute('aria-label', 'Promo hari ini')
     banner.innerHTML = `
         <div class="promo-copy">
-            <span>PROMO HARI INI</span>
+            <span>${esc(promo.name || 'PROMO HARI INI')}</span>
             <strong>${esc(item.name)}</strong>
-            <b>${fmt(item.price)}</b>
+            <b>${fmt(promoPrice)} <del>${fmt(item.price)}</del></b>
         </div>
         <button type="button" data-action="add" data-id="${esc(item.id)}" aria-label="Pilih ${esc(item.name)}">Pilih</button>`
     container.appendChild(banner)
@@ -357,7 +380,9 @@ function renderMenu() {
     }
 
     if (!search) {
-        appendPromoBanner(catalog, items.find(item => item.is_featured))
+        const promo = state.productPromos[0]
+        const promoItem = promo && items.find(item => promo.menu_item_ids?.includes(item.id))
+        appendPromoBanner(catalog, promo, promoItem)
     }
 
     const categorizedIds = new Set()
@@ -385,6 +410,8 @@ function createCard(item, { recommendation = false } = {}) {
     const cartEntries = state.cart.filter(c => c.id === item.id)
     const qty = cartEntries.reduce((s, c) => s + c.quantity, 0)
     const initials = item.name.substring(0, 2).toUpperCase()
+    const promo = promoForItem(item.id)
+    const promoPrice = promo ? promoPriceForItem(item, promo) : null
 
     const card = document.createElement('div')
     card.className = `menu-card${recommendation ? ' recommendation-card' : ''}`
@@ -405,7 +432,10 @@ function createCard(item, { recommendation = false } = {}) {
         <div class="menu-info">
             <div class="menu-name">${esc(item.name)}</div>
             ${item.description ? `<div class="menu-desc">${esc(item.description)}</div>` : ''}
-            <div class="menu-price">${fmt(item.price)}</div>
+            ${promo ? `<div class="menu-promo-badge">${esc(promo.name)}</div>` : ''}
+            <div class="menu-price${promo ? ' has-promo' : ''}">
+                ${promo ? `<strong>${fmt(promoPrice)}</strong><del>${fmt(item.price)}</del>` : fmt(item.price)}
+            </div>
         </div>
         <div class="menu-thumb">
             ${imageUrl
@@ -744,6 +774,8 @@ function invalidateCartAdjustments() {
     state.discountAmount = 0
     state.promoName = null
 
+    applyAutomaticProductPromo()
+
     const promoBtn = el('applyPromoBtn')
     if (promoBtn) promoBtn.textContent = 'Pakai'
     if (hadPromo) {
@@ -754,6 +786,25 @@ function invalidateCartAdjustments() {
         }
     }
 
+}
+
+function applyAutomaticProductPromo() {
+    let best = null
+    for (const promo of state.productPromos) {
+        const eligibleIds = new Set(promo.menu_item_ids || [])
+        const eligible = state.cart
+            .filter(item => eligibleIds.has(item.id))
+            .reduce((sum, item) => {
+                const extras = (item.selectedExtras || []).reduce((s, extra) => s + Number(extra.price || 0), 0)
+                return sum + (Number(item.price) + extras) * Number(item.quantity || 0)
+            }, 0)
+        const discount = promoDiscount(promo, eligible)
+        if (discount > 0 && (!best || discount > best.discount)) best = { promo, discount }
+    }
+    if (!best) return
+    state.promoId = best.promo.id
+    state.promoName = best.promo.name
+    state.discountAmount = best.discount
 }
 
 function updateCartBadge() {
@@ -927,6 +978,7 @@ async function applyPromoCode() {
         fb.style.color  = '#10b981'
         btn.textContent = 'Hapus'
     } catch (err) {
+        applyAutomaticProductPromo()
         const msg = humanizeError(err, 'Kode voucher tidak valid atau tidak dapat digunakan.')
         fb.textContent = msg
         fb.style.color  = '#ef4444'
@@ -945,6 +997,7 @@ function removePromoCode() {
     clearOrderRequestId()
     state.promoCode = null; state.promoId = null
     state.voucherId = null; state.discountAmount = 0; state.promoName = null
+    applyAutomaticProductPromo()
     const inp = el('promoCodeInput')
     if (inp) inp.value = ''
     const fb  = el('promoFeedback')
@@ -984,7 +1037,7 @@ function _renderCheckoutSummary() {
     if (discount > 0) {
         el('checkoutItems').innerHTML +=
             `<div class="summary-item" style="color:#10b981">
-                <span>Diskon (${esc(state.promoCode)})</span>
+                <span>Diskon (${esc(state.promoCode || state.promoName || 'Promo produk')})</span>
                 <span>- ${fmt(discount)}</span>
              </div>`
     }
@@ -1145,7 +1198,9 @@ async function submitOrder() {
             p_customer_name: customerName,
             p_notes:         serviceNotes,
             p_promo_code:    state.promoCode || null,
+            p_member_phone:  state.memberPhone || null,
             p_request_id:    requestId,
+            p_product_promo_id: state.promoCode ? null : state.promoId,
         }
         let result = await sb.rpc('create_self_order', orderArgs)
 
@@ -1153,14 +1208,19 @@ async function submitOrder() {
         // diterapkan. Nomor member tidak boleh dibuang diam-diam; bila diisi,
         // pelanggan diminta mencoba lagi setelah backend siap.
         if (isMissingIdempotencyRpc(result.error)) {
+            const { p_product_promo_id: _, ...memberPhoneArgs } = orderArgs
+            result = await sb.rpc('create_self_order', memberPhoneArgs)
+        }
+        if (isMissingIdempotencyRpc(result.error)) {
+            const { p_member_phone: _, p_product_promo_id: __, ...baseArgs } = orderArgs
             const idempotentLegacyArgs = {
-                ...orderArgs,
+                ...baseArgs,
                 p_member_id: null,
                 p_redeem_points: 0,
             }
             result = await sb.rpc('create_self_order', idempotentLegacyArgs)
             if (isMissingIdempotencyRpc(result.error)) {
-                const { p_request_id: __, ...legacyArgs } = idempotentLegacyArgs
+                const { p_request_id: ___, ...legacyArgs } = idempotentLegacyArgs
                 result = await sb.rpc('create_self_order', legacyArgs)
             }
         }

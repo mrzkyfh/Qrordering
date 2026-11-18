@@ -20,6 +20,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/hooks/use-toast'
 import { humanizeError } from '@/lib/errorMessage'
 import { cn } from '@/lib/utils'
+import { useMenuItems } from '@/hooks/queries/useMenuItems'
 import { CurrencyDisplay } from '@/components/ui/CurrencyDisplay'
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import { format } from 'date-fns'
@@ -75,11 +76,13 @@ function usePromos(outletId: string) {
 export default function PromoManager() {
   const { activeOutletId } = useOutlet()
   const { data: promos = [], isLoading } = usePromos(activeOutletId ?? '')
+  const { data: menuItems = [] } = useMenuItems(activeOutletId ?? '')
   const today = useMemo(() => new Date().toISOString().slice(0, 10), [])
   const [dialogOpen, setDialogOpen] = useState(false)
   const [editPromo, setEditPromo] = useState<Promo | undefined>()
   const [voucherPromo, setVoucherPromo] = useState<Promo | null>(null)
   const [filter, setFilter] = useState<'all' | 'active' | 'scheduled' | 'ended'>('all')
+  const [selectedProductIds, setSelectedProductIds] = useState<string[]>([])
   const qc = useQueryClient()
   const { toast } = useToast()
 
@@ -131,7 +134,7 @@ export default function PromoManager() {
     return true
   })
 
-  function openEdit(promo: Promo) {
+  async function openEdit(promo: Promo) {
     setEditPromo(promo)
     form.reset({
       name: promo.name, description: promo.description ?? '', type: promo.type,
@@ -140,6 +143,8 @@ export default function PromoManager() {
       start_date: promo.start_date?.slice(0, 10) ?? '', end_date: promo.end_date?.slice(0, 10) ?? '',
       usage_limit: promo.usage_limit ? String(promo.usage_limit) : '',
     })
+    const { data } = await supabase.from('promo_products').select('menu_item_id').eq('promo_id', promo.id)
+    setSelectedProductIds((data ?? []).map((row) => row.menu_item_id))
     setDialogOpen(true)
   }
 
@@ -162,12 +167,17 @@ export default function PromoManager() {
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const tbl = supabase.from('promos') as any
-    const { error } = editing ? await tbl.update(payload).eq('id', editing.id) : await tbl.insert(payload)
+    const { data: saved, error } = editing
+      ? await tbl.update(payload).eq('id', editing.id).select('id').single()
+      : await tbl.insert(payload).select('id').single()
     if (error) { toast({ title: 'Gagal', description: humanizeError(error), variant: 'destructive' }); return }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { error: productError } = await (supabase as any).rpc('set_promo_products', { p_promo_id: saved.id, p_menu_item_ids: selectedProductIds })
+    if (productError) { toast({ title: 'Promo tersimpan, tetapi produk gagal ditautkan', description: humanizeError(productError), variant: 'destructive' }); return }
     toast({ title: editing ? 'Promo diperbarui' : 'Promo ditambahkan' })
     qc.invalidateQueries({ queryKey: ['promos', activeOutletId] })
     setDialogOpen(false)
-    if (!editing) form.reset()
+    if (!editing) { form.reset(); setSelectedProductIds([]) }
   }
 
   if (!activeOutletId) return <NoOutlet />
@@ -231,7 +241,16 @@ export default function PromoManager() {
           ), className: 'text-right' },
         ]}
       />
-      <aside className="admin-card p-6"><h2 className="text-lg font-bold">Buat promo</h2><form className="mt-5 space-y-4" onSubmit={form.handleSubmit(onSubmit)}><label className="block"><span className="mb-1.5 block text-sm font-medium">Nama promo</span><Input placeholder="Contoh: Paket Hemat Siang" {...form.register('name')} />{form.formState.errors.name && <span className="text-xs text-red-600">{form.formState.errors.name.message}</span>}</label><div className="grid grid-cols-2 gap-3"><label><span className="mb-1.5 block text-sm font-medium">Jenis</span><select className="min-h-11 w-full rounded-xl border bg-white px-3 text-sm" {...form.register('type')}><option value="percentage">Diskon persentase</option><option value="fixed">Harga khusus</option><option value="bundling">Paket</option></select></label><label><span className="mb-1.5 block text-sm font-medium">Nilai</span><Input inputMode="numeric" placeholder="10" {...form.register('value')} /></label></div><div className="grid grid-cols-2 gap-3"><label><span className="mb-1.5 block text-sm font-medium">Mulai</span><Input type="date" {...form.register('start_date')} /></label><label><span className="mb-1.5 block text-sm font-medium">Selesai</span><Input type="date" {...form.register('end_date')} />{form.formState.errors.end_date && <span className="text-xs text-red-600">{form.formState.errors.end_date.message}</span>}</label></div><label className="block"><span className="mb-1.5 block text-sm font-medium">Produk yang ikut</span><Input disabled placeholder="Berlaku sesuai aturan promo outlet" /></label><Button type="submit" className="w-full"><Plus className="mr-2 h-4 w-4" />Simpan promo</Button></form></aside>
+      <aside className="admin-card p-6">
+        <h2 className="text-lg font-bold">Buat promo</h2>
+        <form className="mt-5 space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+          <label className="block"><span className="mb-1.5 block text-sm font-medium">Nama promo</span><Input placeholder="Contoh: Paket Hemat Siang" {...form.register('name')} />{form.formState.errors.name && <span className="text-xs text-red-600">{form.formState.errors.name.message}</span>}</label>
+          <div className="grid grid-cols-2 gap-3"><label><span className="mb-1.5 block text-sm font-medium">Jenis</span><select className="min-h-11 w-full rounded-xl border bg-white px-3 text-sm" {...form.register('type')}><option value="percentage">Diskon persentase</option><option value="fixed">Harga khusus</option><option value="bundling">Paket</option></select></label><label><span className="mb-1.5 block text-sm font-medium">Nilai</span><Input inputMode="numeric" placeholder="10" {...form.register('value')} /></label></div>
+          <div className="grid grid-cols-2 gap-3"><label><span className="mb-1.5 block text-sm font-medium">Mulai</span><Input type="date" {...form.register('start_date')} /></label><label><span className="mb-1.5 block text-sm font-medium">Selesai</span><Input type="date" {...form.register('end_date')} />{form.formState.errors.end_date && <span className="text-xs text-red-600">{form.formState.errors.end_date.message}</span>}</label></div>
+          <fieldset><legend className="mb-1.5 text-sm font-medium">Produk yang ikut</legend><div className="max-h-52 space-y-1 overflow-y-auto rounded-xl border p-2">{menuItems.length === 0 ? <p className="p-2 text-sm text-muted-foreground">Belum ada produk aktif.</p> : menuItems.map((item) => <label key={item.id} className="flex min-h-10 cursor-pointer items-center gap-3 rounded-lg px-2 hover:bg-gray-50"><input type="checkbox" className="h-4 w-4 accent-[#C62828]" checked={selectedProductIds.includes(item.id)} onChange={(event) => setSelectedProductIds((current) => event.target.checked ? [...current, item.id] : current.filter((id) => id !== item.id))} /><span className="flex-1 text-sm">{item.name}</span><span className="text-xs text-muted-foreground"><CurrencyDisplay value={item.price} /></span></label>)}</div><p className="mt-1 text-xs text-muted-foreground">Pilih satu atau beberapa produk. Kosong berarti promo tidak dibatasi ke produk tertentu.</p></fieldset>
+          <Button type="submit" className="w-full"><Plus className="mr-2 h-4 w-4" />Simpan promo</Button>
+        </form>
+      </aside>
       </div>
 
       <Dialog open={dialogOpen} onOpenChange={(open) => { setDialogOpen(open); if (!open) { setEditPromo(undefined); form.reset() } }}>
@@ -306,6 +325,7 @@ export default function PromoManager() {
               <FormField control={form.control} name="usage_limit" render={({ field }) => (
                 <FormItem><FormLabel>Batas Pemakaian (opsional)</FormLabel><FormControl><Input type="number" min={1} placeholder="Tak terbatas" {...field} /></FormControl><FormMessage /></FormItem>
               )} />
+              <fieldset><legend className="mb-1.5 text-sm font-medium">Produk yang ikut</legend><div className="max-h-48 space-y-1 overflow-y-auto rounded-xl border p-2">{menuItems.map((item) => <label key={item.id} className="flex min-h-10 cursor-pointer items-center gap-3 rounded-lg px-2 hover:bg-gray-50"><input type="checkbox" className="h-4 w-4 accent-[#C62828]" checked={selectedProductIds.includes(item.id)} onChange={(event) => setSelectedProductIds((current) => event.target.checked ? [...current, item.id] : current.filter((id) => id !== item.id))} /><span className="flex-1 text-sm">{item.name}</span><CurrencyDisplay value={item.price} className="text-xs text-muted-foreground" /></label>)}</div></fieldset>
               <div className="flex justify-end gap-2">
                 <Button type="button" variant="outline" onClick={() => setDialogOpen(false)}>Batal</Button>
                 <Button type="submit" disabled={form.formState.isSubmitting}>{form.formState.isSubmitting ? 'Menyimpan...' : 'Simpan'}</Button>

@@ -974,6 +974,7 @@ body { background:#171719; }
 .promo-copy span { margin-bottom:4px; color:#b92626; font-size:12px; font-weight:850; }
 .promo-copy strong { color:#292b30; font-size:16px; line-height:1.25; }
 .promo-copy b { margin-top:6px; color:#b92626; font-size:20px; line-height:1; }
+.promo-copy del { margin-left:6px; color:#8b929c; font-size:11px; font-weight:600; }
 .promo-banner button {
     flex:0 0 auto;
     min-width:72px;
@@ -1149,6 +1150,23 @@ body { background:#171719; }
 .menu-name { font-size:15px; }
 .menu-desc { margin-bottom:5px; font-size:12px; line-height:1.32; }
 .menu-price { font-size:15px; }
+.menu-promo-badge {
+    width:max-content;
+    max-width:100%;
+    margin:2px 0 4px;
+    padding:3px 7px;
+    overflow:hidden;
+    border-radius:999px;
+    color:#a62222;
+    background:#fde8e8;
+    font-size:9px;
+    font-weight:800;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.menu-price.has-promo { display:flex; align-items:baseline; gap:6px; }
+.menu-price.has-promo strong { color:var(--primary); }
+.menu-price.has-promo del { color:#9298a1; font-size:10px; font-weight:500; }
 .menu-thumb { width:90px; height:90px; border-radius:14px; font-size:18px; }
 .menu-thumb img { border-radius:14px; }
 .btn-add { right:-4px; bottom:-4px; width:40px; min-width:40px; height:40px; border-width:3px; font-size:24px; }
