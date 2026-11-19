@@ -1,11 +1,11 @@
 {
-    "name": "QR Ordering",
-    "short_name": "QR Ordering",
+    "name": "mejaku",
+    "short_name": "mejaku",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#0F766E",
+    "theme_color": "#0F766E",
+    "description": "Aplikasi konfirmasi pesanan QR dan dapur mejaku.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

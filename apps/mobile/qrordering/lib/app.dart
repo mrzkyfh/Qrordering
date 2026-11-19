@@ -86,7 +86,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           }
         },
         child: MaterialApp.router(
-          title: 'QR Ordering',
+          title: 'mejaku',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
           routerConfig: AppRouter.router,

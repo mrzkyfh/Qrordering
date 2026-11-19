@@ -1,5 +1,5 @@
 name: qrordering
-description: "Aplikasi kasir & manajemen restoran terintegrasi dengan Supabase."
+description: "Aplikasi konfirmasi pesanan QR dan dapur mejaku."
 publish_to: 'none'
 version: 1.1.96+103
 

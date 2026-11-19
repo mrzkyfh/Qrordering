@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>E-Menu</title>
-    <meta name="theme-color" content="#e11d2a">
+    <title>mejaku - Pesan dari meja</title>
+    <meta name="theme-color" content="#0F766E">
+    <link rel="icon" type="image/svg+xml" href="mejaku-icon.svg">
     <link rel="stylesheet" href="styles.css">
     <script src="vendor/supabase.js"></script>
 </head>
@@ -22,7 +23,7 @@
     <!-- Loading Screen / Splash -->
     <div id="loadingScreen" class="fullscreen splash">
         <div class="splash-inner">
-            <img class="splash-logo" src="logo.png" alt="Logo" />
+            <img class="splash-logo" src="mejaku-icon.svg" alt="Logo mejaku" />
             <h1 class="splash-outlet-name" id="splashOutletName"></h1>
             <div class="splash-loader">
                 <span></span><span></span><span></span>
@@ -48,19 +49,19 @@
                 <img id="welcomeHeroImage" class="welcome-hero-image hidden" alt="" />
                 <div class="welcome-hero-overlay"></div>
                 <div class="welcome-brand">
-                    <img id="welcomeLogo" src="logo.png" alt="" />
+                    <img id="welcomeLogo" src="mejaku-icon.svg" alt="Logo mejaku" />
                     <div>
                         <span>SELAMAT DATANG DI</span>
-                        <h1 id="welcomeTitle">QR Ordering</h1>
+                        <h1 id="welcomeTitle">mejaku</h1>
                     </div>
                 </div>
             </div>
 
             <div class="welcome-body">
                 <div class="welcome-outlet-card" aria-label="Informasi outlet">
-                    <img id="welcomeOutletImage" src="logo.png" alt="Logo outlet" />
+                    <img id="welcomeOutletImage" src="mejaku-icon.svg" alt="Logo outlet" />
                     <div>
-                        <strong id="welcomeOutletName">QR Ordering</strong>
+                        <strong id="welcomeOutletName">mejaku</strong>
                         <span id="welcomeTableLabel">Meja —</span>
                     </div>
                 </div>
@@ -112,7 +113,7 @@
 
                 <footer class="welcome-footer">
                     <span>Didukung oleh</span>
-                    <strong>QR Ordering</strong>
+                    <strong>mejaku</strong>
                 </footer>
             </div>
         </div>
@@ -146,9 +147,9 @@
         <header class="header">
             <div class="header-inner">
                 <div class="header-brand">
-                    <img class="header-logo" src="logo.png" alt="" />
+                    <img class="header-logo" src="mejaku-icon.svg" alt="Logo mejaku" />
                     <div>
-                        <p class="outlet-name" id="outletName">QR Ordering</p>
+                        <p class="outlet-name" id="outletName">mejaku</p>
                         <p class="header-subtitle">Pesan langsung dari meja</p>
                     </div>
                 </div>
@@ -263,7 +264,7 @@
                     <label for="promoCodeInput">Kode promo <span class="optional">(opsional)</span></label>
                     <div style="display:flex;gap:8px">
                         <input type="text" id="promoCodeInput" maxlength="64" autocomplete="off" placeholder="Masukkan kode promo..." style="flex:1;text-transform:uppercase">
-                        <button type="button" id="applyPromoBtn" style="padding:0 14px;border:1px solid #e11d2a;color:#e11d2a;border-radius:8px;background:#fff;font-size:13px;cursor:pointer;white-space:nowrap">Pakai</button>
+                        <button type="button" id="applyPromoBtn" style="padding:0 14px;border:1px solid #0F766E;color:#0F766E;border-radius:8px;background:#fff;font-size:13px;cursor:pointer;white-space:nowrap">Pakai</button>
                     </div>
                     <div id="promoFeedback" style="font-size:12px;margin-top:4px;min-height:16px"></div>
                 </div>

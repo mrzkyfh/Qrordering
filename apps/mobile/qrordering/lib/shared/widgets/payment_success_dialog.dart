@@ -129,7 +129,7 @@ class _PaymentSuccessDialog extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: offline
                         ? const Color(0xFFF59E0B)
-                        : const Color(0xFFE24B4A),
+                        : const Color(0xFF0F766E),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
@@ -211,7 +211,7 @@ class _PaymentSuccessDialog extends StatelessWidget {
                   width: double.infinity,
                   height: 40,
                   child: Material(
-                    color: const Color(0xFFE24B4A),
+                    color: const Color(0xFF0F766E),
                     borderRadius: BorderRadius.circular(8),
                     child: InkWell(
                       onTap: () => Navigator.pop(context),

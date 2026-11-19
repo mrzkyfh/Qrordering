@@ -234,7 +234,7 @@ class _PrintTargetSheetState extends State<_PrintTargetSheet> {
             const SizedBox(height: 14),
             _TargetRow(
               iconBg: const Color(0xFFFFECEC),
-              iconColor: const Color(0xFFB03030),
+              iconColor: const Color(0xFF115E59),
               icon: Icons.receipt_long_outlined,
               title: 'Struk Kasir',
               subtitle: 'Struk pelanggan',
@@ -260,7 +260,7 @@ class _PrintTargetSheetState extends State<_PrintTargetSheet> {
               child: FilledButton(
                 onPressed: _busy == null ? () => Navigator.pop(context) : null,
                 style: FilledButton.styleFrom(
-                  backgroundColor: const Color(0xFFE24B4A),
+                  backgroundColor: const Color(0xFF0F766E),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -351,7 +351,7 @@ class _TargetRow extends StatelessWidget {
                         height: 16,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
-                          color: Color(0xFFE24B4A),
+                          color: Color(0xFF0F766E),
                         ),
                       )
                     : const Icon(

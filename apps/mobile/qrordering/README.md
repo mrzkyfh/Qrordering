@@ -1,6 +1,6 @@
-# qrordering
+# mejaku
 
-Aplikasi POS Flutter qrordering.
+Aplikasi POS Flutter mejaku.
 
 ## Environment Android
 

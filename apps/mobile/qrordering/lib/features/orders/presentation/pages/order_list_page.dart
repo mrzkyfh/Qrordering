@@ -2020,7 +2020,7 @@ class _OrderDetailSheet extends StatelessWidget {
                                                                       FontWeight
                                                                           .w600,
                                                                   color: Color(
-                                                                    0xFFB03030,
+                                                                    0xFF115E59,
                                                                   ),
                                                                 ),
                                                           ),
@@ -3067,19 +3067,19 @@ class _RefundButton extends StatelessWidget {
         icon: const Icon(
           Icons.refresh_rounded,
           size: 16,
-          color: Color(0xFFE24B4A),
+          color: Color(0xFF0F766E),
         ),
         label: const Text(
           'Refund',
           style: TextStyle(
-            color: Color(0xFFE24B4A),
+            color: Color(0xFF0F766E),
             fontSize: 12,
             fontWeight: FontWeight.w500,
           ),
         ),
         style: OutlinedButton.styleFrom(
           backgroundColor: Colors.white,
-          side: const BorderSide(color: Color(0xFFE24B4A), width: 1.5),
+          side: const BorderSide(color: Color(0xFF0F766E), width: 1.5),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           padding: EdgeInsets.zero,
         ),

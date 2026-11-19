@@ -9,7 +9,7 @@ import '../../../../shared/services/printer_service.dart';
 import '../../../../shared/services/kitchen_ticket_builder.dart';
 
 // Aksen merah brand (seragam dgn dialog "Pilih Jenis Perangkat") + netral slate.
-const _teal = Color(0xFFE24B4A);
+const _teal = Color(0xFF0F766E);
 const _muted = Color(0xFF94A3B8);
 
 const _jenisLabels = {
@@ -389,7 +389,7 @@ class _DeviceSettingsPageState extends State<DeviceSettingsPage> {
           padding: EdgeInsets.symmetric(horizontal: large ? 20 : 14),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: const Color(0xFFE24B4A),
+            color: const Color(0xFF0F766E),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Row(
@@ -613,7 +613,7 @@ class _DeviceSettingsPageState extends State<DeviceSettingsPage> {
               _actionBtn(
                 'Hapus',
                 bg: Colors.white,
-                fg: const Color(0xFFE24B4A),
+                fg: const Color(0xFF0F766E),
                 border: const Color(0xFFFCCACA),
                 onTap: () => _confirmDelete(d),
               ),
@@ -731,7 +731,7 @@ class _DeviceSettingsPageState extends State<DeviceSettingsPage> {
             child: const Text(
               'Hapus',
               style: TextStyle(
-                color: Color(0xFFE24B4A),
+                color: Color(0xFF0F766E),
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -1942,7 +1942,7 @@ class _OptionPickerDialog extends StatefulWidget {
 
 class _OptionPickerDialogState extends State<_OptionPickerDialog> {
   static const _kInk = Color(0xFF111111);
-  static const _kRed = Color(0xFFE24B4A);
+  static const _kRed = Color(0xFF0F766E);
   String? _selected;
 
   @override

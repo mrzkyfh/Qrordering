@@ -373,7 +373,7 @@ class _KasirReportPageState extends State<KasirReportPage> {
 
   // ─── Ringkasan Penjualan ─────────────────────────────────────────────────────
   Widget _buildRingkasan() {
-    const red = Color(0xFFE24B4A);
+    const red = Color(0xFF0F766E);
     const green = Color(0xFF1D9E75);
     const gray = Color(0xFFE5E5E5);
 
@@ -1000,7 +1000,7 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const red = Color(0xFFE24B4A);
+    const red = Color(0xFF0F766E);
     return Material(
       color: active ? const Color(0xFFFFF5F5) : Colors.transparent,
       child: InkWell(
@@ -1598,7 +1598,7 @@ class _ChartCard extends StatelessWidget {
                   BarChartRodData(
                     toY: rev,
                     color: const Color(
-                      0xFFE24B4A,
+                      0xFF0F766E,
                     ).withValues(alpha: rev > 0 ? 1.0 : 0.08),
                     width: 8,
                     borderRadius: const BorderRadius.vertical(
@@ -1607,7 +1607,7 @@ class _ChartCard extends StatelessWidget {
                     backDrawRodData: BackgroundBarChartRodData(
                       show: true,
                       toY: top,
-                      color: const Color(0xFFE24B4A).withValues(alpha: 0.08),
+                      color: const Color(0xFF0F766E).withValues(alpha: 0.08),
                     ),
                   ),
                 ],
@@ -1626,7 +1626,7 @@ class _MetodePembayaranCard extends StatelessWidget {
   const _MetodePembayaranCard({required this.payments});
 
   static const _pieColors = [
-    Color(0xFFE24B4A), // Cash
+    Color(0xFF0F766E), // Cash
     Color(0xFFFCD34D), // Transfer
     Color(0xFF60A5FA), // QRIS
     Color(0xFFA78BFA), // Lainnya
@@ -1837,7 +1837,7 @@ class _KategoriCard extends StatelessWidget {
                         widthFactor: maxVal > 0 ? entries[i].value / maxVal : 0,
                         child: Container(
                           decoration: BoxDecoration(
-                            color: const Color(0xFFE24B4A),
+                            color: const Color(0xFF0F766E),
                             borderRadius: BorderRadius.circular(2),
                           ),
                         ),

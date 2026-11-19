@@ -1,8 +1,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-    --primary: #c9302c;
-    --accent:  #ffffff;
+    --primary: #0f766e;
+    --primary-dark: #115e59;
+    --accent:  #f59e0b;
     --bg:      #f7f8f9;
     --card:    #ffffff;
     --border:  #e5e7eb;
@@ -21,12 +22,12 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* ── QR Ordering visual system (Desain QR Ordering.pdf) ── */
+/* ── mejaku visual system (desain.pdf) ── */
 #app { width: min(100%, 560px); margin: 0 auto; background: #fff; box-shadow: 0 0 40px rgba(15,23,42,.08); }
 .header { position: sticky; top: 0; z-index: 35; background: rgba(255,255,255,.96); color: var(--text); border-bottom: 1px solid var(--border); backdrop-filter: blur(14px); }
 .header-inner { min-height: 86px; padding: 16px 22px; }
 .outlet-name { color: var(--text); font-size: 19px; font-weight: 800; letter-spacing: -.025em; }
-.table-badge { margin-top: 5px; padding: 6px 13px; border: 0; border-radius: 999px; color: #a82723; background: #fbeceb; font-weight: 800; }
+.table-badge { margin-top: 5px; padding: 6px 13px; border: 0; border-radius: 999px; color: #115e59; background: #ccfbf1; font-weight: 800; }
 .cart-icon-btn { color: #374151; background: #f4f5f6; border-radius: 50%; }
 .cart-icon-btn:hover { background: #eceff1; }
 .category-filter { top: 86px; padding: 14px 18px; gap: 10px; background: rgba(255,255,255,.97); border-bottom: 0; }
@@ -42,7 +43,7 @@ body {
 .menu-section-title { margin-bottom: 6px; color: #6f7782; font-size: 15px; letter-spacing: .03em; text-transform: uppercase; }
 .menu-grid { display: grid; grid-template-columns: 1fr; gap: 0; }
 .menu-card { display: grid; grid-template-columns: minmax(0,1fr) 116px; grid-template-areas: "info image"; align-items: center; min-height: 166px; padding: 20px 0; border-bottom: 1px solid #eceef0; border-radius: 0; box-shadow: none; overflow: visible; }
-.menu-thumb { grid-area: image; width: 112px; aspect-ratio: 1; border-radius: 20px; background: #fbeceb; color: var(--primary); }
+.menu-thumb { grid-area: image; width: 112px; aspect-ratio: 1; border-radius: 20px; background: #ccfbf1; color: var(--primary); }
 .menu-thumb img { border-radius: inherit; }
 .menu-info { grid-area: info; padding: 0 18px 0 0; }
 .menu-name { margin-bottom: 5px; font-size: 18px; font-weight: 800; letter-spacing: -.025em; }
@@ -61,7 +62,7 @@ body {
 .modal-body { padding: 18px 22px; }
 .modal-footer { padding: 16px 22px calc(18px + env(safe-area-inset-bottom,0px)); }
 .cart-item { min-height: 108px; padding: 16px 0; }
-.cart-thumb { width: 66px; height: 66px; border-radius: 16px; background: #fbeceb; }
+.cart-thumb { width: 66px; height: 66px; border-radius: 16px; background: #ccfbf1; }
 .cart-name { font-size: 16px; font-weight: 800; }
 .cart-price { font-size: 14px; }
 .cart-ctrl .btn-qty { width: 36px; height: 36px; border: 1px solid #d9dde1; border-radius: 50%; }
@@ -794,7 +795,7 @@ body {
 .header { position:sticky; top:0; z-index:35; background:rgba(255,255,255,.96); color:var(--text); border-bottom:1px solid var(--border); backdrop-filter:blur(14px); }
 .header-inner { min-height:86px; padding:16px 22px; }
 .outlet-name { color:var(--text); font-size:19px; font-weight:800; letter-spacing:-.025em; }
-.table-badge { margin-top:5px; padding:6px 13px; border:0; border-radius:999px; color:#a82723; background:#fbeceb; font-weight:800; }
+.table-badge { margin-top:5px; padding:6px 13px; border:0; border-radius:999px; color:#115e59; background:#ccfbf1; font-weight:800; }
 .cart-icon-btn { color:#374151; background:#f4f5f6; border-radius:50%; }
 .category-filter { top:86px; padding:14px 18px; gap:10px; background:rgba(255,255,255,.97); border-bottom:0; }
 .category-tabs { gap:10px; }
@@ -809,7 +810,7 @@ body {
 .menu-section-title { margin-bottom:6px; color:#6f7782; font-size:15px; letter-spacing:.03em; text-transform:uppercase; }
 .menu-grid { display:grid; grid-template-columns:1fr; gap:0; }
 .menu-card { display:grid; grid-template-columns:minmax(0,1fr) 116px; grid-template-areas:"info image"; align-items:center; min-height:166px; padding:20px 0; border-bottom:1px solid #eceef0; border-radius:0; box-shadow:none; overflow:visible; }
-.menu-thumb { grid-area:image; width:112px; height:auto; aspect-ratio:1; border-radius:20px; background:#fbeceb; color:var(--primary); }
+.menu-thumb { grid-area:image; width:112px; height:auto; aspect-ratio:1; border-radius:20px; background:#ccfbf1; color:var(--primary); }
 .menu-thumb img { border-radius:inherit; }
 .menu-info { grid-area:info; padding:0 18px 0 0; }
 .menu-name { margin-bottom:5px; font-size:18px; font-weight:800; letter-spacing:-.025em; }
@@ -828,7 +829,7 @@ body {
 .modal-body { padding:18px 22px; }
 .modal-footer { padding:16px 22px calc(18px + env(safe-area-inset-bottom,0px)); }
 .cart-item { min-height:108px; padding:16px 0; }
-.cart-thumb { width:66px; height:66px; border-radius:16px; background:#fbeceb; }
+.cart-thumb { width:66px; height:66px; border-radius:16px; background:#ccfbf1; }
 .cart-name { font-size:16px; font-weight:800; }
 .cart-price { font-size:14px; }
 .cart-ctrl .btn-qty { width:36px; height:36px; border:1px solid #d9dde1; border-radius:50%; }
@@ -838,7 +839,7 @@ body {
 .form-group input, .form-group textarea { min-height:52px; border-radius:14px; font-size:15px; }
 @media (min-width:720px) { #app { margin-top:24px; margin-bottom:24px; min-height:calc(100vh - 48px); border-radius:28px; overflow:hidden; } }
 
-/* ── Customer menu v3 — mengikuti mockup QR Ordering ───────── */
+/* ── Customer menu v3 — mejaku visual system ───────────────── */
 :root {
     --primary: #d12626;
     --primary-dark: #b91c1c;

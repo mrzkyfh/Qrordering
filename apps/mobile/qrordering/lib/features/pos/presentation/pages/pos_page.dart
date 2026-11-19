@@ -170,7 +170,7 @@ class _SidebarHeader extends StatelessWidget {
                 width: 38,
                 height: 38,
                 alignment: Alignment.center,
-                decoration: const BoxDecoration(color: Color(0xFFE24B4A)),
+                decoration: const BoxDecoration(color: Color(0xFF0F766E)),
                 child: Text(
                   initials,
                   style: const TextStyle(
@@ -455,7 +455,7 @@ class _OrderListButtonState extends State<_OrderListButton> {
                 height: 20,
                 alignment: Alignment.center,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFE24B4A),
+                  color: Color(0xFF0F766E),
                   shape: BoxShape.circle,
                 ),
                 child: Text(
@@ -901,7 +901,7 @@ class _CategoryVTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           border: Border(
             left: BorderSide(
-              color: selected ? const Color(0xFFE24B4A) : Colors.transparent,
+              color: selected ? const Color(0xFF0F766E) : Colors.transparent,
               width: 3,
             ),
           ),
@@ -911,7 +911,7 @@ class _CategoryVTile extends StatelessWidget {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
-            color: selected ? const Color(0xFFE24B4A) : const Color(0xFF666666),
+            color: selected ? const Color(0xFF0F766E) : const Color(0xFF666666),
             fontWeight: selected ? FontWeight.w500 : FontWeight.w400,
             fontSize: 11,
           ),
@@ -1302,7 +1302,7 @@ class _AddonModalState extends State<_AddonModal> {
             width: double.infinity,
             height: 40,
             child: Material(
-              color: _valid ? const Color(0xFFE24B4A) : const Color(0xFFD0D0D0),
+              color: _valid ? const Color(0xFF0F766E) : const Color(0xFFD0D0D0),
               borderRadius: BorderRadius.circular(8),
               child: InkWell(
                 onTap: _valid ? _confirm : null,
@@ -1387,7 +1387,7 @@ class _SectionLabel extends StatelessWidget {
               fontSize: 10,
               fontWeight: FontWeight.w400,
               color: required
-                  ? const Color(0xFFE24B4A)
+                  ? const Color(0xFF0F766E)
                   : const Color(0xFFBBBBBB),
             ),
           ),
@@ -1423,7 +1423,7 @@ class _AddonOption extends StatelessWidget {
           color: selected ? const Color(0xFFFFF5F5) : Colors.white,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: selected ? const Color(0xFFE24B4A) : const Color(0xFFEFEFEF),
+            color: selected ? const Color(0xFF0F766E) : const Color(0xFFEFEFEF),
             width: 1.5,
           ),
         ),
@@ -1450,7 +1450,7 @@ class _AddonOption extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xFFE24B4A),
+                      color: Color(0xFF0F766E),
                     ),
                   )
                 : const Text(
@@ -1470,7 +1470,7 @@ class _AddonOption extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
-          color: selected ? const Color(0xFFE24B4A) : const Color(0xFFD0D0D0),
+          color: selected ? const Color(0xFF0F766E) : const Color(0xFFD0D0D0),
           width: 2,
         ),
       ),
@@ -1480,7 +1480,7 @@ class _AddonOption extends StatelessWidget {
                 width: 7,
                 height: 7,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFE24B4A),
+                  color: Color(0xFF0F766E),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -1495,10 +1495,10 @@ class _AddonOption extends StatelessWidget {
       height: 16,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: selected ? const Color(0xFFE24B4A) : Colors.white,
+        color: selected ? const Color(0xFF0F766E) : Colors.white,
         borderRadius: BorderRadius.circular(4),
         border: Border.all(
-          color: selected ? const Color(0xFFE24B4A) : const Color(0xFFD0D0D0),
+          color: selected ? const Color(0xFF0F766E) : const Color(0xFFD0D0D0),
           width: 2,
         ),
       ),

@@ -1412,8 +1412,11 @@ function isMissingIdempotencyRpc(error) {
     if (!error) return false
     const text = `${error.code || ''} ${error.message || ''} ${error.details || ''}`.toLowerCase()
     return error.code === 'PGRST202'
+        || error.code === '42883'
         || (text.includes('create_self_order') && text.includes('p_request_id'))
         || text.includes('could not find the function')
+        || text.includes('function public.create_self_order')
+        || text.includes('schema cache')
 }
 function fmt(n)          { return new Intl.NumberFormat('id-ID', { style:'currency', currency:'IDR', minimumFractionDigits:0 }).format(n) }
 
@@ -1431,6 +1434,12 @@ function humanizeError(err, fallback) {
         return 'Menu atau meja tidak valid. Coba scan ulang QR code.'
     if (code === '23502')
         return 'Ada data pesanan yang belum lengkap.'
+    if (code === '22023')
+        return err.message || 'Data pesanan tidak valid. Periksa kembali pesanan Anda.'
+    if (code === '55000')
+        return err.message || 'Pesanan online sedang ditutup. Silakan panggil kasir.'
+    if (code === 'PGRST202' || code === '42883' || text.includes('schema cache'))
+        return 'Layanan pesanan belum siap. Silakan panggil kasir.'
     if (text.includes('jwt') || text.includes('expired') || text.includes('session'))
         return 'Sesi berakhir. Muat ulang halaman lalu coba lagi.'
     if (text.includes('network') || text.includes('failed to fetch') || text.includes('fetch') || text.includes('timeout') || text.includes('load failed'))
@@ -1510,7 +1519,7 @@ function selectPaymentMethod(value) {
 
 function renderWelcome() {
     if (!state.outlet || !state.table) return
-    const outletName = state.outlet.name || 'QR Ordering'
+    const outletName = state.outlet.name || 'mejaku'
     const tableLabel = state.table.area
         ? `${state.table.area} · Meja ${state.table.table_number}`
         : `Meja ${state.table.table_number}`
@@ -1519,7 +1528,7 @@ function renderWelcome() {
     el('welcomeTableLabel').textContent = tableLabel
     el('dineInTableLabel').textContent = `Pesan dari Meja ${state.table.table_number}`
 
-    const logoUrl = safeImageUrl(state.outlet.logo_url) || 'logo.png'
+    const logoUrl = safeImageUrl(state.outlet.logo_url) || 'mejaku-icon.svg'
     el('welcomeLogo').src = logoUrl
     el('welcomeLogo').alt = `Logo ${outletName}`
     el('welcomeOutletImage').src = logoUrl

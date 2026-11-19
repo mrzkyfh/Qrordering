@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../services/printer_service.dart';
 
 // Warna brand (konsisten dgn device_settings_page.dart)
-const _kRed = Color(0xFFE24B4A);
+const _kRed = Color(0xFF0F766E);
 const _kMuted = Color(0xFF94A3B8);
 const _kInk = Color(0xFF111111);
 const _kGreen = Color(0xFF1D9E75);

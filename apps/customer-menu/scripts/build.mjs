@@ -4,7 +4,7 @@ import path from 'node:path'
 
 const projectDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const outputDir = path.join(projectDir, 'dist')
-const assets = ['index.html', 'app.js', 'styles.css', 'logo.png', '_headers']
+const assets = ['index.html', 'app.js', 'styles.css', 'mejaku-icon.svg', '_headers']
 const vendorDir = path.join(outputDir, 'vendor')
 
 await rm(outputDir, { recursive: true, force: true })

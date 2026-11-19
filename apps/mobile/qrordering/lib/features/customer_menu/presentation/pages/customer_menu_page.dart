@@ -377,7 +377,7 @@ class _EMenuScreenState extends State<_EMenuScreen> {
   }
 
   String get _outletId => widget.outletData['id'] as String;
-  String get _outletName => widget.outletData['name'] as String? ?? 'QR Ordering';
+  String get _outletName => widget.outletData['name'] as String? ?? 'mejaku';
   String get _tableNumber =>
       widget.tableData['table_number']?.toString() ?? '-';
   String get _tableId => widget.tableData['id'] as String;

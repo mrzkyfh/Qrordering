@@ -107,7 +107,7 @@ class KeepAliveService : Service() {
             Notification.Builder(this)
         }
         val notification: Notification = builder
-            .setContentTitle("QrOrdering POS aktif")
+            .setContentTitle("mejaku POS aktif")
             .setContentText("Siap menerima pesanan online dari meja")
             .setSmallIcon(applicationInfo.icon)
             .setContentIntent(pending)

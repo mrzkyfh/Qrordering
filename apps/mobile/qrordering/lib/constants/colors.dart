@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Konstanta warna halaman Daftar Order (spesifikasi desain khusus).
 /// Semua hardcoded color halaman ini diambil dari sini.
-const kBrandRed = Color(0xFFE24B4A);
+const kBrandRed = Color(0xFF0F766E);
 const kPageBg = Color(0xFFF5F5F5);
 const kCardBg = Colors.white;
 const kCardBorder = Color(0xFFE8E8E8);
@@ -26,13 +26,13 @@ const kStatusDoneText = Color(0xFF14532D);
 // Button
 const kBtnProses = Color(0xFF2563EB);
 const kBtnSajikan = Color(0xFF7C3AED);
-const kBtnBayar = Color(0xFFE24B4A);
+const kBtnBayar = Color(0xFF0F766E);
 const kBtnLunas = Color(0xFF1D9E75);
 
 // ── Tambahan (tidak ada di spec, untuk melengkapi state nyata) ──────────────
 // Avatar order
 const kAvatarBg = Color(0xFFFFECEC);
-const kAvatarText = Color(0xFFB03030);
+const kAvatarText = Color(0xFF115E59);
 
 // Badge type "Takeaway"
 const kTakeawayBg = Color(0xFFE2E8F0);

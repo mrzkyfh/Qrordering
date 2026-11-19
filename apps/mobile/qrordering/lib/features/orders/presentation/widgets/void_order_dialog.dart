@@ -13,12 +13,12 @@ import '../../../../shared/services/connectivity_service.dart';
 import '../../../../shared/services/transaction_journal_service.dart';
 
 // ── Palet (spec desain) ──────────────────────────────────────────────────────
-const _kRed = Color(0xFFE24B4A);
+const _kRed = Color(0xFF0F766E);
 const _kInk = Color(0xFF111111);
 const _kBorder = Color(0xFFE8E8E8);
 
 const _avatarGradients = [
-  [Color(0xFFE24B4A), Color(0xFFB03030)],
+  [Color(0xFF0F766E), Color(0xFF115E59)],
   [Color(0xFF2563EB), Color(0xFF1D4ED8)],
   [Color(0xFF7C3AED), Color(0xFF6D28D9)],
   [Color(0xFF1D9E75), Color(0xFF166534)],
@@ -913,7 +913,7 @@ class _VoidOrderDialogState extends State<_VoidOrderDialog>
           style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w500,
-            color: active ? const Color(0xFFB03030) : const Color(0xFF555555),
+            color: active ? const Color(0xFF115E59) : const Color(0xFF555555),
           ),
         ),
       ),

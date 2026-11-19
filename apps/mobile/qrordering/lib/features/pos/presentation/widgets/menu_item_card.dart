@@ -3,7 +3,7 @@ import '../../../../shared/models/menu_item.dart';
 import '../../../../shared/widgets/backend_network_image.dart';
 import '../../../../core/utils/currency_formatter.dart';
 
-const _kRed = Color(0xFFE24B4A);
+const _kRed = Color(0xFF0F766E);
 
 Color _categoryBg(String? category) {
   if (category == null) return const Color(0xFFF5F5F5);

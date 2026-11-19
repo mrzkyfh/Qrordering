@@ -80,7 +80,7 @@ InputDecoration _cartFieldDecoration({
   ),
   focusedBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(10),
-    borderSide: const BorderSide(color: Color(0xFFE24B4A), width: 1.2),
+    borderSide: const BorderSide(color: Color(0xFF0F766E), width: 1.2),
   ),
 );
 
@@ -227,7 +227,7 @@ class _CartPanelState extends State<CartPanel> {
                           style: const TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFFE24B4A),
+                            color: Color(0xFF0F766E),
                           ),
                         ),
                       ),
@@ -392,7 +392,7 @@ class _CartPanelState extends State<CartPanel> {
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: state.tableId != null
-                              ? const Color(0xFFE24B4A)
+                              ? const Color(0xFF0F766E)
                               : const Color(0xFFEFEFEF),
                         ),
                         borderRadius: BorderRadius.circular(8),
@@ -403,7 +403,7 @@ class _CartPanelState extends State<CartPanel> {
                             Icons.table_restaurant_outlined,
                             size: 16,
                             color: state.tableId != null
-                                ? const Color(0xFFE24B4A)
+                                ? const Color(0xFF0F766E)
                                 : AppColors.textSecondary,
                           ),
                           const SizedBox(width: 8),
@@ -414,7 +414,7 @@ class _CartPanelState extends State<CartPanel> {
                             style: TextStyle(
                               fontSize: 13,
                               color: state.tableId != null
-                                  ? const Color(0xFFE24B4A)
+                                  ? const Color(0xFF0F766E)
                                   : AppColors.textSecondary,
                             ),
                           ),
@@ -423,7 +423,7 @@ class _CartPanelState extends State<CartPanel> {
                             Icons.chevron_right,
                             size: 18,
                             color: state.tableId != null
-                                ? const Color(0xFFE24B4A)
+                                ? const Color(0xFF0F766E)
                                 : AppColors.textSecondary,
                           ),
                         ],
@@ -594,7 +594,7 @@ class _CartPanelState extends State<CartPanel> {
                                         style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w700,
-                                          color: Color(0xFFE24B4A),
+                                          color: Color(0xFF0F766E),
                                         ),
                                       ),
                                     ),
@@ -787,7 +787,7 @@ class _CartPanelState extends State<CartPanel> {
                                         ),
                                       ),
                                 style: OutlinedButton.styleFrom(
-                                  foregroundColor: const Color(0xFFE24B4A),
+                                  foregroundColor: const Color(0xFF0F766E),
                                   backgroundColor: const Color(0xFFFFF5F5),
                                   side: const BorderSide(
                                     color: Color(0xFFFCCACA),
@@ -931,7 +931,7 @@ class _CartPanelState extends State<CartPanel> {
             },
             child: const Text(
               'Kosongkan',
-              style: TextStyle(color: Color(0xFFE24B4A)),
+              style: TextStyle(color: Color(0xFF0F766E)),
             ),
           ),
         ],
@@ -2052,7 +2052,7 @@ class _CartItemRow extends StatelessWidget {
               },
               child: const Text(
                 'Hapus',
-                style: TextStyle(color: Color(0xFFE24B4A)),
+                style: TextStyle(color: Color(0xFF0F766E)),
               ),
             ),
           ],
@@ -2152,7 +2152,7 @@ class _CartItemRow extends StatelessWidget {
                   CurrencyFormatter.format(item.unitPrice),
                   style: const TextStyle(
                     fontSize: 11,
-                    color: Color(0xFFE24B4A),
+                    color: Color(0xFF0F766E),
                   ),
                 ),
               ],
@@ -2215,10 +2215,10 @@ class _QtyBtn extends StatelessWidget {
         padding: EdgeInsets.zero,
         constraints: const BoxConstraints.tightFor(width: 40, height: 40),
         style: IconButton.styleFrom(
-          foregroundColor: isMinus ? const Color(0xFFE24B4A) : Colors.white,
+          foregroundColor: isMinus ? const Color(0xFF0F766E) : Colors.white,
           backgroundColor: isMinus
               ? const Color(0xFFFFECEC)
-              : const Color(0xFFE24B4A),
+              : const Color(0xFF0F766E),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
@@ -2340,7 +2340,7 @@ class _LoyaltyInputState extends State<_LoyaltyInput> {
                         context.read<PosBloc>().add(PosLoyaltyCleared());
                       },
                       style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: Color(0xFFE24B4A)),
+                        side: const BorderSide(color: Color(0xFF0F766E)),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -2349,7 +2349,7 @@ class _LoyaltyInputState extends State<_LoyaltyInput> {
                       child: const Text(
                         'Hapus',
                         style: TextStyle(
-                          color: Color(0xFFE24B4A),
+                          color: Color(0xFF0F766E),
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                         ),
@@ -2368,7 +2368,7 @@ class _LoyaltyInputState extends State<_LoyaltyInput> {
                               );
                             },
                       style: FilledButton.styleFrom(
-                        backgroundColor: const Color(0xFFE24B4A),
+                        backgroundColor: const Color(0xFF0F766E),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -2595,7 +2595,7 @@ class _PromoInputState extends State<_PromoInput> {
                         context.read<PosBloc>().add(PosPromoRemoved());
                       },
                       style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: Color(0xFFE24B4A)),
+                        side: const BorderSide(color: Color(0xFF0F766E)),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -2604,7 +2604,7 @@ class _PromoInputState extends State<_PromoInput> {
                       child: const Text(
                         'Hapus',
                         style: TextStyle(
-                          color: Color(0xFFE24B4A),
+                          color: Color(0xFF0F766E),
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                         ),
@@ -2729,14 +2729,14 @@ class _ErrorChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.info_outline, size: 12, color: Color(0xFFE24B4A)),
+          const Icon(Icons.info_outline, size: 12, color: Color(0xFF0F766E)),
           const SizedBox(width: 4),
           Flexible(
             child: Text(
               label,
               style: const TextStyle(
                 fontSize: 10,
-                color: Color(0xFFE24B4A),
+                color: Color(0xFF0F766E),
                 fontWeight: FontWeight.w500,
               ),
               maxLines: 1,

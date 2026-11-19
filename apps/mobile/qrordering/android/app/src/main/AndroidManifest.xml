@@ -38,7 +38,7 @@
         android:maxSdkVersion="30" />
 
     <application
-        android:label="QR Ordering"
+        android:label="mejaku"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:allowBackup="false"

@@ -298,7 +298,7 @@ class _PromoEditPageState extends State<_PromoEditPage> {
           FilledButton(
             onPressed: () => Navigator.pop(ctx, true),
             style: FilledButton.styleFrom(
-              backgroundColor: const Color(0xFFB03030),
+              backgroundColor: const Color(0xFF115E59),
             ),
             child: const Text('Hapus'),
           ),

@@ -1,7 +1,7 @@
 {
   "name": "customer-menu",
   "version": "1.0.0",
-  "description": "QR Ordering - Customer E-Menu (self-order via QR code)",
+  "description": "mejaku - pesan langsung dari meja melalui QR",
   "scripts": {
     "dev": "npm run build && http-server dist -p 3001 -o --cors -c-1",
     "build": "node scripts/build.mjs",

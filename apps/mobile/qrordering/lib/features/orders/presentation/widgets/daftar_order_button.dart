@@ -47,7 +47,7 @@ class _DaftarOrderButtonState extends State<DaftarOrderButton> {
                   height: 34,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFE24B4A),
+                    color: const Color(0xFF0F766E),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: const Icon(
