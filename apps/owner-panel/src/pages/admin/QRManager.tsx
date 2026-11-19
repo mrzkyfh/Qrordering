@@ -25,7 +25,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { humanizeError } from '@/lib/errorMessage'
 import { cn } from '@/lib/utils'
 import type { RestaurantTable } from '@/types/database'
-import logo from '@/assets/logo.png'
+import logo from '@/assets/mejaku-icon.svg'
 
 function resolveMenuBaseUrl(): string {
   const configured = (import.meta.env.VITE_MENU_BASE_URL as string | undefined)?.trim()
@@ -112,92 +112,94 @@ async function downloadQRPoster(dataUrl: string, table: RestaurantTable, brandin
   const ctx = canvas.getContext('2d')
   if (!ctx) throw new Error('Canvas tidak tersedia')
 
-  const ivory = '#fbf8ef'
-  const ink = '#30271c'
-  const red = '#9f1d20'
-  const darkRed = '#761317'
-  const gold = '#c5a15a'
-
-  ctx.fillStyle = ivory
+  const ink = '#20242a'
+  const muted = '#667085'
+  const primary = '#0f766e'
+  ctx.fillStyle = '#ffffff'
   ctx.fillRect(0, 0, canvas.width, canvas.height)
-  const glow = ctx.createRadialGradient(874, 1240, 80, 874, 1240, 1600)
-  glow.addColorStop(0, 'rgba(255,255,255,.68)')
-  glow.addColorStop(1, 'rgba(197,161,90,.07)')
-  ctx.fillStyle = glow
-  ctx.fillRect(0, 0, canvas.width, canvas.height)
-  ctx.strokeStyle = 'rgba(197,161,90,.46)'
-  ctx.lineWidth = 5
-  ctx.strokeRect(35, 35, canvas.width - 70, canvas.height - 70)
+  ctx.fillStyle = primary
+  ctx.fillRect(0, 0, canvas.width, 405)
 
   const logoImage = await loadImage(branding.logoUrl).catch(() => loadImage(logo))
-  const logoSize = 250
+  ctx.fillStyle = '#ffffff'
+  ctx.beginPath()
+  ctx.arc(420, 205, 108, 0, Math.PI * 2)
+  ctx.fill()
   ctx.save()
   ctx.beginPath()
-  ctx.arc(255, 245, logoSize / 2, 0, Math.PI * 2)
+  ctx.arc(420, 205, 92, 0, Math.PI * 2)
   ctx.clip()
-  ctx.drawImage(logoImage, 130, 120, logoSize, logoSize)
+  ctx.drawImage(logoImage, 328, 113, 184, 184)
   ctx.restore()
-
   ctx.textAlign = 'left'
-  ctx.fillStyle = ink
-  ctx.font = '700 94px Georgia, serif'
-  ctx.fillText(branding.businessName, 430, 235, 1180)
-  ctx.font = '700 52px Georgia, serif'
-  ctx.fillText(branding.outletName !== branding.businessName ? branding.outletName : 'Kebab & Coffee', 435, 315, 1120)
+  ctx.fillStyle = '#ffffff'
+  ctx.font = '800 82px Arial, sans-serif'
+  ctx.fillText(branding.businessName, 570, 205, 1020)
+  ctx.font = '700 38px Arial, sans-serif'
+  ctx.fillText('Pesan langsung dari meja Anda', 570, 280, 1000)
 
   ctx.textAlign = 'center'
   ctx.fillStyle = ink
-  ctx.font = '700 68px Georgia, serif'
-  ctx.fillText('SCAN QR', 874, 485, 1450)
-  ctx.fillText('UNTUK MEMESAN', 874, 570, 1450)
-
-  // Panel nomor meja dibuat dominan agar mudah dibaca dari kejauhan.
-  ctx.fillStyle = red
-  ctx.beginPath()
-  ctx.moveTo(150, 1745)
-  ctx.lineTo(1598, 1745)
-  ctx.lineTo(1558, 1900)
-  ctx.lineTo(1598, 2165)
-  ctx.lineTo(150, 2165)
-  ctx.closePath()
-  ctx.fill()
-  ctx.strokeStyle = darkRed
-  ctx.lineWidth = 18
-  ctx.stroke()
-  ctx.strokeStyle = gold
-  ctx.lineWidth = 8
-  ctx.stroke()
-  ctx.fillStyle = '#e7c476'
-  ctx.font = '700 180px Georgia, serif'
-  ctx.fillText(tableLabel(table.table_number).toUpperCase(), 874, 1985, 1300)
-  if (table.area?.trim()) {
-    ctx.fillStyle = ivory
-    ctx.font = '500 40px Georgia, serif'
-    ctx.fillText(`AREA ${table.area.trim().toUpperCase()}`, 874, 2090, 1200)
-  }
+  ctx.font = '800 98px Arial, sans-serif'
+  ctx.fillText('Scan untuk memesan', 874, 610, 1500)
+  ctx.fillStyle = muted
+  ctx.font = '400 43px Arial, sans-serif'
+  ctx.fillText('Arahkan kamera ponsel ke kode di bawah', 874, 700, 1400)
 
   const qrImage = await loadImage(dataUrl)
-  ctx.fillStyle = '#fffdf7'
-  ctx.fillRect(334, 650, 1080, 1080)
-  ctx.strokeStyle = gold
-  ctx.lineWidth = 14
-  ctx.strokeRect(334, 650, 1080, 1080)
-  ctx.lineWidth = 4
-  ctx.strokeRect(370, 686, 1008, 1008)
-  ctx.drawImage(qrImage, 424, 740, 900, 900)
-
-  const footer = [branding.address, branding.phone].filter(Boolean).join(' • ')
-  ctx.strokeStyle = gold
-  ctx.lineWidth = 5
+  const shellX = 454, shellY = 780, shellSize = 840
+  ctx.fillStyle = '#ffffff'
   ctx.beginPath()
-  ctx.moveTo(100, 2280)
-  ctx.lineTo(1648, 2280)
+  ctx.roundRect(shellX, shellY, shellSize, shellSize, 80)
+  ctx.fill()
+  ctx.strokeStyle = primary
+  ctx.lineWidth = 14
   ctx.stroke()
-  if (footer) {
-    ctx.fillStyle = ink
-    ctx.font = '400 32px Georgia, serif'
-    ctx.fillText(footer, 874, 2370, 1480)
-  }
+  ctx.strokeStyle = '#d1d5db'
+  ctx.lineWidth = 6
+  ctx.setLineDash([18, 14])
+  ctx.beginPath()
+  ctx.roundRect(shellX + 48, shellY + 48, shellSize - 96, shellSize - 96, 48)
+  ctx.stroke()
+  ctx.setLineDash([])
+  ctx.drawImage(qrImage, shellX + 92, shellY + 92, shellSize - 184, shellSize - 184)
+
+  ctx.fillStyle = ink
+  ctx.beginPath()
+  ctx.roundRect(624, 1698, 500, 176, 88)
+  ctx.fill()
+  const tableNumber = table.table_number.replace(/^meja\s*/i, '').trim()
+  ctx.fillStyle = '#ffffff'
+  ctx.font = '800 42px Arial, sans-serif'
+  ctx.fillText('MEJA', 758, 1807)
+  ctx.font = '800 104px Arial, sans-serif'
+  ctx.fillText(tableNumber || '-', 976, 1837)
+
+  const steps = [
+    ['1', 'Scan kode QR'],
+    ['2', 'Pilih menu dan pesan'],
+    ['3', 'Bayar QRIS atau ke kasir'],
+  ] as const
+  steps.forEach(([number, label], index) => {
+    const x = 350 + index * 524
+    ctx.fillStyle = primary
+    ctx.beginPath()
+    ctx.arc(x, 2110, 58, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.fillStyle = '#ffffff'
+    ctx.font = '800 40px Arial, sans-serif'
+    ctx.fillText(number, x, 2125)
+    ctx.fillStyle = '#344054'
+    ctx.font = '700 35px Arial, sans-serif'
+    if (index === 2) {
+      ctx.fillText('Bayar QRIS atau ke', x, 2240, 440)
+      ctx.fillText('kasir', x, 2285, 440)
+    } else ctx.fillText(label, x, 2240, 440)
+  })
+  ctx.fillStyle = muted
+  ctx.font = '400 31px Arial, sans-serif'
+  ctx.fillText('Tanpa unduh aplikasi. Pesanan langsung diteruskan ke dapur setelah pembayaran', 874, 2392, 1550)
+  ctx.fillText('dikonfirmasi.', 874, 2434, 1500)
 
   const a = document.createElement('a')
   a.href = canvas.toDataURL('image/png', 1)
@@ -213,12 +215,9 @@ function printQR(dataUrl: string, table: RestaurantTable, branding: QRBranding):
   // dataUrl sudah dibatasi ke PNG base64; seluruh data outlet di-escape.
   const safeQr = escapeHtml(dataUrl)
   const safeTable = escapeHtml(tableLabel(table.table_number))
-  const safeArea = escapeHtml(table.area?.trim() ?? '')
   const safeBusiness = escapeHtml(branding.businessName)
-  const safeOutlet = escapeHtml(branding.outletName)
-  const safeAddress = escapeHtml(branding.address)
-  const safePhone = escapeHtml(branding.phone)
   const safeLogo = safeImageUrl(branding.logoUrl)
+  const safeTableNumber = escapeHtml(table.table_number.replace(/^meja\s*/i, '').trim() || '-')
   win.document.write(`
     <!doctype html>
     <html lang="id">
@@ -233,9 +232,8 @@ function printQR(dataUrl: string, table: RestaurantTable, branding: QRBranding):
           body {
             display: grid;
             place-items: center;
-            background: #d9d9d9;
-            color: #30271c;
-            font-family: Georgia, "Times New Roman", serif;
+            background: #d9d9d9; color: #20242a;
+            font-family: Arial, Helvetica, sans-serif;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
           }
@@ -244,36 +242,31 @@ function printQR(dataUrl: string, table: RestaurantTable, branding: QRBranding):
             width: 148mm;
             height: 210mm;
             overflow: hidden;
-            padding: 8mm 9mm 7mm;
-            background:
-              radial-gradient(circle at 50% 42%, rgba(255,255,255,.82), rgba(197,161,90,.08)),
-              #fbf8ef;
-            border: .35mm solid rgba(197,161,90,.55);
+            background: #fff;
           }
-          .top { min-height: 25mm; }
-          .brand { display: flex; align-items: center; justify-content: center; gap: 4mm; }
+          .top { height: 38mm; display:flex; align-items:center; justify-content:center; background:#0f766e; color:#fff; }
+          .brand { display: flex; align-items: center; gap: 4mm; }
           .brand-logo {
-            width: 23mm; height: 23mm; border-radius: 50%; object-fit: cover;
+            width: 18mm; height: 18mm; padding:1.5mm; border-radius: 50%; object-fit: cover; background:#fff;
           }
           .brand-copy { text-align: left; }
-          .business { margin: 0; font-size: 8mm; line-height: 1; font-weight: 700; }
-          .outlet { margin-top: 1.2mm; font-size: 4.3mm; font-weight: 700; }
-          .scan-heading { margin-top: 5mm; text-align: center; font-size: 7mm; line-height: 1.08; font-weight: 700; }
-          .main { display: flex; flex-direction: column; align-items: center; gap: 6mm; margin-top: 5mm; }
-          .table-panel {
-            display: grid; place-content: center; width: 100%; min-height: 34mm;
-            text-align: center; color: #fbf8ef; background: #9f1d20;
-            border: 1.8mm solid #761317; outline: .8mm solid #c5a15a; outline-offset: -3.2mm;
-            clip-path: polygon(0 0, 100% 0, 97% 42%, 100% 100%, 0 100%);
-          }
-          .table-number { margin: 0; color: #e7c476; font-size: 15mm; line-height: 1; font-weight: 700; }
-          .area { min-height: 4mm; margin-top: 1.8mm; font-size: 3.1mm; }
+          .business { margin: 0; font-size: 7mm; line-height: 1; font-weight: 800; }
+          .outlet { margin-top: 1.4mm; font-size: 3.5mm; font-weight: 700; }
+          .scan-heading { margin-top: 11mm; text-align: center; font-size: 10mm; line-height: 1; font-weight: 800; }
+          .scan-subtitle { margin-top:3mm; text-align:center; color:#667085; font-size:4mm; }
+          .main { display: flex; flex-direction: column; align-items: center; gap: 5mm; margin-top: 6mm; }
           .qr-shell {
-            width: 88mm; height: 88mm; margin: auto; padding: 6mm; background: #fffdf7;
-            border: 1.2mm solid #c5a15a; outline: .35mm solid #c5a15a; outline-offset: -3mm;
+            width: 72mm; height: 72mm; margin: auto; padding: 6mm; background: #fff;
+            border: 1.1mm solid #0f766e; border-radius:7mm; outline: .5mm dashed #d1d5db; outline-offset: -5mm;
           }
-          .qr { display: block; width: 76mm; height: 76mm; margin: auto; }
-          .footer { min-height: 8mm; margin-top: 6mm; padding-top: 3mm; border-top: .45mm solid #c5a15a; text-align: center; font-size: 3mm; line-height: 1.4; }
+          .qr { display: block; width: 60mm; height: 60mm; margin: auto; }
+          .table-panel { display:flex; align-items:center; justify-content:center; gap:3mm; min-width:43mm; height:16mm; padding:0 7mm; border-radius:9mm; color:#fff; background:#20242a; }
+          .table-word { font-size:3.7mm; font-weight:800; letter-spacing:.55mm; }
+          .table-number { margin:0; font-size:9mm; line-height:1; font-weight:800; }
+          .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:3mm; width:100%; padding:0 8mm; margin-top:3mm; text-align:center; }
+          .step-no { display:grid; place-items:center; width:10mm; height:10mm; margin:auto; border-radius:50%; color:#fff; background:#0f766e; font-size:4mm; font-weight:800; }
+          .step-label { margin-top:3mm; color:#344054; font-size:3.2mm; line-height:1.25; font-weight:700; }
+          .footer { margin:5mm 7mm 0; text-align:center; color:#667085; font-size:3mm; line-height:1.35; }
           @media print {
             body { background: #fff; }
             .poster { width: 148mm; height: 210mm; }
@@ -287,19 +280,24 @@ function printQR(dataUrl: string, table: RestaurantTable, branding: QRBranding):
               ${safeLogo ? `<img class="brand-logo" src="${safeLogo}" alt="Logo ${safeBusiness}" />` : ''}
               <div class="brand-copy">
                 <h1 class="business">${safeBusiness}</h1>
-                <div class="outlet">${safeOutlet && safeOutlet !== safeBusiness ? safeOutlet : 'Kebab &amp; Coffee'}</div>
+                <div class="outlet">Pesan langsung dari meja Anda</div>
               </div>
             </div>
           </header>
-          <div class="scan-heading">SCAN QR<br />UNTUK MEMESAN</div>
+          <div class="scan-heading">Scan untuk memesan</div>
+          <div class="scan-subtitle">Arahkan kamera ponsel ke kode di bawah</div>
           <section class="main">
             <div class="qr-shell"><img class="qr" src="${safeQr}" alt="QR ${safeTable}" /></div>
             <div class="table-panel">
-              <h2 class="table-number">${safeTable.toUpperCase()}</h2>
-              <div class="area">${safeArea ? `AREA ${safeArea.toUpperCase()}` : '&nbsp;'}</div>
+              <span class="table-word">MEJA</span><h2 class="table-number">${safeTableNumber}</h2>
             </div>
           </section>
-          ${(safeAddress || safePhone) ? `<footer class="footer">${safeAddress}${safeAddress && safePhone ? ' &nbsp;•&nbsp; ' : ''}${safePhone}</footer>` : '<footer class="footer">&nbsp;</footer>'}
+          <section class="steps">
+            <div><span class="step-no">1</span><div class="step-label">Scan kode QR</div></div>
+            <div><span class="step-no">2</span><div class="step-label">Pilih menu dan pesan</div></div>
+            <div><span class="step-no">3</span><div class="step-label">Bayar QRIS atau ke kasir</div></div>
+          </section>
+          <footer class="footer">Tanpa unduh aplikasi. Pesanan langsung diteruskan ke dapur setelah pembayaran dikonfirmasi.</footer>
         </main>
         <script>
           window.addEventListener('load', function () {
@@ -331,11 +329,11 @@ export default function QRManager() {
 
   useRealtimeTables(activeOutletId)
   const branding: QRBranding = {
-    businessName: activeOutlet?.settings?.business_name?.trim() || activeOutlet?.name?.trim() || 'QR Ordering',
-    outletName: activeOutlet?.name?.trim() || 'QR Ordering',
+    businessName: 'mejaku',
+    outletName: activeOutlet?.name?.trim() || 'mejaku',
     address: [activeOutlet?.address?.trim(), activeOutlet?.city?.trim()].filter(Boolean).join(', '),
     phone: activeOutlet?.phone?.trim() || '',
-    logoUrl: activeOutlet?.settings?.receipt_logo_url || activeOutlet?.logo_url || logo,
+    logoUrl: logo,
   }
 
   async function generateQR(table: RestaurantTable) {
@@ -465,47 +463,41 @@ export default function QRManager() {
           {preview && (
             <div>
               <div
-                className="mx-auto my-3 flex aspect-[148/210] w-[calc(100%_-_1.5rem)] max-w-[26rem] flex-col border border-[#c5a15a]/50 bg-[#fbf8ef] px-5 pb-4 pt-5 text-[#30271c] shadow-inner"
-                style={{ backgroundImage: 'radial-gradient(circle at 50% 42%, rgba(255,255,255,.92), rgba(197,161,90,.09))' }}
+                className="mx-auto my-3 flex aspect-[148/210] w-[calc(100%_-_1.5rem)] max-w-[26rem] flex-col overflow-hidden bg-white text-[#20242a] shadow-inner"
               >
-                <div className="flex items-center justify-center gap-4">
+                <div className="flex min-h-[20%] items-center justify-center gap-4 bg-[#0f766e] px-5 text-white">
                     <img
                       src={branding.logoUrl}
                       alt={`Logo ${branding.businessName}`}
-                      className="h-14 w-14 shrink-0 rounded-full object-cover"
+                      className="h-14 w-14 shrink-0 rounded-full bg-white p-1 object-cover"
                       onError={(event) => { event.currentTarget.src = logo }}
                     />
-                    <div className="text-left font-serif">
-                      <p className="text-2xl font-bold leading-none">{branding.businessName}</p>
-                      <p className="mt-1 text-base font-bold">
-                        {branding.outletName !== branding.businessName ? branding.outletName : 'Kebab & Coffee'}
-                      </p>
+                    <div className="text-left">
+                      <p className="text-xl font-extrabold leading-none">{branding.businessName}</p>
+                      <p className="mt-1 text-xs font-bold">Pesan langsung dari meja Anda</p>
                     </div>
                 </div>
-                <p className="mt-4 text-center font-serif text-2xl font-bold leading-tight">
-                  SCAN QR<br />UNTUK MEMESAN
-                </p>
-
-                <div className="mt-4 flex flex-1 flex-col items-center justify-center gap-4">
-                  <div className="mx-auto w-fit border-4 border-[#c5a15a] bg-[#fffdf7] p-3 outline outline-1 -outline-offset-[9px] outline-[#c5a15a]">
+                <p className="mt-7 text-center text-3xl font-extrabold leading-none">Scan untuk memesan</p>
+                <p className="mt-2 text-center text-sm text-[#667085]">Arahkan kamera ponsel ke kode di bawah</p>
+                <div className="mt-4 flex flex-1 flex-col items-center gap-4">
+                  <div className="mx-auto rounded-3xl border-[3px] border-[#0f766e] bg-white p-4 outline outline-2 -outline-offset-[12px] outline-dashed outline-[#d1d5db]">
                     <img
                       src={preview.url}
                       alt={`QR ${tableLabel(preview.table.table_number)}`}
-                      className="h-52 w-52"
+                      className="h-44 w-44"
                     />
                   </div>
-                  <div className="relative w-full overflow-hidden border-[5px] border-[#761317] bg-[#9f1d20] px-4 py-4 text-center font-serif text-[#fbf8ef] outline outline-2 -outline-offset-[10px] outline-[#c5a15a]">
-                    <p className="text-4xl font-bold leading-none text-[#e7c476]">
-                      {tableLabel(preview.table.table_number).toUpperCase()}
-                    </p>
-                    <p className="mt-1 min-h-4 text-xs tracking-wider">
-                      {preview.table.area ? `AREA ${preview.table.area.toUpperCase()}` : ''}
-                    </p>
+                  <div className="flex items-center gap-2.5 rounded-full bg-[#20242a] px-6 py-2 text-white">
+                    <span className="text-xs font-extrabold tracking-widest">MEJA</span>
+                    <span className="text-3xl font-extrabold leading-none">{preview.table.table_number.replace(/^meja\s*/i, '')}</span>
                   </div>
                 </div>
-                <div className="mt-4 min-h-5 border-t-2 border-[#c5a15a] pt-2 text-center font-serif text-[11px]">
-                  {[branding.address, branding.phone].filter(Boolean).join(' • ')}
+                <div className="grid grid-cols-3 gap-2 px-5 text-center text-[10px] font-bold text-[#344054]">
+                  {['Scan kode QR', 'Pilih menu dan pesan', 'Bayar QRIS atau ke kasir'].map((text, index) => (
+                    <div key={text}><span className="mx-auto mb-2 grid h-7 w-7 place-items-center rounded-full bg-[#0f766e] text-xs text-white">{index + 1}</span>{text}</div>
+                  ))}
                 </div>
+                <p className="px-5 pb-4 pt-4 text-center text-[10px] leading-snug text-[#667085]">Tanpa unduh aplikasi. Pesanan langsung diteruskan ke dapur setelah pembayaran dikonfirmasi.</p>
               </div>
               <div className="flex gap-2 justify-center border-t bg-white p-4">
                 <Button size="sm" onClick={() => void downloadQR(preview.url, preview.table)}>

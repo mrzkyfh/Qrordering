@@ -158,7 +158,7 @@ export default function OrderList() {
         <DateRangePicker value={dateRange} onChange={setDateRange} />
         <span className="text-sm text-muted-foreground ml-auto">{totalCount} pesanan</span>
       </div>
-      <div className="flex gap-2 overflow-x-auto pb-1" aria-label="Filter status pesanan">{ORDER_TABS.map((tab) => <button key={tab.value} type="button" onClick={() => setStatusFilter(tab.value)} className={cn('min-h-11 whitespace-nowrap rounded-full border px-4 text-sm font-semibold', statusFilter === tab.value ? 'border-[#C62828] bg-[#C62828] text-white' : 'bg-white text-[#374151] hover:bg-gray-50')}>{tab.label}</button>)}</div>
+      <div className="flex gap-2 overflow-x-auto pb-1" aria-label="Filter status pesanan">{ORDER_TABS.map((tab) => <button key={tab.value} type="button" onClick={() => setStatusFilter(tab.value)} className={cn('min-h-11 whitespace-nowrap rounded-full border px-4 text-sm font-semibold', statusFilter === tab.value ? 'border-[#0F766E] bg-[#0F766E] text-white' : 'bg-white text-[#374151] hover:bg-gray-50')}>{tab.label}</button>)}</div>
 
       <DataTable
         data={orders}

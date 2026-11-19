@@ -12,7 +12,7 @@ import {
   CreditCard,
   ShoppingBag,
 } from 'lucide-react'
-import logo from '@/assets/logo.png'
+import logo from '@/assets/mejaku-icon.svg'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/hooks/useAuth'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -90,8 +90,8 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
     <aside className="flex h-full w-[268px] shrink-0 flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border">
       {/* Logo */}
       <div className="flex h-16 items-center gap-3 px-5 border-b border-sidebar-border">
-        <img src={logo} alt="QR Ordering" className="h-11 w-11 rounded-full object-cover shrink-0 ring-2 ring-primary/10" />
-        <span className="text-lg font-extrabold text-sidebar-foreground tracking-tight">QR Ordering</span>
+        <img src={logo} alt="Logo mejaku" className="h-10 w-10 shrink-0" />
+        <span className="text-xl font-extrabold text-sidebar-foreground tracking-tight">meja<span className="text-primary">ku</span></span>
       </div>
 
       <ScrollArea className="flex-1 py-5">

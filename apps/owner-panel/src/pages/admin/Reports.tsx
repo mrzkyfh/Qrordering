@@ -49,7 +49,7 @@ export default function Reports() {
   }
   return <div className="space-y-4">
     <PageHeader title="Laporan" subtitle="Angka penjualan hanya menghitung pembayaran yang sudah dikonfirmasi petugas."><DateRangePicker value={range} onChange={setRange} /><Button variant="outline" onClick={download}><Download className="mr-2 h-4 w-4" />Unduh laporan</Button></PageHeader>
-    <div className="flex gap-2 overflow-x-auto">{tabs.map((item) => <button key={item.value} type="button" onClick={() => setTab(item.value)} className={cn('min-h-11 whitespace-nowrap rounded-full border px-5 text-sm font-semibold', tab === item.value ? 'border-[#C62828] bg-[#C62828] text-white' : 'bg-white text-[#374151]')}>{item.label}</button>)}</div>
+    <div className="flex gap-2 overflow-x-auto">{tabs.map((item) => <button key={item.value} type="button" onClick={() => setTab(item.value)} className={cn('min-h-11 whitespace-nowrap rounded-full border px-5 text-sm font-semibold', tab === item.value ? 'border-[#0F766E] bg-[#0F766E] text-white' : 'bg-white text-[#374151]')}>{item.label}</button>)}</div>
     <div className="grid items-start gap-4 xl:grid-cols-[minmax(0,1.6fr)_minmax(300px,.7fr)]">
       <section className="admin-card min-h-[520px] p-6"><h2 className="text-lg font-bold">{tab === 'closing' ? `Tutup harian · ${format(range.to, 'd MMM yyyy', { locale: id })}` : tabs.find((item) => item.value === tab)?.label}</h2><p className="text-sm text-muted-foreground">Untuk dicocokkan dengan uang tunai dan mutasi merchant.</p>
         {isLoading ? <p className="py-12 text-center text-muted-foreground">Memuat laporan...</p> : <>

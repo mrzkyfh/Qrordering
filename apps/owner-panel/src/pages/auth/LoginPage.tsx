@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { Eye, EyeOff } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/hooks/useAuth'
-import logo from '@/assets/logo.png'
+import logo from '@/assets/mejaku-icon.svg'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -85,8 +85,8 @@ export default function LoginPage() {
       <div className="w-full max-w-sm space-y-6">
         {/* Logo */}
         <div className="flex flex-col items-center gap-3">
-          <img src={logo} alt="QR Ordering" className="h-24 w-24 rounded-full object-cover shadow-md" />
-          <h1 className="text-2xl font-bold tracking-tight">QR Ordering</h1>
+          <img src={logo} alt="Logo mejaku" className="h-20 w-20" />
+          <h1 className="text-3xl font-extrabold tracking-tight">meja<span className="text-primary">ku</span></h1>
           <p className="text-sm text-muted-foreground">Masuk ke akun Anda</p>
         </div>
 
