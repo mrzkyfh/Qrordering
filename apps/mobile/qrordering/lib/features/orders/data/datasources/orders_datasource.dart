@@ -11,7 +11,6 @@ import '../../../../shared/services/connectivity_service.dart';
 import '../../../../shared/services/offline_queue_service.dart';
 import '../../../../shared/services/order_realtime_service.dart';
 import '../../../../shared/services/backend_request.dart' as backend;
-import '../../../pos/data/datasources/pos_datasource.dart';
 
 class SalesDaySummary {
   final double total;
@@ -116,6 +115,8 @@ SalesPageResult salesPageResultFromPayload(Object? payload) {
 }
 
 class OrdersDatasource {
+  static const cacheBoxName = 'menu_cache_secure_v1';
+  static const legacyCacheBoxName = 'menu_cache';
   final SupabaseClient? _injectedClient;
   final SupabaseClient? _injectedFallbackClient;
 
@@ -126,9 +127,8 @@ class OrdersDatasource {
   SupabaseClient get _client => _injectedClient ?? Supabase.instance.client;
 
   static const _uuid = Uuid();
-  Box? get _offlineCache => Hive.isBoxOpen(PosDatasource.menuCacheBoxName)
-      ? Hive.box(PosDatasource.menuCacheBoxName)
-      : null;
+  Box? get _offlineCache =>
+      Hive.isBoxOpen(cacheBoxName) ? Hive.box(cacheBoxName) : null;
 
   List<Order>? _cachedOrders(String key) {
     final raw = _offlineCache?.get(key) as String?;

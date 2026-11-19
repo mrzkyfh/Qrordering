@@ -44,7 +44,7 @@ class _NewOrderBannerHostState extends State<NewOrderBannerHost> {
   void _openOrders() {
     _dismiss();
     final router = GoRouter.maybeOf(context);
-    router?.go('/kasir/orders');
+    router?.go('/orders');
   }
 
   @override
@@ -61,9 +61,15 @@ class _NewOrderBannerHostState extends State<NewOrderBannerHost> {
         widget.child,
         if (event != null)
           Positioned(
-            top: 0, left: 0, right: 0,
+            top: 0,
+            left: 0,
+            right: 0,
             child: SafeArea(
-              child: _BannerCard(event: event, onTap: _openOrders, onClose: _dismiss),
+              child: _BannerCard(
+                event: event,
+                onTap: _openOrders,
+                onClose: _dismiss,
+              ),
             ),
           ),
       ],
@@ -75,7 +81,11 @@ class _BannerCard extends StatelessWidget {
   final NewOrderEvent event;
   final VoidCallback onTap;
   final VoidCallback onClose;
-  const _BannerCard({required this.event, required this.onTap, required this.onClose});
+  const _BannerCard({
+    required this.event,
+    required this.onTap,
+    required this.onClose,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -93,12 +103,17 @@ class _BannerCard extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  width: 36, height: 36,
+                  width: 36,
+                  height: 36,
                   decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: 0.18),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Icon(Icons.notifications_active, color: Colors.white, size: 20),
+                  child: const Icon(
+                    Icons.notifications_active,
+                    color: Colors.white,
+                    size: 20,
+                  ),
                 ),
                 const SizedBox(width: 12),
                 Expanded(

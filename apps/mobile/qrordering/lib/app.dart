@@ -6,14 +6,10 @@ import 'package:toastification/toastification.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
-import 'features/pos/presentation/bloc/pos_bloc.dart';
-import 'features/pos/data/datasources/pos_datasource.dart';
 import 'shared/services/supabase_service.dart';
 import 'shared/services/notification_service.dart';
 import 'shared/services/keep_alive_service.dart';
 import 'shared/services/printer_service.dart';
-import 'shared/services/sync_service.dart';
-import 'shared/services/offline_bootstrap_service.dart';
 import 'shared/services/encrypted_hive_service.dart';
 import 'shared/widgets/new_order_banner_host.dart';
 import 'core/widgets/version_gate.dart';
@@ -57,40 +53,29 @@ class _AppState extends State<App> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (_) => AuthBloc(
-            supabaseService: SupabaseService(),
-            // Callback ini harus selesai sebelum AuthBloc menukar/menghapus
-            // JWT. Selain realtime, timer retry printer dan drain outbox juga
-            // dapat memanggil RPC tiket dapur.
-            stopNotifications: _pauseStaffBackgroundWork,
-          )..add(AuthCheckRequested()),
-        ),
-        BlocProvider(create: (_) => PosBloc(datasource: PosDatasource())),
-      ],
+    return BlocProvider(
+      create: (_) => AuthBloc(
+        supabaseService: SupabaseService(),
+        // Callback ini harus selesai sebelum AuthBloc menukar/menghapus
+        // JWT. Selain realtime, timer retry printer dan drain outbox juga
+        // dapat memanggil RPC tiket dapur.
+        stopNotifications: _pauseStaffBackgroundWork,
+      )..add(AuthCheckRequested()),
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) async {
           if (state is AuthAuthenticated) {
             StartupDiagnostics.phase('ready');
-            SyncService.instance.resume();
             PrinterService().resumePendingPrintRetries();
             final outletId = state.profile.outletId;
-            // Semua role staf masuk ke antarmuka Kasir (mobile = POS murni).
-            // Manajemen (produk/staf/promo/laporan lengkap) lewat owner-panel web.
             navigateBeforeCleanup(
-              navigate: () => AppRouter.router.go(switch (state.role) {
-                'owner' || 'admin' || 'manajer' || 'kasir' => '/kasir',
-                _ => '/scan',
-              }),
+              navigate: () => AppRouter.router.go('/orders'),
               cleanup: () => _startAuthenticatedBackgroundWork(state, outletId),
             );
           } else if (state is AuthClockInRequired) {
             StartupDiagnostics.phase('ready');
             navigateBeforeCleanup(
               navigate: () => AppRouter.router.go('/clock-in'),
-              cleanup: () => _cleanupForClockIn(state.outletId),
+              cleanup: _cleanupAfterAuthChange,
             );
           } else if (state is AuthDeviceRequired) {
             StartupDiagnostics.phase('ready');
@@ -106,8 +91,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           theme: AppTheme.light,
           routerConfig: AppRouter.router,
           builder: (context, child) {
-            // Clamp skala teks sistem: cegah layout POS (tinggi sel/kartu tetap)
-            // overflow bila font device diset sangat besar/kecil.
+            // Batasi skala agar kartu dapur tetap mudah dipindai di layar kecil.
             final mq = MediaQuery.of(context);
             return MediaQuery(
               data: mq.copyWith(
@@ -186,7 +170,6 @@ Future<void> _pauseStaffBackgroundWork() async {
   await Future.wait([
     NotificationService().stop(),
     PrinterService().pausePendingPrintRetries(),
-    SyncService.instance.pause(),
   ]);
 }
 
@@ -203,30 +186,11 @@ Future<void> _cleanupAfterAuthChange() async {
   }
 }
 
-Future<void> _cleanupForClockIn(String outletId) async {
-  await _cleanupAfterAuthChange();
-  if (outletId.isEmpty) return;
-  try {
-    await OfflineBootstrapService.instance
-        .prepare(outletId)
-        .timeout(const Duration(seconds: 26));
-  } catch (error) {
-    debugPrint('AUTH clock-in bootstrap warning: $error');
-  }
-}
-
 Future<void> _startAuthenticatedBackgroundWork(
   AuthAuthenticated state,
   String? outletId,
 ) async {
   if (outletId == null || outletId.isEmpty) return;
-  try {
-    await OfflineBootstrapService.instance
-        .prepare(outletId, force: true)
-        .timeout(const Duration(seconds: 26));
-  } catch (error) {
-    debugPrint('AUTH offline bootstrap warning: $error');
-  }
   final operationalRoles = {'owner', 'kasir', 'admin', 'manajer'};
   if (!operationalRoles.contains(state.role)) return;
   try {

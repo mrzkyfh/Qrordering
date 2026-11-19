@@ -98,7 +98,7 @@ class _StartupLoading extends StatelessWidget {
       CircularProgressIndicator(),
       SizedBox(height: 20),
       Text(
-        'Menyiapkan aplikasi kasir…',
+        'Menyiapkan pesanan dan dapur…',
         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
       ),
       SizedBox(height: 6),

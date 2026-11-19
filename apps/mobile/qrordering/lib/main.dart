@@ -13,33 +13,16 @@ import 'core/config/app_config.dart';
 import 'features/settings/data/app_settings.dart';
 import 'shared/services/backend_route_resolver.dart';
 import 'shared/services/connectivity_service.dart';
-import 'shared/services/offline_queue_service.dart';
-import 'shared/services/sync_service.dart';
 import 'shared/services/error_log_service.dart';
 import 'shared/services/encrypted_hive_service.dart';
-import 'shared/services/transaction_journal_service.dart';
-import 'features/pos/data/datasources/pos_datasource.dart';
-import 'features/pos/data/services/held_order_service.dart';
+import 'features/orders/data/datasources/orders_datasource.dart';
 import 'core/widgets/startup_gate.dart';
 import 'core/startup/startup_support.dart';
 
 const _encryptedBoxPairs = <({String secure, String legacy})>[
   (
-    secure: PosDatasource.menuCacheBoxName,
-    legacy: PosDatasource.legacyMenuCacheBoxName,
-  ),
-  (
-    secure: OfflineQueueService.boxName,
-    legacy: OfflineQueueService.legacyBoxName,
-  ),
-  (
-    secure: OfflineQueueService.deadBoxName,
-    legacy: OfflineQueueService.legacyDeadBoxName,
-  ),
-  (secure: HeldOrderService.boxName, legacy: HeldOrderService.legacyBoxName),
-  (
-    secure: TransactionJournalService.boxName,
-    legacy: TransactionJournalService.legacyBoxName,
+    secure: OrdersDatasource.cacheBoxName,
+    legacy: OrdersDatasource.legacyCacheBoxName,
   ),
 ];
 
@@ -118,8 +101,8 @@ Future<void> _bootstrapApplication() async {
     // semuanya sebelum membuat kunci baru; jangan meniru reinstall yang
     // menghapus satu-satunya salinan transaksi lokal.
     await EncryptedHiveService.recoverInvalidKey(
-      recoverableBoxNames: const [PosDatasource.menuCacheBoxName],
-      protectedBoxNames: _encryptedBoxPairs.skip(1).map((pair) => pair.secure),
+      recoverableBoxNames: const [OrdersDatasource.cacheBoxName],
+      protectedBoxNames: const [],
       timeout: _boxStartupTimeout,
     );
     await _openEncryptedBoxes();
@@ -173,7 +156,7 @@ Future<void> _bootstrapApplication() async {
   );
 
   if (!_runtimeServicesStarted) {
-    // Konektivitas + sinkronisasi transaksi offline.
+    // Pantau koneksi agar daftar pesanan dapat memberi status jaringan.
     StartupDiagnostics.phase('connectivity');
     await runStartupOperation<void>(
       category: 'CONNECTIVITY_INIT_TIMEOUT',
@@ -181,9 +164,6 @@ Future<void> _bootstrapApplication() async {
       operation: ConnectivityService.instance.init,
     );
     StartupDiagnostics.phase('services');
-    OfflineQueueService.instance.init();
-    TransactionJournalService.instance.init();
-    SyncService.instance.start();
     _runtimeServicesStarted = true;
   }
   StartupDiagnostics.phase('auth_restore');
@@ -194,7 +174,7 @@ Future<void> _openEncryptedBoxes() async {
     await EncryptedHiveService.openAndMigrate(
       secureName: pair.secure,
       legacyName: pair.legacy,
-      allowCorruptBoxReplacement: pair.secure == PosDatasource.menuCacheBoxName,
+      allowCorruptBoxReplacement: pair.secure == OrdersDatasource.cacheBoxName,
       timeout: _boxStartupTimeout,
     );
   }
