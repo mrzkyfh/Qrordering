@@ -841,9 +841,9 @@ body {
 
 /* ── Customer menu v3 — mejaku visual system ───────────────── */
 :root {
-    --primary: #d12626;
-    --primary-dark: #b91c1c;
-    --soft-red: #fff0f0;
+    --primary: #0f766e;
+    --primary-dark: #115e59;
+    --soft-red: #ecfdf5;
     --text: #25272b;
     --muted: #747b86;
     --border: #ececef;
@@ -1094,7 +1094,7 @@ body { background:#171719; }
     padding:0 20px;
     gap:12px;
     border-radius:18px;
-    background:linear-gradient(90deg,#d82626,#c91f26);
+    background:linear-gradient(90deg,#0f766e,#115e59);
     box-shadow:none;
     font-size:16px;
     font-weight:800;
@@ -1302,7 +1302,7 @@ body { background:#171719; }
     background:#fff;
     cursor:pointer;
 }
-.payment-option.selected { border:1.5px solid var(--primary); background:#fff3f3; }
+.payment-option.selected { border:1.5px solid var(--primary); background:#ecfdf5; }
 .payment-option input { position:absolute; opacity:0; pointer-events:none; }
 .payment-radio {
     width:20px;

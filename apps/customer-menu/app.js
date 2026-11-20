@@ -1202,7 +1202,11 @@ async function submitOrder() {
             p_request_id:    requestId,
             p_product_promo_id: state.promoCode ? null : state.promoId,
         }
-        let result = await sb.rpc('create_self_order', orderArgs)
+        let result = await sb.rpc('submit_qr_order', orderArgs)
+        // Tetap kompatibel selama deployment database dan frontend bergulir.
+        if (isMissingCanonicalOrderRpc(result.error)) {
+            result = await sb.rpc('create_self_order', orderArgs)
+        }
 
         // Kompatibilitas untuk checkout TANPA member saat migration baru belum
         // diterapkan. Nomor member tidak boleh dibuang diam-diam; bila diisi,
@@ -1407,6 +1411,14 @@ function clearOrderRequestId() {
     state.orderRequestId = null
     try { sessionStorage.removeItem(pendingRequestKey()) }
     catch { /* tidak memengaruhi keberhasilan order */ }
+}
+function isMissingCanonicalOrderRpc(error) {
+    if (!error) return false
+    const text = `${error.code || ''} ${error.message || ''} ${error.details || ''}`.toLowerCase()
+    return error.code === 'PGRST202'
+        || error.code === '42883'
+        || (text.includes('submit_qr_order') && text.includes('function'))
+        || text.includes('schema cache')
 }
 function isMissingIdempotencyRpc(error) {
     if (!error) return false
