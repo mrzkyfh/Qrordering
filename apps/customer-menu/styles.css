@@ -1332,3 +1332,39 @@ body { background:#171719; }
 @media (min-width:720px) {
     #cartOverlay .cart-page { min-height:calc(100vh - 44px); margin:22px auto; }
 }
+
+/* Category groups — full-width separators like the original Time420s menu. */
+.menu-section {
+    position:relative;
+}
+.menu-section + .menu-section {
+    margin-top:24px;
+    padding-top:30px;
+}
+.menu-section + .menu-section::before {
+    content:"";
+    position:absolute;
+    top:0;
+    left:-18px;
+    right:-18px;
+    height:8px;
+    border-top:1px solid #e5e7eb;
+    border-bottom:1px solid #e5e7eb;
+    background:#f3f4f6;
+}
+.menu-section-title {
+    margin:0 0 8px;
+    padding:0;
+    color:#252b36;
+    font-size:16px;
+    font-weight:900;
+    line-height:1.25;
+    letter-spacing:.025em;
+}
+
+@media (min-width:720px) {
+    .menu-section + .menu-section::before {
+        left:-22px;
+        right:-22px;
+    }
+}
