@@ -1456,6 +1456,18 @@ function humanizeError(err, fallback) {
         return 'Sesi berakhir. Muat ulang halaman lalu coba lagi.'
     if (text.includes('network') || text.includes('failed to fetch') || text.includes('fetch') || text.includes('timeout') || text.includes('load failed'))
         return 'Koneksi bermasalah. Periksa internet Anda lalu coba lagi.'
+    // Jangan sembunyikan error checkout yang belum dipetakan. Pesan database
+    // dibatasi dan dibersihkan agar operator mendapat petunjuk yang berguna
+    // tanpa menampilkan detail/query internal kepada pelanggan.
+    const safeMessage = String((err && err.message) || '')
+        .replace(/\s+/g, ' ')
+        .replace(/(?:https?:\/\/|postgres(?:ql)?:\/\/|select\s|insert\s|update\s|delete\s).*/i, '')
+        .trim()
+        .slice(0, 160)
+    if (safeMessage) {
+        const reference = code ? ` (${code})` : ''
+        return `${safeMessage}${reference}`
+    }
     return fallback || 'Terjadi kesalahan. Coba lagi sebentar.'
 }
 

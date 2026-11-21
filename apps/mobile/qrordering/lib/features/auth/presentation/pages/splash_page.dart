@@ -47,7 +47,7 @@ class SplashPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 28),
                 const Text(
-                  'Times 420',
+                  'mejaku',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,

@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const Text('Times 420',
+                      const Text('mejaku',
                           style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.bold,
@@ -201,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      Text('Times 420${_version.isEmpty ? '' : ' · $_version'}',
+                      Text('mejaku${_version.isEmpty ? '' : ' · $_version'}',
                           style: TextStyle(
                               color: AppColors.textDisabled, fontSize: 12)),
                     ],
